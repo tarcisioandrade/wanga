@@ -18,23 +18,27 @@ const lightTheme = {
   BG_COLOR: "#FFFFFF",
   TEXT_COLOR: "#000000",
 
+  // other
+  MENU_ITEM_COLOR: "#185DCF",
+  TAB_ITEM_COLOR: "#FFFFFF",
+
   FONT_XXS: pms(11),
   FONT_XS: pms(12),
+  FONT_SM: pms(14),
   FONT_BASE: pms(16),
-  FONT_MD: pms(18),
+  FONT_MD: pms(17),
+  FONT_LG: pms(18),
 
-  FONT_FAMILY: {
-    REGULAR: "SF-Pro-Display-Regular",
-    MEDIUM: "SF-Pro-Display-Medium",
-    SEMIBOLD: "SF-Pro-Display-SemiBold",
-    BOLD: "SF-Pro-Display-Bold",
-  },
+  FONT_FAMILY: "SF-Pro-Display-Regular",
 };
 
 const darkTheme = {
   ...lightTheme,
 
   SECONDARY: "#232222",
+
+  MENU_ITEM_COLOR: "#FFFFFF",
+  TAB_ITEM_COLOR: "#3F3F3F",
 
   BG_COLOR: "#2A2A2A",
   TEXT_COLOR: "#FFFFFF",

@@ -1,15 +1,18 @@
-import { styled } from "styled-components/native";
+import { Theme, styled } from "styled-components/native";
 import { phs, pvs } from "../utils/metrics";
-import Constants from "expo-constants";
+
+type ContainerBgColor = {
+  bg?: keyof Theme;
+};
 
 export const Layout = styled.SafeAreaView`
   background-color: ${(props) => props.theme.BG_COLOR};
   flex: 1;
-  padding-top: ${Constants.statusBarHeight + "px"};
 `;
 
-export const Container = styled.View`
+export const Container = styled.View<ContainerBgColor>`
   padding: 0 ${phs(22)};
+  background-color: ${({ bg, theme }) => (bg ? theme[bg] : "transparent")};
 `;
 
 export const ScrollContainer = styled.ScrollView`
