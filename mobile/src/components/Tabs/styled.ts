@@ -25,6 +25,6 @@ export const STabItem = styled.Pressable<TabActive>`
 export const STabText = styled.Text<TabActive>`
   color: ${(props) =>
     props.active ? props.theme.WHITE : props.theme.TEXT_COLOR};
-  font-weight: 600;
+  font-weight: 400;
   font-size: ${(props) => props.theme.FONT_XS};
 `;

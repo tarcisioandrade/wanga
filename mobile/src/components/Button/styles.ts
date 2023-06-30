@@ -15,5 +15,5 @@ export const PrimaryButton = styled.TouchableOpacity.attrs({
 export const ButtonText = styled.Text`
   color: ${(props) => props.theme.WHITE};
   font-size: ${(props) => props.theme.FONT_BASE} ;
-  font-family: ${(props) => props.theme.FONT_FAMILY.MEDIUM} ;
+  font-family: ${(props) => props.theme.FONT_FAMILY} ;
 `;

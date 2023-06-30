@@ -1,7 +1,7 @@
 import styled from "styled-components/native";
-import { phs, pvs } from "../../../../utils/metrics";
+import { phs, pvs } from "../../../../../utils/metrics";
 
-export const MangaCardContainer = styled.TouchableOpacity.attrs({
+export const CarouselMangaCardContainer = styled.TouchableOpacity.attrs({
   activeOpacity: 0.8,
 })`
   overflow: hidden;
@@ -11,11 +11,11 @@ export const MangaCardContainer = styled.TouchableOpacity.attrs({
   height: ${pvs(166)};
 `;
 
-export const MangaImage = styled.Image`
+export const CarouselMangaCardImage = styled.Image`
   height: ${pvs(166)};
 `;
 
-export const MangaFooter = styled.View`
+export const CarouselMangaCardFooter = styled.View`
   position: absolute;
   bottom: 0;
   left: 0;
@@ -27,13 +27,13 @@ export const MangaFooter = styled.View`
   align-items: center;
 `;
 
-export const MangaFooterText = styled.Text`
+export const CarouselMangaCardFooterText = styled.Text`
   font-size: ${(props) => props.theme.FONT_XXS};
   color: ${(props) => props.theme.WHITE};
   font-weight: 700;
 `;
 
-export const MangaBadge = styled.View`
+export const CarouselMangaCardBadge = styled.View`
   background-color: ${(props) => props.theme.PRIMARY};
   padding: 3px 10px;
   border-radius: 8px;
@@ -44,7 +44,7 @@ export const MangaBadge = styled.View`
   z-index: 999;
 `;
 
-export const MangaBadgeText = styled.Text`
+export const CarouselMangaCardBadgeText = styled.Text`
   color: ${(props) => props.theme.WHITE};
   font-weight: 600;
   font-size: ${(props) => props.theme.FONT_XS};

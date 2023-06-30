@@ -1,17 +1,17 @@
 import React from "react";
 import {
-  ReleaseCarouselWrapper,
-  ReleaseCarouselContainer,
-  ReleaseCarouselHeader,
+  CarouselWrapper,
+  CarouselContainer,
+  CarouselHeader,
   ViewButton,
   ViewButtonText,
 } from "./styled";
-import { Title } from "../../../../components/Title";
+import { Title } from "../../../../../components/Title";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Carousel from "react-native-reanimated-carousel";
-import { ReleaseElement } from "../../../../@types/release";
-import MangaCard from "../MangaCard";
-import { hs, vs } from "../../../../utils/metrics";
+import { ReleaseElement } from "../../../../../@types/release";
+import ReleaseMangaCard from "../../Cards/ReleaseMangaCard";
+import { hs, vs } from "../../../../../utils/metrics";
 
 type Props = {
   releases: ReleaseElement[];
@@ -20,14 +20,14 @@ type Props = {
 const ReleaseCarousel = ({ releases }: Props) => {
   const goToScreenRelease = () => {};
   return (
-    <ReleaseCarouselContainer>
-      <ReleaseCarouselHeader>
+    <CarouselContainer>
+      <CarouselHeader>
         <Title>Lançados Recentemente</Title>
         <ViewButton onPress={goToScreenRelease}>
           <ViewButtonText>Ver Todos</ViewButtonText>
         </ViewButton>
-      </ReleaseCarouselHeader>
-      <ReleaseCarouselWrapper bg="SECONDARY">
+      </CarouselHeader>
+      <CarouselWrapper bg="SECONDARY">
         <GestureHandlerRootView>
           <Carousel
             width={hs(125)}
@@ -39,11 +39,13 @@ const ReleaseCarousel = ({ releases }: Props) => {
             autoFillData={false}
             loop={false}
             data={releases}
-            renderItem={({ item }) => <MangaCard releaseElement={item} />}
+            renderItem={({ item }) => (
+              <ReleaseMangaCard releaseElement={item} />
+            )}
           />
         </GestureHandlerRootView>
-      </ReleaseCarouselWrapper>
-    </ReleaseCarouselContainer>
+      </CarouselWrapper>
+    </CarouselContainer>
   );
 };
 

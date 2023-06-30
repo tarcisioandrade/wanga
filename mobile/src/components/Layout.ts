@@ -1,4 +1,4 @@
-import { Theme, styled } from "styled-components/native";
+import styled, { Theme } from "styled-components/native";
 import { phs, pvs } from "../utils/metrics";
 
 type ContainerBgColor = {
@@ -17,5 +17,4 @@ export const Container = styled.View<ContainerBgColor>`
 
 export const ScrollContainer = styled.ScrollView`
   flex: 1;
-  padding-bottom: ${pvs(70)};
 `;
