@@ -27,11 +27,13 @@
     "react-native-safe-area-context": "4.5.0",
     "react-native-screens": "~3.20.0",
     "react-native-svg": "13.4.0",
-    "styled-components": "^6.0.1"
+    "styled-components": "^5.3.5"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@types/react": "~18.0.14",
+    "@types/styled-components": "^5.1.26",
+    "@types/styled-components-react-native": "^5.2.1",
     "react-native-svg-transformer": "^1.0.0",
     "typescript": "^4.9.4"
   },
