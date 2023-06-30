@@ -4,40 +4,57 @@ import { RootStackScreenProps } from "../../@types/navigation";
 import { Container, Layout, ScrollContainer } from "../../components/Layout";
 import Tabs, { TabType } from "../../components/Tabs";
 import ReleaseCarousel from "./components/Carousels/ReleaseCarousel";
-import { Release } from "../../@types/release";
 import MostReadPeriodCarousel from "./components/Carousels/MostReadPeriodCarousel";
-import { MostReadPeriod } from "../../@types/mostReadPeriod";
+import { useQueries } from "@tanstack/react-query";
 
-import fakeDataRelease from "../../../fakeData/saiu_hoje.json";
-import fakeDataMostReadPeriod from "../../../fakeData/most_read_period.json";
-import fakeDataMostRead from "../../../fakeData/most_read.json";
-import { MostRead } from "../../@types/mostRead";
 import MostReadCarousel from "./components/Carousels/MostReadCarousel";
-
-const release = fakeDataRelease as Release;
-const { most_read: most_read_period } =
-  fakeDataMostReadPeriod as MostReadPeriod;
-const { most_read } = fakeDataMostRead as MostRead;
-
-const release_data_sliced = release.releases.slice(0, 10);
-const most_read_period_sliced = most_read_period.slice(0, 10);
+import {
+  getMostRead,
+  getMostReadPeriod,
+  getReleases,
+} from "../../api/MangaDBApi";
+import { queryKeys } from "../../constants/queryKeys";
 
 const tabsInfo: TabType[] = [
   { value: "", label: "Todos" },
-  { value: "mangas", label: "Mangás" },
-  { value: "manhuas", label: "Manhuas" },
-  { value: "webtoons", label: "Webtoons" },
-  { value: "novels", label: "Novels" },
+  { value: "manga", label: "Mangás" },
+  { value: "manhua", label: "Manhuas" },
+  { value: "webtoon", label: "Webtoons" },
+  { value: "novel", label: "Novels" },
 ];
 
-const Home = ({ navigation }: RootStackScreenProps<"home">) => {
-  const [activeTab, setActiveTab] = useState("");
+const Home = () => {
+  const [type, setActiveTab] = useState("");
+
+  const [releasesResult, mostReadPeriodResult, mostReadResult] = useQueries({
+    queries: [
+      {
+        queryKey: [queryKeys.releases, type],
+        queryFn: () => getReleases(1, type),
+      },
+      {
+        queryKey: [queryKeys.mostReadPeriod, type],
+        queryFn: () => getMostReadPeriod(1, type),
+      },
+      {
+        queryKey: [queryKeys.mostRead, type],
+        queryFn: () => getMostRead(1, type),
+      },
+    ],
+  });
 
   const handleTabChange = (value: string) => {
     setActiveTab(value);
     console.log(value);
   };
 
+  const release_data_sliced = releasesResult.data?.releases.slice(0, 10);
+  const most_read_period_sliced = mostReadPeriodResult.data?.most_read.slice(
+    0,
+    10
+  );
+
+  // TO DO: Tratar os erros dos carrousel, ta tudo com ! la na data deles.
   return (
     <Layout>
       <ScrollContainer
@@ -47,13 +64,25 @@ const Home = ({ navigation }: RootStackScreenProps<"home">) => {
         <Container>
           <Tabs
             tabs={tabsInfo}
-            activeTab={activeTab}
+            activeTab={type}
             onTabChange={handleTabChange}
           />
         </Container>
-        <ReleaseCarousel releases={release_data_sliced} />
-        <MostReadPeriodCarousel most_read_period={most_read_period_sliced} />
-        <MostReadCarousel most_read={most_read} />
+
+        <ReleaseCarousel
+          releases={release_data_sliced!}
+          loading={releasesResult.isLoading}
+        />
+
+        <MostReadPeriodCarousel
+          most_read_period={most_read_period_sliced!}
+          loading={mostReadPeriodResult.isLoading}
+        />
+
+        <MostReadCarousel
+          most_read={mostReadResult.data?.most_read}
+          loading={mostReadPeriodResult.isLoading}
+        />
       </ScrollContainer>
     </Layout>
   );
