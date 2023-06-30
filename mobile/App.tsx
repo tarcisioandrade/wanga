@@ -6,6 +6,8 @@ import { useFonts } from "expo-font";
 import { Text } from "react-native";
 import Routes from "./src/routes/Navigator";
 import { StatusBar } from "expo-status-bar";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { useAppStateChange } from "./src/hooks/useAppStateChange";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -17,11 +19,16 @@ export default function App() {
   const { theme } = useThemeMode();
   const statusStyle = theme === "dark" ? "light" : "dark";
 
+  const queryClient = new QueryClient();
+  useAppStateChange();
+
   if (!fontsLoaded) return <Text>Loading</Text>;
   return (
     <ThemeProvider theme={lightTheme}>
-      <StatusBar style={"dark"} />
-      <Routes />
+      <QueryClientProvider client={queryClient}>
+        <StatusBar style={"dark"} />
+        <Routes />
+      </QueryClientProvider>
     </ThemeProvider>
   );
 }
