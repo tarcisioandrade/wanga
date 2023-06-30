@@ -9,6 +9,7 @@ export const CarouselMangaCardContainer = styled.TouchableOpacity.attrs({
   position: relative;
   width: ${phs(117)};
   height: ${pvs(166)};
+  background-color: #00000016;
 `;
 
 export const CarouselMangaCardImage = styled.Image`

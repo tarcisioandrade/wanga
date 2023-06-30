@@ -12,15 +12,17 @@ import {
   CarouselWrapper,
 } from "../ReleaseCarousel/styled";
 import MostReadCard from "../../Cards/MostReadCard";
+import Skeleton from "../../Skeleton";
 
 type Props = {
-  most_read: MostReadElement[];
+  most_read: MostReadElement[] | undefined;
+  loading: boolean;
 };
 
-const MostReadCarousel = ({ most_read }: Props) => {
+const MostReadCarousel = ({ most_read, loading }: Props) => {
   const goToScreenMostRead = () => {};
 
-  const mostReadRanking = most_read.map(({ serie_name }, i) => ({
+  const mostReadRanking = most_read?.map(({ serie_name }, i) => ({
     ranking: i + 1,
     name: serie_name,
   }));
@@ -34,22 +36,26 @@ const MostReadCarousel = ({ most_read }: Props) => {
         </ViewButton>
       </CarouselHeader>
       <CarouselWrapper bg="SECONDARY">
-        <GestureHandlerRootView>
-          <Carousel
-            width={hs(125)}
-            style={{ width: "100%" }}
-            height={vs(166)}
-            panGestureHandlerProps={{
-              activeOffsetX: [-10, 10],
-            }}
-            autoFillData={false}
-            loop={false}
-            data={most_read}
-            renderItem={({ item }) => (
-              <MostReadCard data={item} position={mostReadRanking} />
-            )}
-          />
-        </GestureHandlerRootView>
+        {loading ? (
+          <Skeleton />
+        ) : (
+          <GestureHandlerRootView>
+            <Carousel
+              width={hs(125)}
+              style={{ width: "100%" }}
+              height={vs(166)}
+              panGestureHandlerProps={{
+                activeOffsetX: [-10, 10],
+              }}
+              autoFillData={false}
+              loop={false}
+              data={most_read!}
+              renderItem={({ item }) => (
+                <MostReadCard data={item} position={mostReadRanking!} />
+              )}
+            />
+          </GestureHandlerRootView>
+        )}
       </CarouselWrapper>
     </CarouselContainer>
   );

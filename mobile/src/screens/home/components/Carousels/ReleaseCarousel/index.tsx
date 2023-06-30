@@ -12,12 +12,14 @@ import Carousel from "react-native-reanimated-carousel";
 import { ReleaseElement } from "../../../../../@types/release";
 import ReleaseMangaCard from "../../Cards/ReleaseMangaCard";
 import { hs, vs } from "../../../../../utils/metrics";
+import Skeleton from "../../Skeleton";
 
 type Props = {
-  releases: ReleaseElement[];
+  releases: ReleaseElement[] | undefined;
+  loading: boolean;
 };
 
-const ReleaseCarousel = ({ releases }: Props) => {
+const ReleaseCarousel = ({ releases, loading }: Props) => {
   const goToScreenRelease = () => {};
   return (
     <CarouselContainer>
@@ -28,22 +30,26 @@ const ReleaseCarousel = ({ releases }: Props) => {
         </ViewButton>
       </CarouselHeader>
       <CarouselWrapper bg="SECONDARY">
-        <GestureHandlerRootView>
-          <Carousel
-            width={hs(125)}
-            style={{ width: "100%" }}
-            height={vs(166)}
-            panGestureHandlerProps={{
-              activeOffsetX: [-10, 10],
-            }}
-            autoFillData={false}
-            loop={false}
-            data={releases}
-            renderItem={({ item }) => (
-              <ReleaseMangaCard releaseElement={item} />
-            )}
-          />
-        </GestureHandlerRootView>
+        {loading ? (
+          <Skeleton />
+        ) : (
+          <GestureHandlerRootView>
+            <Carousel
+              width={hs(125)}
+              style={{ width: "100%" }}
+              height={vs(166)}
+              panGestureHandlerProps={{
+                activeOffsetX: [-10, 10],
+              }}
+              autoFillData={false}
+              loop={false}
+              data={releases!}
+              renderItem={({ item }) => (
+                <ReleaseMangaCard releaseElement={item} />
+              )}
+            />
+          </GestureHandlerRootView>
+        )}
       </CarouselWrapper>
     </CarouselContainer>
   );

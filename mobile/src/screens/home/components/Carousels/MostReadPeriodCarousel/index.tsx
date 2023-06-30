@@ -12,12 +12,14 @@ import Carousel from "react-native-reanimated-carousel";
 import { hs, vs } from "../../../../../utils/metrics";
 import { MostReadPeriodElement } from "../../../../../@types/mostReadPeriod";
 import MostReadPeriodCard from "../../Cards/MostReadPeriodCard";
+import Skeleton from "../../Skeleton";
 
 type Props = {
-  most_read_period: MostReadPeriodElement[];
+  most_read_period: MostReadPeriodElement[] | undefined;
+  loading: boolean;
 };
 
-const MostReadPeriodCarousel = ({ most_read_period }: Props) => {
+const MostReadPeriodCarousel = ({ most_read_period, loading }: Props) => {
   const goToScreenMostReadPeriod = () => {};
 
   return (
@@ -29,20 +31,24 @@ const MostReadPeriodCarousel = ({ most_read_period }: Props) => {
         </ViewButton>
       </CarouselHeader>
       <CarouselWrapper bg="SECONDARY">
-        <GestureHandlerRootView>
-          <Carousel
-            width={hs(125)}
-            style={{ width: "100%" }}
-            height={vs(166)}
-            panGestureHandlerProps={{
-              activeOffsetX: [-10, 10],
-            }}
-            autoFillData={false}
-            loop={false}
-            data={most_read_period}
-            renderItem={({ item }) => <MostReadPeriodCard data={item} />}
-          />
-        </GestureHandlerRootView>
+        {loading ? (
+          <Skeleton />
+        ) : (
+          <GestureHandlerRootView>
+            <Carousel
+              width={hs(125)}
+              style={{ width: "100%" }}
+              height={vs(166)}
+              panGestureHandlerProps={{
+                activeOffsetX: [-10, 10],
+              }}
+              autoFillData={false}
+              loop={false}
+              data={most_read_period!}
+              renderItem={({ item }) => <MostReadPeriodCard data={item} />}
+            />
+          </GestureHandlerRootView>
+        )}
       </CarouselWrapper>
     </CarouselContainer>
   );
