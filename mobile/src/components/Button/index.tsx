@@ -7,8 +7,6 @@ type Props = TouchableOpacityProps & {
 };
 
 const Button = ({ children, ...rest }: Props) => {
-  console.log("button render")
-
   return (
     <PrimaryButton {...rest}>
       <ButtonText>{children}</ButtonText>
