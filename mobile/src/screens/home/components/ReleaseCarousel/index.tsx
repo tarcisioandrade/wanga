@@ -1,11 +1,11 @@
 import React from "react";
 import {
-  CarouselWrapper,
-  CarrouselContainer,
-  CarrouselHeader,
+  ReleaseCarouselWrapper,
+  ReleaseCarouselContainer,
+  ReleaseCarouselHeader,
   ViewButton,
   ViewButtonText,
-} from "./styles";
+} from "./styled";
 import { Title } from "../../../../components/Title";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Carousel from "react-native-reanimated-carousel";
@@ -17,17 +17,17 @@ type Props = {
   releases: ReleaseElement[];
 };
 
-const Carrousel = ({ releases }: Props) => {
+const ReleaseCarousel = ({ releases }: Props) => {
   const goToScreenRelease = () => {};
   return (
-    <CarrouselContainer>
-      <CarrouselHeader>
+    <ReleaseCarouselContainer>
+      <ReleaseCarouselHeader>
         <Title>Lançados Recentemente</Title>
         <ViewButton onPress={goToScreenRelease}>
           <ViewButtonText>Ver Todos</ViewButtonText>
         </ViewButton>
-      </CarrouselHeader>
-      <CarouselWrapper bg="SECONDARY">
+      </ReleaseCarouselHeader>
+      <ReleaseCarouselWrapper bg="SECONDARY">
         <GestureHandlerRootView>
           <Carousel
             width={hs(125)}
@@ -42,9 +42,9 @@ const Carrousel = ({ releases }: Props) => {
             renderItem={({ item }) => <MangaCard releaseElement={item} />}
           />
         </GestureHandlerRootView>
-      </CarouselWrapper>
-    </CarrouselContainer>
+      </ReleaseCarouselWrapper>
+    </ReleaseCarouselContainer>
   );
 };
 
-export default Carrousel;
+export default ReleaseCarousel;
