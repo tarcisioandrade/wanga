@@ -21,10 +21,3 @@ export const STabItem = styled.Pressable<TabActive>`
   justify-content: center;
   align-items: center;
 `;
-
-export const STabText = styled.Text<TabActive>`
-  color: ${(props) =>
-    props.active ? props.theme.WHITE : props.theme.TEXT_COLOR};
-  font-weight: 400;
-  font-size: ${(props) => props.theme.FONT_XS};
-`;

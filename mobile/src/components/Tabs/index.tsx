@@ -1,6 +1,7 @@
-import { StyleSheet, TouchableOpacity, View, Text } from "react-native";
+import { StyleSheet } from "react-native";
 import React from "react";
-import { STabItem, STabText, STabsContainer } from "./styled";
+import { STabItem, STabsContainer } from "./styled";
+import { Text } from "../Text";
 
 export type TabType = {
   value: string;
@@ -31,7 +32,9 @@ const Tabs: React.FC<TabsProps> = ({ tabs, activeTab, onTabChange }) => {
             onPress={() => handleTabChange(tab.value)}
             style={styles.shadow}
           >
-            <STabText active={isActive}>{tab.label}</STabText>
+            <Text size="FONT_XS" color={isActive ? "WHITE" : null}>
+              {tab.label}
+            </Text>
           </STabItem>
         );
       })}
