@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
-import { phs, pvs } from "../../../../../utils/metrics";
-import { Container } from "../../../../../components/Layout";
+import { phs, pvs } from "../../../../utils/metrics";
+import { Container } from "../../../../components/Layout";
 
 export const CarouselContainer = styled.View`
   margin-top: ${pvs(19)};
@@ -14,12 +14,6 @@ export const CarouselHeader = styled.View`
 `;
 
 export const ViewButton = styled.Pressable``;
-
-export const ViewButtonText = styled.Text`
-  font-weight: 400;
-  font-size: ${(props) => props.theme.FONT_XS};
-  color: ${(props) => props.theme.GRAY_600};
-`;
 
 export const CarouselWrapper = styled(Container)`
   padding: ${pvs(10)} ${phs(22)};

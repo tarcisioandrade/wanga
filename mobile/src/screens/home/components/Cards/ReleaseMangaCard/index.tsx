@@ -1,5 +1,4 @@
 import React from "react";
-import fakeData from "../../../../../../fakeData/saiu_hoje.json";
 import { ReleaseElement } from "../../../../../@types/release";
 import {
   CarouselMangaCardContainer,
@@ -11,15 +10,13 @@ import {
 } from "./styled";
 import { truncateString } from "../../../../../utils/truncateString";
 
-const data = fakeData.releases[0] as ReleaseElement;
-
 type Props = {
-  releaseElement: ReleaseElement;
+  data: ReleaseElement;
 };
 
-const ReleaseMangaCard = ({ releaseElement }: Props) => {
+const ReleaseMangaCard = ({ data }: Props) => {
   const goToMangaPage = () => {};
-  const firstChapt = releaseElement.chapters.at(-1)!;
+  const firstChapt = data.chapters.at(-1)!;
   const chapterFormat =
     Number(firstChapt.number) < 9
       ? "0" + firstChapt?.number
@@ -35,15 +32,15 @@ const ReleaseMangaCard = ({ releaseElement }: Props) => {
 
       <CarouselMangaCardImage
         source={{
-          uri: releaseElement.image,
+          uri: data.image,
         }}
         resizeMode="cover"
-        alt={releaseElement.name}
+        alt={data.name}
       />
 
       <CarouselMangaCardFooter>
         <CarouselMangaCardFooterText>
-          {truncateString(releaseElement.name, 17)}
+          {truncateString(data.name, 17)}
         </CarouselMangaCardFooterText>
       </CarouselMangaCardFooter>
     </CarouselMangaCardContainer>

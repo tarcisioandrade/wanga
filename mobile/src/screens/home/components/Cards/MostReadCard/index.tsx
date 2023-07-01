@@ -20,7 +20,7 @@ type Props = {
 };
 
 const MostReadCard = ({ data, position }: Props) => {
-  const positionTarget = position.find(({ name }) => name === data.serie_name);
+  const positionTarget = position?.find(({ name }) => name === data.serie_name);
 
   return (
     <CarouselMangaCardContainer>

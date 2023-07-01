@@ -2,11 +2,8 @@ import React, { useState } from "react";
 
 import { Container, Layout, ScrollContainer } from "../../components/Layout";
 import Tabs, { TabType } from "../../components/Tabs";
-import ReleaseCarousel from "./components/Carousels/ReleaseCarousel";
-import MostReadPeriodCarousel from "./components/Carousels/MostReadPeriodCarousel";
 import { useQueries } from "@tanstack/react-query";
 
-import MostReadCarousel from "./components/Carousels/MostReadCarousel";
 import {
   getMostRead,
   getMostReadPeriod,
@@ -14,6 +11,10 @@ import {
 } from "../../api/mangaServices";
 import { queryKeys } from "../../constants/queryKeys";
 import Header from "../../components/Header";
+import { Carousel } from "./components/Carousel";
+import ReleaseMangaCard from "./components/Cards/ReleaseMangaCard";
+import MostPeriodCard from "./components/Cards/MostReadPeriodCard";
+import MostReadCard from "./components/Cards/MostReadCard";
 
 const tabsInfo: TabType[] = [
   { value: "", label: "Todos" },
@@ -54,6 +55,17 @@ const Home = () => {
     10
   );
 
+  const goToScreenRelease = () => {};
+  const goToScreenMostRead = () => {};
+  const goToScreenMostReadPeriod = () => {};
+
+  const mostReadRanking = mostReadResult.data?.most_read.map(
+    ({ serie_name }, i) => ({
+      ranking: i + 1,
+      name: serie_name,
+    })
+  );
+
   // TO DO: Tratar os erros dos carrousel, ta tudo com ! la na data deles.
   return (
     <Layout>
@@ -67,20 +79,42 @@ const Home = () => {
           />
         </Container>
 
-        <ReleaseCarousel
-          releases={release_data_sliced!}
-          loading={releasesResult.isLoading}
-        />
+        <Carousel.Container>
+          <Carousel.Header
+            handleScreen={goToScreenRelease}
+            title="Lançados Recentemente"
+          />
+          <Carousel.Wrapper
+            data={release_data_sliced}
+            loading={releasesResult.isLoading}
+            card={ReleaseMangaCard}
+          />
+        </Carousel.Container>
 
-        <MostReadPeriodCarousel
-          most_read_period={most_read_period_sliced!}
-          loading={mostReadPeriodResult.isLoading}
-        />
+        <Carousel.Container>
+          <Carousel.Header
+            handleScreen={goToScreenMostReadPeriod}
+            title="Lançados Recentemente"
+          />
+          <Carousel.Wrapper
+            data={most_read_period_sliced}
+            loading={mostReadPeriodResult.isLoading}
+            card={MostPeriodCard}
+          />
+        </Carousel.Container>
 
-        <MostReadCarousel
-          most_read={mostReadResult.data?.most_read}
-          loading={mostReadPeriodResult.isLoading}
-        />
+        <Carousel.Container>
+          <Carousel.Header
+            handleScreen={goToScreenMostRead}
+            title="Mais Lidos"
+          />
+          <Carousel.Wrapper
+            data={mostReadResult.data?.most_read}
+            loading={mostReadResult.isLoading}
+            card={MostReadCard}
+            position={mostReadRanking}
+          />
+        </Carousel.Container>
       </ScrollContainer>
     </Layout>
   );
