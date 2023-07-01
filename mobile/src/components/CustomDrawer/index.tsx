@@ -7,11 +7,11 @@ import {
   DrawerItemList,
   useDrawerProgress,
 } from "@react-navigation/drawer";
-import HomeIcon from "../../../assets/svg-icon/home.svg";
-import FavoritesIcon from "../../../assets/svg-icon/favorites.svg";
-import HistoricIcon from "../../../assets/svg-icon/historic.svg";
-import MoreIcon from "../../../assets/svg-icon/more-icon.svg";
-import Logo from "../../../assets/logo.svg";
+import HomeIcon from "assets/svg-icon/home.svg";
+import FavoritesIcon from "assets/svg-icon/favorites.svg";
+import HistoricIcon from "assets/svg-icon/historic.svg";
+import MoreIcon from "assets/svg-icon/more-icon.svg";
+import Logo from "assets/logo.svg";
 import { SvgProps } from "react-native-svg";
 import Animated from "react-native-reanimated";
 import {
@@ -29,7 +29,7 @@ import {
   UserLabel,
 } from "./styled";
 import { Container } from "../Layout";
-import { hs, phs, pvs, vs } from "../../utils/metrics";
+import { hs, phs, pvs, vs } from "src/utils/metrics";
 import Icon from "../Icon";
 import { useTheme } from "styled-components/native";
 

@@ -1,10 +1,10 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
 import { DrawerParamList, RootStackParamList } from "../@types/navigation";
-import Header from "../components/Header";
+import Header from "src/components/Header";
 import Favorites from "../screens/Favorites";
 import Historic from "../screens/Historic";
-import CustomDrawer from "../components/CustomDrawer";
+import CustomDrawer from "src/components/CustomDrawer";
 import HomeStackNavigator from "./HomeStackNavigator";
 
 const { Screen, Navigator } = createDrawerNavigator<DrawerParamList>();

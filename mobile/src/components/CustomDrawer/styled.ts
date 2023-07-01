@@ -1,7 +1,7 @@
 import Animated from "react-native-reanimated";
 import styled from "styled-components/native";
 import Constants from "expo-constants";
-import { phs, pvs } from "../../utils/metrics";
+import { phs, pvs } from "src/utils/metrics";
 
 type DrawerActive = {
   active: boolean;

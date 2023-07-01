@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { pvs, pms } from "../../utils/metrics";
+import { pvs, pms } from "src/utils/metrics";
 
 export const PrimaryButton = styled.TouchableOpacity.attrs({
   activeOpacity: 0.9,
@@ -14,6 +14,6 @@ export const PrimaryButton = styled.TouchableOpacity.attrs({
 
 export const ButtonText = styled.Text`
   color: ${(props) => props.theme.WHITE};
-  font-size: ${(props) => props.theme.FONT_BASE} ;
-  font-family: ${(props) => props.theme.FONT_FAMILY} ;
+  font-size: ${(props) => props.theme.FONT_BASE};
+  font-family: ${(props) => props.theme.FONT_FAMILY};
 `;

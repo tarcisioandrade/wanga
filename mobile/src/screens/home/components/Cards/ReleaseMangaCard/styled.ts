@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { phs, pvs } from "../../../../../utils/metrics";
+import { phs, pvs } from "src/utils/metrics";
 
 export const CarouselMangaCardContainer = styled.TouchableOpacity.attrs({
   activeOpacity: 0.8,

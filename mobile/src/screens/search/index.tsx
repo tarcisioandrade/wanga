@@ -1,11 +1,11 @@
 import { View, Text } from "react-native";
 import React, { useState } from "react";
-import { Container, Layout, ScrollContainer } from "../../components/Layout";
-import Header from "../../components/Header";
+import { Container, Layout, ScrollContainer } from "src/components/Layout";
+import Header from "src/components/Header";
 import { useQuery } from "@tanstack/react-query";
-import useDebounce from "../../hooks/useDebounde";
-import { queryKeys } from "../../constants/queryKeys";
-import { getSearch } from "../../api/mangaServices";
+import useDebounce from "src/hooks/useDebounde";
+import { queryKeys } from "src/constants/queryKeys";
+import { getSearch } from "src/api/mangaServices";
 import { SearchCardsContainer } from "./styled";
 import SearchCard from "./components/SearchCard";
 

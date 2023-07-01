@@ -3,10 +3,10 @@ import { MostReadPeriod } from "../@types/mostReadPeriod";
 import { Release } from "../@types/release";
 import { mangaDBApi } from "./instances";
 
-import fakeDataRelease from "../../fakeData/saiu_hoje.json";
-import fakeDataMostReadPeriod from "../../fakeData/most_read_period.json";
-import fakeDataMostRead from "../../fakeData/most_read.json";
-import fakeDataSearch from "../../fakeData/search.json";
+import fakeDataRelease from "fakeData/saiu_hoje.json";
+import fakeDataMostReadPeriod from "fakeData/most_read_period.json";
+import fakeDataMostRead from "fakeData/most_read.json";
+import fakeDataSearch from "fakeData/search.json";
 
 import { SearchElement } from "../@types/search";
 

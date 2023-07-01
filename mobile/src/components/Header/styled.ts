@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 import Constants from "expo-constants";
-import { pvs } from "../../utils/metrics";
+import { pvs } from "src/utils/metrics";
 
 export const HeaderContainer = styled.View`
   align-items: center;

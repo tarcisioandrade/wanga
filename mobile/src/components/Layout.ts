@@ -1,5 +1,5 @@
 import styled, { Theme } from "styled-components/native";
-import { phs, pvs } from "../utils/metrics";
+import { phs, pvs } from "src/utils/metrics";
 
 type ContainerBgColor = {
   bg?: keyof Theme;

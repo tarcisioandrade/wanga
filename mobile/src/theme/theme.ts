@@ -1,4 +1,4 @@
-import { pms } from "../utils/metrics";
+import { pms } from "src/utils/metrics";
 
 const lightTheme = {
   PRIMARY: "#185DCF",

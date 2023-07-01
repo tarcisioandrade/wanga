@@ -1,5 +1,5 @@
 import React from "react";
-import { ReleaseElement } from "../../../../../@types/release";
+import { ReleaseElement } from "src/@types/release";
 import {
   CarouselMangaCardContainer,
   CarouselMangaCardBadge,
@@ -8,7 +8,7 @@ import {
   CarouselMangaCardFooterText,
   CarouselMangaCardImage,
 } from "./styled";
-import { truncateString } from "../../../../../utils/truncateString";
+import { truncateString } from "src/utils/truncateString";
 
 type Props = {
   data: ReleaseElement;

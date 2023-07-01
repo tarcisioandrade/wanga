@@ -1,7 +1,7 @@
 import React from "react";
 import * as S from "./styled";
-import { Title } from "../../../../components/Title";
-import { Text } from "../../../../components/Text";
+import { Title } from "src/components/Title";
+import { Text } from "src/components/Text";
 
 type CarouselHeaderProps = {
   title: string;

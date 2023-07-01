@@ -1,6 +1,5 @@
-import { View, Text } from "react-native";
 import React from "react";
-import { truncateString } from "../../../../../utils/truncateString";
+import { truncateString } from "src/utils/truncateString";
 import {
   CarouselMangaCardContainer,
   CarouselMangaCardBadge,
@@ -9,7 +8,7 @@ import {
   CarouselMangaCardFooter,
   CarouselMangaCardFooterText,
 } from "../ReleaseMangaCard/styled";
-import { MostReadElement } from "../../../../../@types/mostRead";
+import { MostReadElement } from "src/@types/mostRead";
 
 type Props = {
   data: MostReadElement;

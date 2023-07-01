@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
-import { phs, pvs } from "../../../../utils/metrics";
-import { Container } from "../../../../components/Layout";
+import { phs, pvs } from "src/utils/metrics";
+import { Container } from "src/components/Layout";
 
 export const CarouselContainer = styled.View`
   margin-top: ${pvs(19)};

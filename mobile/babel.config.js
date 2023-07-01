@@ -15,6 +15,16 @@ module.exports = function (api) {
           allowUndefined: true,
         },
       ],
+      [
+        "module-resolver",
+        {
+          alias: {
+            src: "./src",
+            fakeData: "./fakeData",
+            assets: "./assets",
+          },
+        },
+      ],
     ],
   };
 };

@@ -6,12 +6,12 @@ import {
   LogoContainer,
   LogoText,
 } from "./styled";
-import Hamburguer from "../../../assets/svg-icon/hamburger.svg";
-import SearchIcon from "../../../assets/svg-icon/search.svg";
-import ArrowLeft from "../../../assets/svg-icon/arrow-left.svg";
-import Logo from "../../../assets/logo.svg";
+import Hamburguer from "assets/svg-icon/hamburger.svg";
+import SearchIcon from "assets/svg-icon/search.svg";
+import ArrowLeft from "assets/svg-icon/arrow-left.svg";
+import Logo from "assets/logo.svg";
 import { Container, Layout } from "../Layout";
-import { vs, hs } from "../../utils/metrics";
+import { vs, hs } from "src/utils/metrics";
 import Icon from "../Icon";
 import { useNavigation, DrawerActions } from "@react-navigation/native";
 

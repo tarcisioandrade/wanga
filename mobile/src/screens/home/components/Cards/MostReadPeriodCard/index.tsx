@@ -1,5 +1,5 @@
 import React from "react";
-import { MostReadPeriodElement } from "../../../../../@types/mostReadPeriod";
+import { MostReadPeriodElement } from "src/@types/mostReadPeriod";
 import {
   CarouselMangaCardBadge,
   CarouselMangaCardBadgeText,
@@ -8,7 +8,7 @@ import {
   CarouselMangaCardFooterText,
   CarouselMangaCardImage,
 } from "../ReleaseMangaCard/styled";
-import { truncateString } from "../../../../../utils/truncateString";
+import { truncateString } from "src/utils/truncateString";
 
 type Props = {
   data: MostReadPeriodElement;

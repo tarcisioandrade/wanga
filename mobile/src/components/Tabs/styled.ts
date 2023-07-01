@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { phs, pvs } from "../../utils/metrics";
+import { phs, pvs } from "src/utils/metrics";
 
 type TabActive = {
   active: boolean;

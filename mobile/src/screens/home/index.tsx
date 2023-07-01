@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-import { Container, Layout, ScrollContainer } from "../../components/Layout";
-import Tabs, { TabType } from "../../components/Tabs";
+import { Container, Layout, ScrollContainer } from "src/components/Layout";
+import Tabs, { TabType } from "src/components/Tabs";
 import { useQueries } from "@tanstack/react-query";
 
 import {
@@ -10,7 +10,7 @@ import {
   getReleases,
 } from "../../api/mangaServices";
 import { queryKeys } from "../../constants/queryKeys";
-import Header from "../../components/Header";
+import Header from "src/components/Header";
 import { Carousel } from "./components/Carousel";
 import ReleaseMangaCard from "./components/Cards/ReleaseMangaCard";
 import MostPeriodCard from "./components/Cards/MostReadPeriodCard";

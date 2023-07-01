@@ -1,6 +1,5 @@
-import { View, Text } from "react-native";
 import React from "react";
-import { Serie } from "../../../@types/search";
+import { Serie } from "src/@types/search";
 import {
   Artist,
   BadgesContainer,
@@ -11,8 +10,8 @@ import {
   SearchTitle,
   SearchWrapper,
 } from "./styled";
-import Star from "../../../../assets/svg-icon/star.svg";
-import BadgePrimary from "../../../components/Badge";
+import Star from "assets/svg-icon/star.svg";
+import BadgePrimary from "src/components/Badge";
 
 type Props = {
   mangaSearch: Serie;
