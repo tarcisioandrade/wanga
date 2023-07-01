@@ -1,47 +1,45 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
-import Home from "../screens/home";
-import { RootStackParamList } from "../@types/navigation";
+import { DrawerParamList, RootStackParamList } from "../@types/navigation";
 import Header from "../components/Header";
 import Favorites from "../screens/Favorites";
 import Historic from "../screens/Historic";
 import CustomDrawer from "../components/CustomDrawer";
+import HomeStackNavigator from "./HomeStackNavigator";
 
-const { Screen, Navigator } = createDrawerNavigator<RootStackParamList>();
+const { Screen, Navigator } = createDrawerNavigator<DrawerParamList>();
 
 const Routes = () => {
   return (
     <NavigationContainer>
       <Navigator
-        initialRouteName="home"
+        initialRouteName="drawerHome"
         screenOptions={{
           headerTitle: "",
-          header: ({ navigation }) => (
-            <Header openMenu={navigation.openDrawer} />
-          ),
           drawerStyle: {
             backgroundColor: "transparent",
           },
+          headerShown: false,
         }}
         drawerContent={(props) => <CustomDrawer {...props} />}
         useLegacyImplementation
       >
         <Screen
-          name="home"
+          name="drawerHome"
           options={{
             title: "Home",
           }}
-          component={Home}
+          component={HomeStackNavigator}
         />
         <Screen
-          name="favorites"
+          name="drawerFavorites"
           options={{
             title: "Favoritos",
           }}
           component={Favorites}
         />
         <Screen
-          name="historic"
+          name="drawerHistoric"
           options={{
             title: "Histórico",
           }}

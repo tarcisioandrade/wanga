@@ -1,9 +1,14 @@
 import { DrawerScreenProps } from "@react-navigation/drawer";
 
-type RootStackParamList = {
+export type RootStackParamList = {
   home: undefined;
-  favorites: undefined;
-  historic: undefined;
+  search: undefined;
+};
+
+export type DrawerParamList = {
+  drawerHome: undefined;
+  drawerFavorites: undefined;
+  drawerHistoric: undefined;
 };
 
 declare global {

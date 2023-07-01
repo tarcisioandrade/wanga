@@ -29,7 +29,12 @@ const lightTheme = {
   FONT_MD: pms(17),
   FONT_LG: pms(18),
 
-  FONT_FAMILY: "SF-Pro-Display-Regular",
+  FONT_FAMILY: "Inter_400Regular",
+
+  WEIGHT_MEDIUM: "Inter_500Medium",
+  WEIGHT_SEMIBOLD: "Inter_600SemiBold",
+  WEIGHT_BOLD: "Inter_700Bold",
+  WEIGHT_EXTRABOLD: "Inter_800ExtraBold",
 };
 
 const darkTheme = {

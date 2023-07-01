@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-import { RootStackScreenProps } from "../../@types/navigation";
 import { Container, Layout, ScrollContainer } from "../../components/Layout";
 import Tabs, { TabType } from "../../components/Tabs";
 import ReleaseCarousel from "./components/Carousels/ReleaseCarousel";
@@ -12,8 +11,9 @@ import {
   getMostRead,
   getMostReadPeriod,
   getReleases,
-} from "../../api/MangaDBApi";
+} from "../../api/mangaServices";
 import { queryKeys } from "../../constants/queryKeys";
+import Header from "../../components/Header";
 
 const tabsInfo: TabType[] = [
   { value: "", label: "Todos" },
@@ -57,10 +57,8 @@ const Home = () => {
   // TO DO: Tratar os erros dos carrousel, ta tudo com ! la na data deles.
   return (
     <Layout>
-      <ScrollContainer
-        contentContainerStyle={{ paddingBottom: 70 }}
-        showsVerticalScrollIndicator={false}
-      >
+      <Header />
+      <ScrollContainer>
         <Container>
           <Tabs
             tabs={tabsInfo}

@@ -38,13 +38,13 @@ type IconAndLabelMappings = {
 };
 
 const iconAndLabelMappings: IconAndLabelMappings = {
-  home: {
+  drawerHome: {
     icon: HomeIcon,
   },
-  favorites: {
+  drawerFavorites: {
     icon: FavoritesIcon,
   },
-  historic: {
+  drawerHistoric: {
     icon: HistoricIcon,
   },
 };

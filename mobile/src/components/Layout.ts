@@ -15,6 +15,9 @@ export const Container = styled.View<ContainerBgColor>`
   background-color: ${({ bg, theme }) => (bg ? theme[bg] : "transparent")};
 `;
 
-export const ScrollContainer = styled.ScrollView`
+export const ScrollContainer = styled.ScrollView.attrs({
+  contentContainerStyle: { paddingBottom: 70 },
+  showsVerticalScrollIndicator: false,
+})`
   flex: 1;
 `;
