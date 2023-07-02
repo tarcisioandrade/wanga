@@ -9,5 +9,5 @@ export const BadgeContainer = styled.View`
 
 export const BadgeText = styled.Text`
   color: ${(props) => props.theme.WHITE};
-  font-size: ${(props) => props.theme.FONT_XXS};
+  font-size: ${(props) => props.theme.FONT_4XS};
 `;

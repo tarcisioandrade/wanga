@@ -2,13 +2,12 @@ import React from "react";
 import { MostReadPeriodElement } from "src/@types/mostReadPeriod";
 import {
   CarouselMangaCardBadge,
-  CarouselMangaCardBadgeText,
   CarouselMangaCardContainer,
   CarouselMangaCardFooter,
-  CarouselMangaCardFooterText,
   CarouselMangaCardImage,
 } from "../ReleaseMangaCard/styled";
 import { truncateString } from "src/utils/truncateString";
+import { Text } from "src/components/Text";
 
 type Props = {
   data: MostReadPeriodElement;
@@ -18,9 +17,9 @@ const MostPeriodCard = ({ data }: Props) => {
   return (
     <CarouselMangaCardContainer>
       <CarouselMangaCardBadge>
-        <CarouselMangaCardBadgeText>
+        <Text color="WHITE" size="FONT_XS" weight="WEIGHT_MEDIUM">
           {data.chapter_number}
-        </CarouselMangaCardBadgeText>
+        </Text>
       </CarouselMangaCardBadge>
       <CarouselMangaCardImage
         source={{
@@ -31,9 +30,9 @@ const MostPeriodCard = ({ data }: Props) => {
       />
 
       <CarouselMangaCardFooter>
-        <CarouselMangaCardFooterText>
+        <Text color="WHITE" size="FONT_4XS" weight="WEIGHT_SEMIBOLD">
           {truncateString(data.series_name, 17)}
-        </CarouselMangaCardFooterText>
+        </Text>
       </CarouselMangaCardFooter>
     </CarouselMangaCardContainer>
   );

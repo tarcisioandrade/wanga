@@ -34,21 +34,9 @@ export const DrawerAvatar = styled.View`
   align-items: center;
 `;
 
-export const DrawerAvatarText = styled.Text`
-  font-weight: 600;
-  font-size: ${(props) => props.theme.FONT_LG};
-  color: ${(props) => props.theme.WHITE};
-`;
-
 export const NoAuthContainer = styled.View`
   flex-direction: row;
   margin-top: ${pvs(10)};
-`;
-
-export const NoAuthMessage = styled.Text`
-  font-weight: 500;
-  font-size: ${(props) => props.theme.FONT_XS};
-  color: ${(props) => props.theme.GRAY_600};
 `;
 
 export const LinkToLogin = styled.Text`
@@ -77,10 +65,4 @@ export const CustomDrawerItem = styled.Pressable<DrawerActive>`
   flex-direction: row;
   align-items: center;
   gap: 16px;
-`;
-
-export const DrawerItemText = styled.Text`
-  color: ${(props) => props.theme.MENU_ITEM_COLOR};
-  font-size: 14px;
-  font-weight: 500;
 `;

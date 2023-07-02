@@ -15,6 +15,7 @@ import { Carousel } from "./components/Carousel";
 import ReleaseMangaCard from "./components/Cards/ReleaseMangaCard";
 import MostPeriodCard from "./components/Cards/MostReadPeriodCard";
 import MostReadCard from "./components/Cards/MostReadCard";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const tabsInfo: TabType[] = [
   { value: "", label: "Todos" },
@@ -49,7 +50,9 @@ const Home = () => {
     console.log(value);
   };
 
-  const release_data_sliced = releasesResult.data?.releases.slice(0, 10);
+  const release_data_sliced = releasesResult.data?.releases
+    .slice(0, 10)
+    .filter(({ chapters }) => chapters.length);
   const most_read_period_sliced = mostReadPeriodResult.data?.most_read.slice(
     0,
     10
@@ -79,42 +82,44 @@ const Home = () => {
           />
         </Container>
 
-        <Carousel.Container>
-          <Carousel.Header
-            handleScreen={goToScreenRelease}
-            title="Lançados Recentemente"
-          />
-          <Carousel.Wrapper
-            data={release_data_sliced}
-            loading={releasesResult.isLoading}
-            card={ReleaseMangaCard}
-          />
-        </Carousel.Container>
+        <GestureHandlerRootView>
+          <Carousel.Container>
+            <Carousel.Header
+              handleScreen={goToScreenRelease}
+              title="Lançados Recentemente"
+            />
+            <Carousel.Wrapper
+              data={release_data_sliced}
+              loading={releasesResult.isLoading}
+              card={ReleaseMangaCard}
+            />
+          </Carousel.Container>
 
-        <Carousel.Container>
-          <Carousel.Header
-            handleScreen={goToScreenMostReadPeriod}
-            title="Lançados Recentemente"
-          />
-          <Carousel.Wrapper
-            data={most_read_period_sliced}
-            loading={mostReadPeriodResult.isLoading}
-            card={MostPeriodCard}
-          />
-        </Carousel.Container>
+          <Carousel.Container>
+            <Carousel.Header
+              handleScreen={goToScreenMostReadPeriod}
+              title="Lançados Recentemente"
+            />
+            <Carousel.Wrapper
+              data={most_read_period_sliced}
+              loading={mostReadPeriodResult.isLoading}
+              card={MostPeriodCard}
+            />
+          </Carousel.Container>
 
-        <Carousel.Container>
-          <Carousel.Header
-            handleScreen={goToScreenMostRead}
-            title="Mais Lidos"
-          />
-          <Carousel.Wrapper
-            data={mostReadResult.data?.most_read}
-            loading={mostReadResult.isLoading}
-            card={MostReadCard}
-            position={mostReadRanking}
-          />
-        </Carousel.Container>
+          <Carousel.Container>
+            <Carousel.Header
+              handleScreen={goToScreenMostRead}
+              title="Mais Lidos"
+            />
+            <Carousel.Wrapper
+              data={mostReadResult.data?.most_read}
+              loading={mostReadResult.isLoading}
+              card={MostReadCard}
+              position={mostReadRanking}
+            />
+          </Carousel.Container>
+        </GestureHandlerRootView>
       </ScrollContainer>
     </Layout>
   );

@@ -32,7 +32,7 @@ const Tabs: React.FC<TabsProps> = ({ tabs, activeTab, onTabChange }) => {
             onPress={() => handleTabChange(tab.value)}
             style={styles.shadow}
           >
-            <Text size="FONT_XS" color={isActive ? "WHITE" : null}>
+            <Text size="FONT_4XS" color={isActive ? "WHITE" : null}>
               {tab.label}
             </Text>
           </STabItem>

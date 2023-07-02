@@ -3,12 +3,11 @@ import { truncateString } from "src/utils/truncateString";
 import {
   CarouselMangaCardContainer,
   CarouselMangaCardBadge,
-  CarouselMangaCardBadgeText,
   CarouselMangaCardImage,
   CarouselMangaCardFooter,
-  CarouselMangaCardFooterText,
 } from "../ReleaseMangaCard/styled";
 import { MostReadElement } from "src/@types/mostRead";
+import { Text } from "src/components/Text";
 
 type Props = {
   data: MostReadElement;
@@ -24,7 +23,9 @@ const MostReadCard = ({ data, position }: Props) => {
   return (
     <CarouselMangaCardContainer>
       <CarouselMangaCardBadge>
-        <CarouselMangaCardBadgeText>{`#${positionTarget?.ranking}`}</CarouselMangaCardBadgeText>
+        <Text color="WHITE" size="FONT_XS" weight="WEIGHT_MEDIUM">
+          {`#${positionTarget?.ranking}`}
+        </Text>
       </CarouselMangaCardBadge>
       <CarouselMangaCardImage
         source={{
@@ -35,9 +36,9 @@ const MostReadCard = ({ data, position }: Props) => {
       />
 
       <CarouselMangaCardFooter>
-        <CarouselMangaCardFooterText>
+        <Text color="WHITE" size="FONT_4XS" weight="WEIGHT_SEMIBOLD">
           {truncateString(data.serie_name, 17)}
-        </CarouselMangaCardFooterText>
+        </Text>
       </CarouselMangaCardFooter>
     </CarouselMangaCardContainer>
   );

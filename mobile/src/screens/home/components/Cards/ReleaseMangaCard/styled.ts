@@ -28,12 +28,6 @@ export const CarouselMangaCardFooter = styled.View`
   align-items: center;
 `;
 
-export const CarouselMangaCardFooterText = styled.Text`
-  font-size: ${(props) => props.theme.FONT_XXS};
-  color: ${(props) => props.theme.WHITE};
-  font-weight: 700;
-`;
-
 export const CarouselMangaCardBadge = styled.View`
   background-color: ${(props) => props.theme.PRIMARY};
   padding: 3px 10px;
@@ -43,10 +37,4 @@ export const CarouselMangaCardBadge = styled.View`
   top: 5px;
   left: 5px;
   z-index: 999;
-`;
-
-export const CarouselMangaCardBadgeText = styled.Text`
-  color: ${(props) => props.theme.WHITE};
-  font-weight: 600;
-  font-size: ${(props) => props.theme.FONT_XS};
 `;

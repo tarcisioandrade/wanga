@@ -1,5 +1,6 @@
 import React from "react";
 import { SvgProps } from "react-native-svg";
+import { DefaultTheme } from "styled-components/native";
 import { useTheme } from "styled-components/native";
 
 type Props = SvgProps & {

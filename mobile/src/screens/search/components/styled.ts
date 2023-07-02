@@ -40,7 +40,7 @@ export const Score = styled.View`
 `;
 
 export const ScoreText = styled.Text`
-  font-size: ${(props) => props.theme.FONT_XXS};
+  font-size: ${(props) => props.theme.FONT_4XS};
   color: ${(props) => props.theme.TEXT_COLOR};
 `;
 

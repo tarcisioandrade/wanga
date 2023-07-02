@@ -1,10 +1,7 @@
-import { View, Text, Pressable } from "react-native";
+import { Pressable } from "react-native";
 import React from "react";
 import {
   DrawerContentComponentProps,
-  DrawerContentScrollView,
-  DrawerItem,
-  DrawerItemList,
   useDrawerProgress,
 } from "@react-navigation/drawer";
 import HomeIcon from "assets/svg-icon/home.svg";
@@ -16,22 +13,20 @@ import { SvgProps } from "react-native-svg";
 import Animated from "react-native-reanimated";
 import {
   DrawerAvatar,
-  DrawerAvatarText,
   DrawerContainer,
   DrawerHeaderContainer,
   DrawerHeaderFlex,
   DrawerItemContainer,
-  DrawerItemText,
   CustomDrawerItem,
   LinkToLogin,
   NoAuthContainer,
-  NoAuthMessage,
   UserLabel,
 } from "./styled";
 import { Container } from "../Layout";
 import { hs, phs, pvs, vs } from "src/utils/metrics";
 import Icon from "../Icon";
 import { useTheme } from "styled-components/native";
+import { Text } from "../Text";
 
 type IconAndLabelMappings = {
   [key: string]: { icon: React.FC<SvgProps> };
@@ -66,7 +61,9 @@ const CustomDrawer = (props: DrawerContentComponentProps) => {
           <DrawerHeaderFlex>
             {user ? (
               <DrawerAvatar>
-                <DrawerAvatarText>W</DrawerAvatarText>
+                <Text size="FONT_LG" color="WHITE" weight="WEIGHT_SEMIBOLD">
+                  W
+                </Text>
               </DrawerAvatar>
             ) : (
               <Logo width={hs(40)} height={vs(40)} />
@@ -85,7 +82,9 @@ const CustomDrawer = (props: DrawerContentComponentProps) => {
             <UserLabel>Woltz-senpai</UserLabel>
           ) : (
             <NoAuthContainer>
-              <NoAuthMessage>Você não está logado. </NoAuthMessage>
+              <Text color="GRAY_600" size="FONT_XS" weight="WEIGHT_MEDIUM">
+                Você não está logado.{" "}
+              </Text>
               <Pressable>
                 <LinkToLogin>Login</LinkToLogin>
               </Pressable>
@@ -112,7 +111,9 @@ const CustomDrawer = (props: DrawerContentComponentProps) => {
                   width={phs(24)}
                   height={pvs(24)}
                 />
-                <DrawerItemText>{options.title}</DrawerItemText>
+                <Text color="PRIMARY" size="FONT_XS" weight="WEIGHT_MEDIUM">
+                  {options.title}
+                </Text>
               </CustomDrawerItem>
             );
           })}
