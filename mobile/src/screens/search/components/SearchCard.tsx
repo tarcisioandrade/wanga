@@ -11,7 +11,7 @@ import {
   SearchWrapper,
 } from "./styled";
 import Star from "assets/svg-icon/star.svg";
-import BadgePrimary from "src/components/Badge";
+import Badge from "src/components/Badge";
 
 type Props = {
   mangaSearch: Serie;
@@ -34,7 +34,7 @@ const SearchCard = ({ mangaSearch }: Props) => {
         {categories.length ? (
           <BadgesContainer>
             {categories.map(({ name, id_category }) => (
-              <BadgePrimary key={id_category}>{name}</BadgePrimary>
+              <Badge key={id_category}>{name}</Badge>
             ))}
           </BadgesContainer>
         ) : null}
