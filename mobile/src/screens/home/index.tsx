@@ -4,11 +4,6 @@ import { Container, Layout, ScrollContainer } from "src/components/Layout";
 import Tabs, { TabType } from "src/components/Tabs";
 import { useQueries } from "@tanstack/react-query";
 
-import {
-  getMostRead,
-  getMostReadPeriod,
-  getReleases,
-} from "../../api/mangaServices";
 import { queryKeys } from "../../constants/queryKeys";
 import Header from "src/components/Header";
 import { Carousel } from "./components/Carousel";
@@ -16,6 +11,13 @@ import ReleaseMangaCard from "./components/Cards/ReleaseMangaCard";
 import MostPeriodCard from "./components/Cards/MostReadPeriodCard";
 import MostReadCard from "./components/Cards/MostReadCard";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import Parallax from "./components/Parallax";
+import {
+  getFeatured,
+  getMostRead,
+  getMostReadPeriod,
+  getReleases,
+} from "../../api/mangaServices";
 
 const tabsInfo: TabType[] = [
   { value: "", label: "Todos" },
@@ -28,22 +30,27 @@ const tabsInfo: TabType[] = [
 const Home = () => {
   const [type, setActiveTab] = useState("");
 
-  const [releasesResult, mostReadPeriodResult, mostReadResult] = useQueries({
-    queries: [
-      {
-        queryKey: [queryKeys.releases, type],
-        queryFn: () => getReleases(1, type),
-      },
-      {
-        queryKey: [queryKeys.mostReadPeriod, type],
-        queryFn: () => getMostReadPeriod(1, type),
-      },
-      {
-        queryKey: [queryKeys.mostRead, type],
-        queryFn: () => getMostRead(1, type),
-      },
-    ],
-  });
+  const [releasesResult, mostReadPeriodResult, mostReadResult, featuredResult] =
+    useQueries({
+      queries: [
+        {
+          queryKey: [queryKeys.releases, type],
+          queryFn: () => getReleases(1, type),
+        },
+        {
+          queryKey: [queryKeys.mostReadPeriod, type],
+          queryFn: () => getMostReadPeriod(1, type),
+        },
+        {
+          queryKey: [queryKeys.mostRead, type],
+          queryFn: () => getMostRead(1, type),
+        },
+        {
+          queryKey: [queryKeys.featured],
+          queryFn: getFeatured,
+        },
+      ],
+    });
 
   const handleTabChange = (value: string) => {
     setActiveTab(value);
@@ -74,15 +81,17 @@ const Home = () => {
     <Layout>
       <Header />
       <ScrollContainer>
-        <Container>
-          <Tabs
-            tabs={tabsInfo}
-            activeTab={type}
-            onTabChange={handleTabChange}
-          />
-        </Container>
-
         <GestureHandlerRootView>
+          <Parallax featured={featuredResult.data?.featured} />
+
+          <Container>
+            <Tabs
+              tabs={tabsInfo}
+              activeTab={type}
+              onTabChange={handleTabChange}
+            />
+          </Container>
+
           <Carousel.Container>
             <Carousel.Header
               handleScreen={goToScreenRelease}
@@ -98,7 +107,7 @@ const Home = () => {
           <Carousel.Container>
             <Carousel.Header
               handleScreen={goToScreenMostReadPeriod}
-              title="Lançados Recentemente"
+              title="Mais Lidos da Semana"
             />
             <Carousel.Wrapper
               data={most_read_period_sliced}

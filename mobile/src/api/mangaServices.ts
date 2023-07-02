@@ -7,13 +7,16 @@ import fakeDataRelease from "fakeData/saiu_hoje.json";
 import fakeDataMostReadPeriod from "fakeData/most_read_period.json";
 import fakeDataMostRead from "fakeData/most_read.json";
 import fakeDataSearch from "fakeData/search.json";
+import fakeDataFeatured from "fakeData/featured.json";
 
-import { SearchElement } from "../@types/search";
+import { Search } from "../@types/search";
+import { Featured } from "src/@types/featured";
 
 const release = fakeDataRelease as Release;
 const most_read_period = fakeDataMostReadPeriod as MostReadPeriod;
 const most_read = fakeDataMostRead as MostRead;
-const search_data = fakeDataSearch as SearchElement;
+const search_data = fakeDataSearch as Search;
+const featured_data = fakeDataFeatured as Featured;
 
 export function delay<T>(t: number, v: T): Promise<T> {
   return new Promise(function (resolve) {
@@ -65,9 +68,9 @@ export async function getMostRead(page: number = 1, type?: string) {
 
 export async function getSearch(searchValue: string) {
   const search = searchValue;
-  // return delay<SearchElement>(2000, search_data)
+  // return delay<Search>(2000, search_data)
 
-  const res = await mangaDBApi.post<SearchElement>(
+  const res = await mangaDBApi.post<Search>(
     "/lib/search/series.json",
     {
       search,
@@ -79,6 +82,14 @@ export async function getSearch(searchValue: string) {
       },
     }
   );
+
+  return res.data;
+}
+
+export async function getFeatured() {
+  return delay<Featured>(2000, featured_data);
+
+  const res = await mangaDBApi.get<Featured>("/home/getFeaturedSeries.json");
 
   return res.data;
 }

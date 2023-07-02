@@ -1,13 +1,13 @@
 import React from "react";
 import { ReleaseElement } from "src/@types/release";
+import { truncateString } from "src/utils/truncateString";
+import { Text } from "src/components/Text";
 import {
   CarouselMangaCardContainer,
   CarouselMangaCardBadge,
   CarouselMangaCardFooter,
   CarouselMangaCardImage,
 } from "./styled";
-import { truncateString } from "src/utils/truncateString";
-import { Text } from "src/components/Text";
 
 type Props = {
   data: ReleaseElement;
@@ -16,16 +16,20 @@ type Props = {
 const ReleaseMangaCard = ({ data }: Props) => {
   const goToMangaPage = () => {};
   const firstChapt = data.chapters.at(-1)!;
+
   const chapterFormat =
     Number(firstChapt?.number) < 9
       ? "0" + firstChapt?.number
       : firstChapt?.number;
 
+  const chapterLabel =
+    data.chapters.length > 1 ? `${chapterFormat}, ...` : chapterFormat;
+
   return (
     <CarouselMangaCardContainer onPress={goToMangaPage}>
       <CarouselMangaCardBadge>
         <Text color="WHITE" size="FONT_XS" weight="WEIGHT_MEDIUM">
-          {chapterFormat}, ...
+          {chapterLabel}
         </Text>
       </CarouselMangaCardBadge>
 

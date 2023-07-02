@@ -15,11 +15,11 @@ export interface ReleaseElement {
   image_avif: string;
   image_thumb_avif: string;
   range: string;
-  chapters: Chapter[];
+  chapters: ReleaseChapter[];
   link: string;
 }
 
-export interface Chapter {
+export interface ReleaseChapter {
   url: string;
   number: string;
   date_created: string;

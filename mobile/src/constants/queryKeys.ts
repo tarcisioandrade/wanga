@@ -3,4 +3,5 @@ export const queryKeys = {
   mostReadPeriod: "most-read-period-key",
   mostRead: "most-read-key",
   search: "search-key",
+  featured: "featured-key",
 };

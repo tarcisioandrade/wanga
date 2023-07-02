@@ -5,6 +5,13 @@ type ContainerBgColor = {
   bg?: keyof Theme;
 };
 
+type StackProps = {
+  justify_content?: string;
+  align_items?: string;
+  direction?: string;
+  gap?: number;
+};
+
 export const Layout = styled.SafeAreaView`
   background-color: ${(props) => props.theme.BG_COLOR};
   flex: 1;
@@ -20,4 +27,13 @@ export const ScrollContainer = styled.ScrollView.attrs({
   showsVerticalScrollIndicator: false,
 })`
   flex: 1;
+`;
+
+export const Stack = styled.View<StackProps>`
+  flex-direction: ${(props) => (props.direction ? props.direction : "column")};
+  align-items: ${(props) =>
+    props.align_items ? props.align_items : "flex-start"};
+  justify-content: ${(props) =>
+    props.justify_content ? props.justify_content : "flex-start"};
+  gap: ${(props) => (props.gap ? props.gap + "px" : 0)};
 `;
