@@ -1,6 +1,7 @@
 import React from "react";
 import * as S from "./styled";
-import { Title } from "src/components/Title";
+import Icon from "src/components/Icon";
+import ArrowRight from "assets/svg-icon/arrow-right.svg";
 import { Text } from "src/components/Text";
 
 type CarouselHeaderProps = {
@@ -11,11 +12,9 @@ type CarouselHeaderProps = {
 const CarouselHeader = ({ title, handleScreen }: CarouselHeaderProps) => {
   return (
     <S.CarouselHeader>
-      <Title>{title}</Title>
+      <Text weight="WEIGHT_SEMIBOLD">{title}</Text>
       <S.ViewButton onPress={handleScreen}>
-        <Text size="FONT_XS" color="GRAY_600">
-          Ver Todos
-        </Text>
+        <Icon icon={ArrowRight} type="stroke" color="#969696" />
       </S.ViewButton>
     </S.CarouselHeader>
   );

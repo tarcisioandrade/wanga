@@ -26,26 +26,24 @@ const CarouselWrapper = ({
       {loading ? (
         <Skeleton />
       ) : (
-        <GestureHandlerRootView>
-          <Carousel
-            width={hs(125)}
-            style={{ width: "100%" }}
-            height={vs(166)}
-            panGestureHandlerProps={{
-              activeOffsetX: [-10, 10],
-            }}
-            autoFillData={false}
-            loop={false}
-            data={data}
-            renderItem={({ item }) =>
-              position ? (
-                <Card data={item} position={position} />
-              ) : (
-                <Card data={item} />
-              )
-            }
-          />
-        </GestureHandlerRootView>
+        <Carousel
+          width={hs(125)}
+          style={{ width: "100%" }}
+          height={vs(166)}
+          panGestureHandlerProps={{
+            activeOffsetX: [-10, 10],
+          }}
+          autoFillData={false}
+          loop={false}
+          data={data}
+          renderItem={({ item }) =>
+            position ? (
+              <Card data={item} position={position} />
+            ) : (
+              <Card data={item} />
+            )
+          }
+        />
       )}
     </S.CarouselWrapper>
   );
