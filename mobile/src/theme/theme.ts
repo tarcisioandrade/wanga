@@ -16,15 +16,17 @@ const lightTheme = {
   DARK_900: "#232222",
 
   BG_COLOR: "#FFFFFF",
-  TEXT_COLOR: "#000000",
+  TEXT_COLOR: "#2E2E2E",
 
   // other
   MENU_ITEM_COLOR: "#185DCF",
   TAB_ITEM_COLOR: "#FFFFFF",
 
-  FONT_XXS: pms(11),
-  FONT_XS: pms(12),
-  FONT_SM: pms(14),
+  FONT_4XS: pms(11),
+  FONT_3XS: pms(12),
+  FONT_2XS: pms(13),
+  FONT_XS: pms(14),
+  FONT_SM: pms(15),
   FONT_BASE: pms(16),
   FONT_MD: pms(17),
   FONT_LG: pms(18),
