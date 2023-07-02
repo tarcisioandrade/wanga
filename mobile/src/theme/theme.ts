@@ -7,7 +7,8 @@ const lightTheme = {
   WARNING: "#FDBD31",
 
   WHITE: "#FFFFFF",
-
+  BLACK: "#000",
+  BLACK_TRANSPARENT: "rgba(0, 0, 0, 0.5)",
   GRAY_500: "#ACACAC",
   GRAY_600: "#969696",
 

@@ -2,6 +2,7 @@ import React from "react";
 import { Serie } from "src/@types/search";
 import {
   Artist,
+  BadgeStatus,
   BadgesContainer,
   Score,
   ScoreText,
@@ -12,24 +13,35 @@ import {
 } from "./styled";
 import Star from "assets/svg-icon/star.svg";
 import Badge from "src/components/Badge";
+import { Text } from "src/components/Text";
+import { truncateString } from "src/utils/truncateString";
 
 type Props = {
   mangaSearch: Serie;
 };
+
 const SearchCard = ({ mangaSearch }: Props) => {
   const categories = mangaSearch.categories.slice(0, 3);
 
   const goToMangaScreen = () => {};
+  const imageUri = mangaSearch.cover.includes("no-cover")
+    ? require("assets/images/no-asset.jpg")
+    : { uri: mangaSearch.cover };
 
   return (
     <SearchWrapper onPress={goToMangaScreen}>
-      <SearchImage
-        source={{
-          uri: mangaSearch.cover,
-        }}
-      />
       <SearchInfoContainer>
-        <SearchTitle>{mangaSearch.name}</SearchTitle>
+        <SearchImage source={imageUri} />
+        {mangaSearch.is_complete && (
+          <BadgeStatus>
+            <Text color="WHITE" size="FONT_4XS" weight="WEIGHT_MEDIUM">
+              Completo
+            </Text>
+          </BadgeStatus>
+        )}
+      </SearchInfoContainer>
+      <SearchInfoContainer>
+        <SearchTitle>{truncateString(mangaSearch.name, 55)}</SearchTitle>
         {mangaSearch.artist ? <Artist>{mangaSearch.artist}</Artist> : null}
         {categories.length ? (
           <BadgesContainer>

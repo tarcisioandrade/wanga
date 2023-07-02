@@ -1,15 +1,21 @@
 import React, { ReactNode } from "react";
 import { BadgeText, BadgeContainer } from "./styled";
 import { StyleSheet } from "react-native";
+import { DefaultTheme } from "styled-components/native";
 
 export type BadgeProps = {
   children: ReactNode;
-  type?: "Primary" | "Outlined";
+  type?: "Filled" | "Outlined";
+  bg?: keyof DefaultTheme;
 };
 
-const Badge = ({ children, type = "Primary" }: BadgeProps) => {
+const Badge = ({ children, type = "Filled", bg }: BadgeProps) => {
   return (
-    <BadgeContainer type={type} style={type === "Outlined" && styles.shadow}>
+    <BadgeContainer
+      bg={bg}
+      type={type}
+      style={type === "Outlined" && styles.shadow}
+    >
       <BadgeText type={type}>{children}</BadgeText>
     </BadgeContainer>
   );

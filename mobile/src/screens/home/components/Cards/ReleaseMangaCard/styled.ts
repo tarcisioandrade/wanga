@@ -22,7 +22,7 @@ export const CarouselMangaCardFooter = styled.View`
   left: 0;
   right: 0;
   height: 21px;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${(props) => props.theme.BLACK_TRANSPARENT};
   padding-left: 8px;
   justify-content: center;
   align-items: center;
