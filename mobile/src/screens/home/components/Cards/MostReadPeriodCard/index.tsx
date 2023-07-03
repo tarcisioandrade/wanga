@@ -31,7 +31,7 @@ const MostPeriodCard = ({ data }: Props) => {
 
       <CarouselMangaCardFooter>
         <Text color="WHITE" size="FONT_4XS" weight="WEIGHT_SEMIBOLD">
-          {truncateString(data.series_name, 17)}
+          {truncateString(data.series_name, 16)}
         </Text>
       </CarouselMangaCardFooter>
     </CarouselMangaCardContainer>

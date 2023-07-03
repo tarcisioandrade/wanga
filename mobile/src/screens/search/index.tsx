@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Container, Layout, ScrollContainer } from "src/components/Layout";
 import Header from "src/components/Header";
 import { useQuery } from "@tanstack/react-query";
-import useDebounce from "src/hooks/useDebounde";
+import useDebounce from "src/hooks/useDebounce";
 import { queryKeys } from "src/constants/queryKeys";
 import { getSearch } from "src/api/mangaServices";
 import { SearchCardsContainer } from "./styled";

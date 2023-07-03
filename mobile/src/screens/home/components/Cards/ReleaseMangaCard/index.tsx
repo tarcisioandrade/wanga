@@ -43,7 +43,7 @@ const ReleaseMangaCard = ({ data }: Props) => {
 
       <CarouselMangaCardFooter>
         <Text color="WHITE" size="FONT_4XS" weight="WEIGHT_SEMIBOLD">
-          {truncateString(data.name, 17)}
+          {truncateString(data.name, 16)}
         </Text>
       </CarouselMangaCardFooter>
     </CarouselMangaCardContainer>

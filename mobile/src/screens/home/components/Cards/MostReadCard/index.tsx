@@ -37,7 +37,7 @@ const MostReadCard = ({ data, position }: Props) => {
 
       <CarouselMangaCardFooter>
         <Text color="WHITE" size="FONT_4XS" weight="WEIGHT_SEMIBOLD">
-          {truncateString(data.serie_name, 17)}
+          {truncateString(data.serie_name, 16)}
         </Text>
       </CarouselMangaCardFooter>
     </CarouselMangaCardContainer>

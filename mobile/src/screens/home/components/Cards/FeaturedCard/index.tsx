@@ -26,7 +26,7 @@ const FeaturedCard = ({ data }: Props) => {
       </FeaturedHeader>
       <FeaturedBoxInfo>
         <Text color="WHITE" size="FONT_XS" weight="WEIGHT_MEDIUM">
-          {truncateString(data.series_name, 20)}
+          {truncateString(data.series_name, 16)}
         </Text>
         <Stack direction="row" gap={4}>
           <BooksIcon />
