@@ -2,7 +2,7 @@ import got from "got";
 import { Chapter, ChapterBody } from "../types/Chapter";
 
 interface IChapter {
-  getChapters: (id: string, page: number | string) => Promise<Chapter>;
+  getChapters: (id: string, page: number | string) => Promise<Chapter | null>;
 }
 
 export class ChaptersModel implements IChapter {
@@ -39,7 +39,7 @@ export class ChaptersModel implements IChapter {
         });
       }
     } else {
-      throw new Error("Chapter not found.");
+      return null;
     }
 
     return return_data;

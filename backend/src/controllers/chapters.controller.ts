@@ -10,7 +10,7 @@ export class ChaptersController {
     this.getAllChapters = this.getAllChapters.bind(this);
     this.getChapterPerPage = this.getChapterPerPage.bind(this);
   }
-  
+
   async getAllChapters(req: Request, res: Response) {
     const id = req.params.id;
 
@@ -25,7 +25,8 @@ export class ChaptersController {
       const result = await chapterModel.getChapters(id, i);
 
       if (!result) {
-        res.sendStatus(404);
+        // res.sendStatus(404);
+        res.send(return_data);
         return;
       }
 
@@ -58,7 +59,10 @@ export class ChaptersController {
       .getChapters(id, page)
       .then((result) => {
         if (!result) {
-          res.sendStatus(404);
+          res.send({
+            chapters: false,
+            current_page: Number(page),
+          });
           return;
         }
 
@@ -71,7 +75,10 @@ export class ChaptersController {
           return_data.name = result.name;
         }
 
-        res.send(return_data);
+        res.send({
+          chapters: return_data.chapters,
+          current_page: Number(page),
+        });
       })
       .catch((error) => {
         if (error instanceof Error) {

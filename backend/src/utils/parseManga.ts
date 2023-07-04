@@ -4,7 +4,7 @@ export function parseManga(html: string, id: string) {
   let manga = {} as MangaTarget;
 
   html = html.replace(/(\r\n|\n|\r)/gm, "");
-  
+
   let series_desc_div = html
     .match(/(<div id="series-desc").*(?=<div id="chapter-list")/gm)![0]
     .trim();
@@ -23,13 +23,14 @@ export function parseManga(html: string, id: string) {
     .trim()
     .replace(/<i.*?<\/i>/gm, "")
     .replace(/<a.*<\/a>/gm, "")
-    .trim();
+    .trim()
+    .replace(/\s+/g, " ");
   manga.description = series_desc_div
-    .match(/(?<=<span class="series-desc">.*?span>).*?(?=<\/span>.*?<ol)/gm)![0]
+    .match(/(?<=<span class="series-desc">.*?span>).*?(?=<\/span>.*?)/gm)![0]
     .trim()
     .replace(/<br>/gm, "")
     .trim()
-    .replace(/<(\/|)(br|a|b|span)(\/|)>/gm, "")
+    .replace(/<(\/|)(br|a|b|span|div)(\/|)>/gm, "")
     .replace(/&nbsp;/gm, " ");
   manga.chapters_count = html
     .match(
