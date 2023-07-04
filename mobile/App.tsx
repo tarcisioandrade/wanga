@@ -38,7 +38,7 @@ export default function App() {
 
   if (!fontsLoaded) return <Text>Loading</Text>;
   return (
-    <ThemeProvider theme={lightTheme}>
+    <ThemeProvider theme={darkTheme}>
       <QueryClientProvider client={queryClient}>
         <StatusBar style={"dark"} />
         <Routes />

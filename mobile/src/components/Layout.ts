@@ -1,8 +1,11 @@
 import styled, { Theme } from "styled-components/native";
 import { phs, pvs } from "src/utils/metrics";
+import { css } from "styled-components";
 
-type ContainerBgColor = {
+type ContainerProps = {
   bg?: keyof Theme;
+  py?: number;
+  pb?: number;
 };
 
 type StackProps = {
@@ -10,6 +13,10 @@ type StackProps = {
   align_items?: string;
   direction?: string;
   gap?: number;
+  wrap?: boolean;
+  mt?: number;
+  flex?: number;
+  my?: number;
 };
 
 export const Layout = styled.SafeAreaView`
@@ -17,9 +24,22 @@ export const Layout = styled.SafeAreaView`
   flex: 1;
 `;
 
-export const Container = styled.View<ContainerBgColor>`
+export const Container = styled.View<ContainerProps>`
   padding: 0 ${phs(22)};
   background-color: ${({ bg, theme }) => (bg ? theme[bg] : "transparent")};
+
+  ${(props) =>
+    props.py &&
+    css`
+      padding-top: ${pvs(props.py)};
+      padding-bottom: ${pvs(props.py)};
+    `}
+
+  ${(props) =>
+    props.pb &&
+    css`
+      padding-bottom: ${pvs(props.pb)};
+    `}
 `;
 
 export const ScrollContainer = styled.ScrollView.attrs({
@@ -36,4 +56,30 @@ export const Stack = styled.View<StackProps>`
   justify-content: ${(props) =>
     props.justify_content ? props.justify_content : "flex-start"};
   gap: ${(props) => (props.gap ? props.gap + "px" : 0)};
+
+  ${(props) =>
+    props.wrap &&
+    css`
+      flex-wrap: wrap;
+    `}
+
+  ${(props) =>
+    props.mt &&
+    css`
+      margin-top: ${pvs(props.mt)};
+    `}
+
+    ${(props) =>
+    props.flex &&
+    css`
+      flex: ${props.flex};
+    `}
+
+    
+    ${(props) =>
+    props.my &&
+    css`
+      margin-top: ${pvs(props.my)};
+      margin-bottom: ${pvs(props.my)};
+    `}
 `;

@@ -68,7 +68,7 @@ export async function getMostRead(page: number = 1, type?: string) {
 
 export async function getSearch(searchValue: string) {
   const search = searchValue;
-  // return delay<Search>(2000, search_data)
+  // return delay<Search>(2000, search_data);
 
   const res = await mangaDBApi.post<Search>(
     "/lib/search/series.json",
