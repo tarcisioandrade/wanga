@@ -5,5 +5,5 @@ export const mangaDBApi = axios.create({
 });
 
 export const wangaDBApi = axios.create({
-  baseURL: "",
+  baseURL: process.env.WANGA_API,
 });
