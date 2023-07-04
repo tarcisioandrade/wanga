@@ -19,6 +19,7 @@ export type CustomTextProps = {
     DefaultTheme,
     "WEIGHT_BOLD" | "WEIGHT_MEDIUM" | "WEIGHT_SEMIBOLD" | "WEIGHT_EXTRABOLD"
   >;
+  line_height?: number;
 };
 
 export const Text = styled.Text<CustomTextProps>`
@@ -27,39 +28,40 @@ export const Text = styled.Text<CustomTextProps>`
     weight ? theme[weight] : theme.FONT_FAMILY};
   font-size: ${({ size, theme }) => (size ? theme[size] : theme.FONT_BASE)};
   letter-spacing: -0.32px;
-  line-height: ${pms(21)};
+  line-height: ${(props) =>
+    props.line_height ? pms(props.line_height) : pms(21)};
 
   ${(props) =>
     props.size === "FONT_4XS" &&
     css`
-      line-height: ${pms(13)};
+      line-height: ${props.line_height ? pms(props.line_height) : pms(13)};
       letter-spacing: 0.07px;
     `}
 
   ${(props) =>
     props.size === "FONT_3XS" &&
     css`
-      line-height: ${pms(16)};
+      line-height: ${props.line_height ? pms(props.line_height) : pms(16)};
     `}
 
     ${(props) =>
     props.size === "FONT_2XS" &&
     css`
-      line-height: ${pms(18)};
+      line-height: ${props.line_height ? pms(props.line_height) : pms(18)};
       letter-spacing: 0.08px;
     `}
 
   ${(props) =>
     props.size === "FONT_SM" &&
     css`
-      line-height: ${pms(20)};
+      line-height: ${props.line_height ? pms(props.line_height) : pms(20)};
       letter-spacing: 0.24px;
     `}
 
     ${(props) =>
     props.size === "FONT_BASE" &&
     css`
-      line-height: ${pms(21)};
+      line-height: ${props.line_height ? pms(props.line_height) : pms(21)};
       letter-spacing: -0.32px;
     `}
 
@@ -67,14 +69,14 @@ export const Text = styled.Text<CustomTextProps>`
     ${(props) =>
     props.size === "FONT_MD" &&
     css`
-      line-height: ${pms(22)};
+      line-height: ${props.line_height ? pms(props.line_height) : pms(22)};
       letter-spacing: -0.41px;
     `}
 
     ${(props) =>
     props.size === "FONT_LG" &&
     css`
-      line-height: ${pms(22)};
+      line-height: ${props.line_height ? pms(props.line_height) : pms(22)};
       letter-spacing: -0.41px;
     `}
 `;

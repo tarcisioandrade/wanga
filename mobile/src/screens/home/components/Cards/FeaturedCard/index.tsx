@@ -10,14 +10,26 @@ import {
   FeaturedHeader,
   FeaturedImage,
 } from "./styled";
+import { useNavigation } from "@react-navigation/native";
 
 type Props = {
   data: FeaturedElement;
 };
 
 const FeaturedCard = ({ data }: Props) => {
+  const navigator = useNavigation();
+
+  const goToMangaScreen = (id: number) => {
+    navigator.navigate("manga", {
+      id,
+    });
+  };
+
   return (
-    <FeaturedContainer bg={data.hex_color}>
+    <FeaturedContainer
+      bg={data.hex_color}
+      onPress={() => goToMangaScreen(data.id_serie)}
+    >
       <FeaturedImage resizeMode="cover" source={{ uri: data.featured_image }} />
       <FeaturedHeader>
         <Text color="WHITE" size="FONT_4XS">

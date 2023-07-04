@@ -15,6 +15,7 @@ import Star from "assets/svg-icon/star.svg";
 import Badge from "src/components/Badge";
 import { Text } from "src/components/Text";
 import { truncateString } from "src/utils/truncateString";
+import { useNavigation } from "@react-navigation/native";
 
 type Props = {
   mangaSearch: Serie;
@@ -22,14 +23,20 @@ type Props = {
 
 const SearchCard = ({ mangaSearch }: Props) => {
   const categories = mangaSearch.categories.slice(0, 3);
+  const navigator = useNavigation();
 
-  const goToMangaScreen = () => {};
+  const goToMangaScreen = (id: number) => {
+    navigator.navigate("manga", {
+      id,
+    });
+  };
+
   const imageUri = mangaSearch.cover.includes("no-cover")
     ? require("assets/images/no-asset.jpg")
     : { uri: mangaSearch.cover };
 
   return (
-    <SearchWrapper onPress={goToMangaScreen}>
+    <SearchWrapper onPress={() => goToMangaScreen(mangaSearch.id_serie)}>
       <SearchInfoContainer>
         <SearchImage source={imageUri} />
         {mangaSearch.is_complete && (

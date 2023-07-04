@@ -8,6 +8,7 @@ import {
 } from "../ReleaseMangaCard/styled";
 import { MostReadElement } from "src/@types/mostRead";
 import { Text } from "src/components/Text";
+import { useNavigation } from "@react-navigation/native";
 
 type Props = {
   data: MostReadElement;
@@ -20,8 +21,18 @@ type Props = {
 const MostReadCard = ({ data, position }: Props) => {
   const positionTarget = position?.find(({ name }) => name === data.serie_name);
 
+  const navigator = useNavigation();
+
+  const goToMangaScreen = (id: number) => {
+    navigator.navigate("manga", {
+      id,
+    });
+  };
+
+  // TO DO: TRANSFORMAR ESSES CARDS EM PATTERN COMPOSITION
+
   return (
-    <CarouselMangaCardContainer>
+    <CarouselMangaCardContainer onPress={() => goToMangaScreen(data.id_serie)}>
       <CarouselMangaCardBadge>
         <Text color="WHITE" size="FONT_XS" weight="WEIGHT_MEDIUM">
           {`#${positionTarget?.ranking}`}

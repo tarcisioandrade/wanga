@@ -8,14 +8,23 @@ import {
 } from "../ReleaseMangaCard/styled";
 import { truncateString } from "src/utils/truncateString";
 import { Text } from "src/components/Text";
+import { useNavigation } from "@react-navigation/native";
 
 type Props = {
   data: MostReadPeriodElement;
 };
 
 const MostPeriodCard = ({ data }: Props) => {
+  const navigator = useNavigation();
+
+  const goToMangaScreen = (id: number) => {
+    navigator.navigate("manga", {
+      id,
+    });
+  };
+
   return (
-    <CarouselMangaCardContainer>
+    <CarouselMangaCardContainer onPress={() => goToMangaScreen(data.id_serie)}>
       <CarouselMangaCardBadge>
         <Text color="WHITE" size="FONT_XS" weight="WEIGHT_MEDIUM">
           {data.chapter_number}

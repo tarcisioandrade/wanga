@@ -3,6 +3,9 @@ import { DrawerScreenProps } from "@react-navigation/drawer";
 export type RootStackParamList = {
   home: undefined;
   search: undefined;
+  manga: {
+    id: number;
+  };
 };
 
 export type DrawerParamList = {

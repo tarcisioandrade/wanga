@@ -8,13 +8,15 @@ import {
   CarouselMangaCardFooter,
   CarouselMangaCardImage,
 } from "./styled";
+import { useNavigation } from "@react-navigation/native";
 
 type Props = {
   data: ReleaseElement;
 };
 
 const ReleaseMangaCard = ({ data }: Props) => {
-  const goToMangaPage = () => {};
+  const navigator = useNavigation();
+
   const firstChapt = data.chapters.at(-1)!;
 
   const chapterFormat =
@@ -25,8 +27,14 @@ const ReleaseMangaCard = ({ data }: Props) => {
   const chapterLabel =
     data.chapters.length > 1 ? `${chapterFormat}, ...` : chapterFormat;
 
+  const goToMangaScreen = (id: number) => {
+    navigator.navigate("manga", {
+      id,
+    });
+  };
+
   return (
-    <CarouselMangaCardContainer onPress={goToMangaPage}>
+    <CarouselMangaCardContainer onPress={() => goToMangaScreen(data.id_serie)}>
       <CarouselMangaCardBadge>
         <Text color="WHITE" size="FONT_XS" weight="WEIGHT_MEDIUM">
           {chapterLabel}

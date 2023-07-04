@@ -7,13 +7,15 @@ export type BadgeProps = {
   children: ReactNode;
   type?: "Filled" | "Outlined";
   bg?: keyof DefaultTheme;
+  width?: number;
 };
 
-const Badge = ({ children, type = "Filled", bg }: BadgeProps) => {
+const Badge = ({ children, type = "Filled", bg, width }: BadgeProps) => {
   return (
     <BadgeContainer
       bg={bg}
       type={type}
+      width={width}
       style={type === "Outlined" && styles.shadow}
     >
       <BadgeText type={type}>{children}</BadgeText>

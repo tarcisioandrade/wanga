@@ -4,4 +4,6 @@ export const queryKeys = {
   mostRead: "most-read-key",
   search: "search-key",
   featured: "featured-key",
+  mangaInfo: "manga-info-key",
+  chapters: "manga-chapters-key",
 };
