@@ -29,7 +29,7 @@ const MostReadCard = ({ data, position }: Props) => {
     });
   };
 
-  // TO DO: TRANSFORMAR ESSES CARDS EM PATTERN COMPOSITION
+  // TODO: TRANSFORMAR ESSES CARDS EM PATTERN COMPOSITION
 
   return (
     <CarouselMangaCardContainer onPress={() => goToMangaScreen(data.id_serie)}>

@@ -15,7 +15,7 @@ const MangaScreen = ({ route }: RootStackScreenProps<"manga">) => {
     queryFn: () => getMangaInfo(id),
   });
 
-  // TO DO: Tratar erro;
+  // TODO: Tratar erro;
   if (error) {
     console.error(error);
     return null;

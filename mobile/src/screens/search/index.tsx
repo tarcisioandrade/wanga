@@ -27,7 +27,12 @@ const Search = () => {
 
   return (
     <Layout>
-      <Header inputShow onChangeValue={handleSearch} value={searchValue} />
+      <Header
+        backShow
+        inputShow
+        onChangeValue={handleSearch}
+        value={searchValue}
+      />
       <ScrollContainer>
         <Container>
           {loading ? <SearchSkeleton /> : null}

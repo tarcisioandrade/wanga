@@ -50,7 +50,7 @@ export const FeaturedBoxInfo = styled.View`
   gap: 4px;
 `;
 
-// TO DO: Trocar o skeleton;
+// TODO: Trocar o skeleton;
 
 export const FeaturedSkeleton = styled.View`
   width: ${phs(350)};

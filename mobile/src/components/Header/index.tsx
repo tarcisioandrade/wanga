@@ -17,43 +17,55 @@ import { useNavigation, DrawerActions } from "@react-navigation/native";
 
 type Props = {
   inputShow?: boolean;
+  backShow?: boolean;
+  menuShow?: boolean;
+  searchShow?: boolean;
   value?: string;
   onChangeValue?: (value: string) => void;
 };
-const Header = ({ inputShow, onChangeValue, value }: Props) => {
+const Header = ({
+  inputShow,
+  backShow,
+  menuShow,
+  searchShow,
+  onChangeValue,
+  value,
+}: Props) => {
   const navigator = useNavigation();
 
   return (
     <Container bg="BG_COLOR">
       <HeaderContainer>
+        {backShow && (
+          <Pressable onPress={navigator.goBack}>
+            <Icon type="fill" icon={ArrowLeft} />
+          </Pressable>
+        )}
+        {menuShow && (
+          <Pressable
+            onPress={() => navigator.dispatch(DrawerActions.openDrawer)}
+          >
+            <Icon type="fill" icon={Hamburguer} />
+          </Pressable>
+        )}
+
         {inputShow ? (
-          <>
-            <Pressable onPress={navigator.goBack}>
-              <Icon type="fill" icon={ArrowLeft} />
-            </Pressable>
-            <InputSearch
-              onChangeText={onChangeValue}
-              value={value}
-              autoFocus={inputShow}
-            />
-          </>
+          <InputSearch
+            onChangeText={onChangeValue}
+            value={value}
+            autoFocus={inputShow}
+          />
         ) : (
-          <>
-            <Pressable
-              onPress={() => navigator.dispatch(DrawerActions.openDrawer)}
-            >
-              <Icon type="fill" icon={Hamburguer} />
-            </Pressable>
+          <LogoContainer>
+            <Logo width={hs(24)} height={vs(24)} />
+            <LogoText>Wanga</LogoText>
+          </LogoContainer>
+        )}
 
-            <LogoContainer>
-              <Logo width={hs(24)} height={vs(24)} />
-              <LogoText>Wanga</LogoText>
-            </LogoContainer>
-
-            <Pressable onPress={() => navigator.navigate("search")}>
-              <Icon type="stroke" icon={SearchIcon} />
-            </Pressable>
-          </>
+        {searchShow && (
+          <Pressable onPress={() => navigator.navigate("search")}>
+            <Icon type="stroke" icon={SearchIcon} />
+          </Pressable>
         )}
       </HeaderContainer>
     </Container>

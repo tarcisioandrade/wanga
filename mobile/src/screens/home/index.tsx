@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 
 import { Container, Layout, ScrollContainer } from "src/components/Layout";
 import Tabs, { TabType } from "src/components/Tabs";
@@ -18,6 +18,8 @@ import {
   getMostReadPeriod,
   getReleases,
 } from "../../api/mangaServices";
+import { RootStackScreenProps } from "src/@types/navigation";
+import { useMangaQueries } from "src/hooks/useMangaQueries";
 
 const tabsInfo: TabType[] = [
   { value: "", label: "Todos" },
@@ -27,35 +29,41 @@ const tabsInfo: TabType[] = [
   { value: "novel", label: "Novels" },
 ];
 
-const Home = () => {
+const Home = ({ navigation }: RootStackScreenProps<"home">) => {
   const [type, setActiveTab] = useState("");
+  const {
+    releasesResult,
+    mostReadPeriodResult,
+    mostReadResult,
+    featuredResult,
+  } = useMangaQueries(type);
 
-  const [releasesResult, mostReadPeriodResult, mostReadResult, featuredResult] =
-    useQueries({
-      queries: [
-        {
-          queryKey: [queryKeys.releases, type],
-          queryFn: () => getReleases(1, type),
-        },
-        {
-          queryKey: [queryKeys.mostReadPeriod, type],
-          queryFn: () => getMostReadPeriod(1, type),
-        },
-        {
-          queryKey: [queryKeys.mostRead, type],
-          queryFn: () => getMostRead(1, type),
-        },
-        {
-          queryKey: [queryKeys.featured],
-          queryFn: getFeatured,
-        },
-      ],
-    });
+  // const [releasesResult, mostReadPeriodResult, mostReadResult, featuredResult] =
+  //   useQueries({
+  //     queries: [
+  //       {
+  //         queryKey: [queryKeys.releases, type],
+  //         queryFn: () => getReleases(1, type),
+  //       },
+  //       {
+  //         queryKey: [queryKeys.mostReadPeriod, type],
+  //         queryFn: () => getMostReadPeriod(1, type),
+  //       },
+  //       {
+  //         queryKey: [queryKeys.mostRead, type],
+  //         queryFn: () => getMostRead(1, type),
+  //       },
+  //       {
+  //         queryKey: [queryKeys.featured],
+  //         queryFn: getFeatured,
+  //       },
+  //     ],
+  //   });
 
-  const handleTabChange = (value: string) => {
+  const handleTabChange = useCallback((value: string) => {
     setActiveTab(value);
     console.log(value);
-  };
+  }, []);
 
   const release_data_sliced = releasesResult.data?.releases
     .slice(0, 10)
@@ -67,7 +75,11 @@ const Home = () => {
 
   const goToScreenRelease = () => {};
   const goToScreenMostRead = () => {};
-  const goToScreenMostReadPeriod = () => {};
+  const goToScreenMostReadPeriod = () => {
+    navigation.navigate("mostReadPeriod", {
+      type,
+    });
+  };
 
   const mostReadRanking = mostReadResult.data?.most_read.map(
     ({ serie_name }, i) => ({
@@ -76,10 +88,10 @@ const Home = () => {
     })
   );
 
-  // TO DO: Tratar os erros dos carrousel, ta tudo com ! la na data deles.
+  // TODO: Tratar os erros dos carrousel, ta tudo com ! la na data deles.
   return (
     <Layout>
-      <Header />
+      <Header menuShow searchShow />
       <ScrollContainer>
         <GestureHandlerRootView>
           <Parallax featured={featuredResult.data?.featured} />

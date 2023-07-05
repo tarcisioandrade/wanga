@@ -1,4 +1,4 @@
-import { ActivityIndicator, FlatList } from "react-native";
+import { ActivityIndicator, Alert, FlatList } from "react-native";
 import React, { ReactElement } from "react";
 import { Container, Stack } from "src/components/Layout";
 import { vs } from "src/utils/metrics";
@@ -31,10 +31,10 @@ const ChapterListRoot = ({ id, children }: Props) => {
     }
   };
 
-  // TO DO: Tratar erro;
+  // TODO: Tratar erro;
   if (error) {
     console.error(error);
-    return null;
+    Alert.alert("Falha no servidor", "Não conseguimos carregar os capitulos.");
   }
 
   return (

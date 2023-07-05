@@ -1,6 +1,5 @@
 import React, { ElementType, ReactNode } from "react";
 import * as S from "./styled";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Carousel from "react-native-reanimated-carousel";
 import { hs, vs } from "src/utils/metrics";
 import Skeleton from "../Skeleton";

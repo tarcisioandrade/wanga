@@ -14,8 +14,9 @@ type StackProps = {
   direction?: "row" | "column";
   gap?: number;
   wrap?: boolean;
-  mt?: number;
   flex?: number;
+  pb?: number;
+  mt?: number;
   my?: number;
   px?: number;
   py?: number;
@@ -58,7 +59,7 @@ export const Stack = styled.View<StackProps>`
   justify-content: ${(props) =>
     props.justify_content ? props.justify_content : "flex-start"};
   gap: ${(props) => (props.gap ? props.gap + "px" : 0)};
-
+  padding-bottom: ${(props) => (props.pb ? pvs(props.pb) : 0)};
   ${(props) =>
     props.wrap &&
     css`

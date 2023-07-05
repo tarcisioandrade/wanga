@@ -25,7 +25,7 @@ export function delay<T>(t: number, v: T): Promise<T> {
 }
 
 export async function getReleases(page: number = 1, type?: string) {
-  return delay<Release>(2000, release);
+  // return delay<Release>(2000, release);
 
   const { data } = await mangaDBApi.get<Release>("/home/releases", {
     params: {
@@ -37,8 +37,12 @@ export async function getReleases(page: number = 1, type?: string) {
   return data;
 }
 
-export async function getMostReadPeriod(page: number = 1, type?: string) {
-  return delay<MostReadPeriod>(2000, most_read_period);
+export async function getMostReadPeriod(
+  page: number = 1,
+  period: string,
+  type?: string
+) {
+  // return delay<MostReadPeriod>(2000, most_read_period);
 
   const { data } = await mangaDBApi.get<MostReadPeriod>(
     "/home/most_read_period",
@@ -46,6 +50,7 @@ export async function getMostReadPeriod(page: number = 1, type?: string) {
       params: {
         page,
         type,
+        period,
       },
     }
   );
@@ -54,7 +59,7 @@ export async function getMostReadPeriod(page: number = 1, type?: string) {
 }
 
 export async function getMostRead(page: number = 1, type?: string) {
-  return delay<MostRead>(2000, most_read);
+  // return delay<MostRead>(2000, most_read);
 
   const { data } = await mangaDBApi.get<MostRead>("/home/most_read", {
     params: {
@@ -87,7 +92,7 @@ export async function getSearch(searchValue: string) {
 }
 
 export async function getFeatured() {
-  return delay<Featured>(2000, featured_data);
+  // return delay<Featured>(2000, featured_data);
 
   const res = await mangaDBApi.get<Featured>("/home/getFeaturedSeries.json");
 

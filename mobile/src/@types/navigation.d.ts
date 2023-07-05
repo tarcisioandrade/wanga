@@ -6,6 +6,9 @@ export type RootStackParamList = {
   manga: {
     id: number;
   };
+  mostReadPeriod: {
+    type: string;
+  };
 };
 
 export type DrawerParamList = {
