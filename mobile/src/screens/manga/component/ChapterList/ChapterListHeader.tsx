@@ -11,12 +11,14 @@ import { Text } from "src/components/Text";
 import ArrowDown from "assets/svg-icon/arrow-down.svg";
 import ArrowUp from "assets/svg-icon/arrow-up.svg";
 import BooksIcon from "assets/svg-icon/books.svg";
+import ChapterListSkeleton from "./ChapterListSkeleton";
 
 type Props = {
   manga: Manga | undefined;
+  loading: boolean;
 };
 
-const ChapterListHeader = ({ manga }: Props) => {
+const ChapterListHeader = ({ manga, loading }: Props) => {
   const [showAllDescription, setShowAllDescription] = useState(false);
 
   const handleShowDescription = () => {
@@ -25,6 +27,7 @@ const ChapterListHeader = ({ manga }: Props) => {
     }
   };
 
+  if (loading) return <ChapterListSkeleton />;
   return (
     <>
       <Stack direction="row" gap={12}>

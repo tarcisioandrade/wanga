@@ -1,5 +1,4 @@
 import React from "react";
-import { ActivityIndicator } from "react-native";
 import { Container, Stack } from "src/components/Layout";
 import { Skeleton } from "src/components/Skeleton";
 
@@ -28,10 +27,6 @@ const ChapterListSkeleton = () => {
         <Skeleton width="100%" height={8} radius={8} />
         <Skeleton width="100%" height={8} radius={8} />
         <Skeleton width="100%" height={8} radius={8} />
-      </Stack>
-
-      <Stack mt={33} align_items="center" justify_content="center">
-        <ActivityIndicator />
       </Stack>
     </Container>
   );

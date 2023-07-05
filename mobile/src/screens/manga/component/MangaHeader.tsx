@@ -19,7 +19,7 @@ const MangaHeader = ({ score }: Props) => {
   const navigator = useNavigation();
   const theme = useTheme();
 
-  const hasFavorited = true;
+  const hasFavorited = false;
   const favoriteManga = () => {};
   const unfavoriteManga = () => {};
 
@@ -30,10 +30,12 @@ const MangaHeader = ({ score }: Props) => {
           <Pressable onPress={navigator.goBack}>
             <Icon type="fill" icon={ArrowLeft} />
           </Pressable>
-          <Stack direction="row" align_items="center" gap={2}>
-            <Text size="FONT_SM">{score}</Text>
-            <StarIcon />
-          </Stack>
+          {score && (
+            <Stack direction="row" align_items="center" gap={2}>
+              <Text size="FONT_SM">{score}</Text>
+              <StarIcon />
+            </Stack>
+          )}
         </Stack>
         {hasFavorited ? (
           <Pressable onPress={unfavoriteManga}>

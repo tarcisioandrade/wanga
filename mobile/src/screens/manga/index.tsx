@@ -15,15 +15,18 @@ const MangaScreen = ({ route }: RootStackScreenProps<"manga">) => {
     queryFn: () => getMangaInfo(id),
   });
 
+  // TO DO: Tratar erro;
   if (error) {
     console.error(error);
-    return;
+    return null;
   }
 
   return (
     <Layout>
       <MangaHeader score={data?.manga.score!} />
-      <ChapterList.Root id={id} loading={isLoading} manga={data?.manga} />
+      <ChapterList.Root id={id}>
+        <ChapterList.Header manga={data?.manga} loading={isLoading} />
+      </ChapterList.Root>
     </Layout>
   );
 };

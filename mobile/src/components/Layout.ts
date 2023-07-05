@@ -11,12 +11,14 @@ type ContainerProps = {
 type StackProps = {
   justify_content?: string;
   align_items?: string;
-  direction?: string;
+  direction?: "row" | "column";
   gap?: number;
   wrap?: boolean;
   mt?: number;
   flex?: number;
   my?: number;
+  px?: number;
+  py?: number;
 };
 
 export const Layout = styled.SafeAreaView`
@@ -81,5 +83,19 @@ export const Stack = styled.View<StackProps>`
     css`
       margin-top: ${pvs(props.my)};
       margin-bottom: ${pvs(props.my)};
+    `}
+
+    ${(props) =>
+    props.px &&
+    css`
+      padding-left: ${phs(props.px)};
+      padding-right: ${phs(props.px)};
+    `}
+
+    ${(props) =>
+    props.py &&
+    css`
+      padding-top: ${pvs(props.py)};
+      padding-bottom: ${pvs(props.py)};
     `}
 `;
