@@ -14,7 +14,6 @@ import {
 import Star from "assets/svg-icon/star.svg";
 import Badge from "src/components/Badge";
 import { Text } from "src/components/Text";
-import { truncateString } from "src/utils/truncateString";
 import { useNavigation } from "@react-navigation/native";
 
 type Props = {
@@ -48,7 +47,7 @@ const SearchCard = ({ mangaSearch }: Props) => {
         )}
       </SearchInfoContainer>
       <SearchInfoContainer>
-        <SearchTitle>{truncateString(mangaSearch.name, 55)}</SearchTitle>
+        <SearchTitle numberOfLines={3}>{mangaSearch.name}</SearchTitle>
         {mangaSearch.artist ? <Artist>{mangaSearch.artist}</Artist> : null}
         {categories.length ? (
           <BadgesContainer>

@@ -1,6 +1,5 @@
 import styled from "styled-components/native";
 import { phs, pvs } from "src/utils/metrics";
-import { BadgeContainer } from "src/components/Badge/styled";
 
 export const SearchWrapper = styled.TouchableOpacity.attrs({
   activeOpacity: 0.9,
