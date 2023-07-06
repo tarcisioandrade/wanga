@@ -3,6 +3,7 @@ import * as S from "./styled";
 import Icon from "src/components/Icon";
 import ArrowRight from "assets/svg-icon/arrow-right.svg";
 import { Text } from "src/components/Text";
+import CustomPressable from "src/components/CustomPressable";
 
 type CarouselHeaderProps = {
   title: string;
@@ -13,9 +14,9 @@ const CarouselHeader = ({ title, handleScreen }: CarouselHeaderProps) => {
   return (
     <S.CarouselHeader>
       <Text weight="WEIGHT_SEMIBOLD">{title}</Text>
-      <S.ViewButton onPress={handleScreen}>
+      <CustomPressable innerSpace={2} onPress={handleScreen}>
         <Icon icon={ArrowRight} type="stroke" color="#969696" />
-      </S.ViewButton>
+      </CustomPressable>
     </S.CarouselHeader>
   );
 };

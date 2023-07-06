@@ -1,10 +1,6 @@
 import React, { useState, useCallback } from "react";
-
 import { Container, Layout, ScrollContainer } from "src/components/Layout";
 import Tabs, { TabType } from "src/components/Tabs";
-import { useQueries } from "@tanstack/react-query";
-
-import { queryKeys } from "../../constants/queryKeys";
 import Header from "src/components/Header";
 import { Carousel } from "./components/Carousel";
 import ReleaseMangaCard from "./components/Cards/ReleaseMangaCard";
@@ -12,12 +8,6 @@ import MostPeriodCard from "./components/Cards/MostReadPeriodCard";
 import MostReadCard from "./components/Cards/MostReadCard";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Parallax from "./components/Parallax";
-import {
-  getFeatured,
-  getMostRead,
-  getMostReadPeriod,
-  getReleases,
-} from "../../api/mangaServices";
 import { RootStackScreenProps } from "src/@types/navigation";
 import { useMangaQueries } from "src/hooks/useMangaQueries";
 
@@ -38,31 +28,8 @@ const Home = ({ navigation }: RootStackScreenProps<"home">) => {
     featuredResult,
   } = useMangaQueries(type);
 
-  // const [releasesResult, mostReadPeriodResult, mostReadResult, featuredResult] =
-  //   useQueries({
-  //     queries: [
-  //       {
-  //         queryKey: [queryKeys.releases, type],
-  //         queryFn: () => getReleases(1, type),
-  //       },
-  //       {
-  //         queryKey: [queryKeys.mostReadPeriod, type],
-  //         queryFn: () => getMostReadPeriod(1, type),
-  //       },
-  //       {
-  //         queryKey: [queryKeys.mostRead, type],
-  //         queryFn: () => getMostRead(1, type),
-  //       },
-  //       {
-  //         queryKey: [queryKeys.featured],
-  //         queryFn: getFeatured,
-  //       },
-  //     ],
-  //   });
-
   const handleTabChange = useCallback((value: string) => {
     setActiveTab(value);
-    console.log(value);
   }, []);
 
   const release_data_sliced = releasesResult.data?.releases

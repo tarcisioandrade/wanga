@@ -11,9 +11,8 @@ export const CarouselHeader = styled.View`
   justify-content: space-between;
   align-items: center;
   padding: 0 ${phs(22)};
+  margin-bottom: 6px;
 `;
-
-export const ViewButton = styled.Pressable``;
 
 export const CarouselWrapper = styled(Container)`
   padding: ${pvs(10)} ${phs(22)};

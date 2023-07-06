@@ -1,10 +1,10 @@
 import React from "react";
-import { Container, Stack } from "src/components/Layout";
+import { Stack } from "src/components/Layout";
 import { Skeleton } from "src/components/Skeleton";
 
 const ChapterListSkeleton = () => {
   return (
-    <Container>
+    <>
       <Stack direction="row" gap={12}>
         <Stack>
           <Skeleton width={120} height={168} radius={8} />
@@ -28,7 +28,7 @@ const ChapterListSkeleton = () => {
         <Skeleton width="100%" height={8} radius={8} />
         <Skeleton width="100%" height={8} radius={8} />
       </Stack>
-    </Container>
+    </>
   );
 };
 

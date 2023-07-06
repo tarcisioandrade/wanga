@@ -27,6 +27,7 @@ import { hs, phs, pvs, vs } from "src/utils/metrics";
 import Icon from "../Icon";
 import { useTheme } from "styled-components/native";
 import { Text } from "../Text";
+import CustomPressable from "../CustomPressable";
 
 type IconAndLabelMappings = {
   [key: string]: { icon: React.FC<SvgProps> };
@@ -69,14 +70,14 @@ const CustomDrawer = (props: DrawerContentComponentProps) => {
               <Logo width={hs(40)} height={vs(40)} />
             )}
 
-            <Pressable>
+            <CustomPressable>
               <Icon
                 type="fill"
                 icon={MoreIcon}
                 width={hs(24)}
                 height={vs(24)}
               />
-            </Pressable>
+            </CustomPressable>
           </DrawerHeaderFlex>
           {user ? (
             <UserLabel>Woltz-senpai</UserLabel>

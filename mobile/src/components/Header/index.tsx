@@ -14,6 +14,7 @@ import { Container, Layout } from "../Layout";
 import { vs, hs } from "src/utils/metrics";
 import Icon from "../Icon";
 import { useNavigation, DrawerActions } from "@react-navigation/native";
+import CustomPressable from "../CustomPressable";
 
 type Props = {
   inputShow?: boolean;
@@ -37,16 +38,16 @@ const Header = ({
     <Container bg="BG_COLOR">
       <HeaderContainer>
         {backShow && (
-          <Pressable onPress={navigator.goBack}>
+          <CustomPressable onPress={navigator.goBack}>
             <Icon type="fill" icon={ArrowLeft} />
-          </Pressable>
+          </CustomPressable>
         )}
         {menuShow && (
-          <Pressable
+          <CustomPressable
             onPress={() => navigator.dispatch(DrawerActions.openDrawer)}
           >
             <Icon type="fill" icon={Hamburguer} />
-          </Pressable>
+          </CustomPressable>
         )}
 
         {inputShow ? (
@@ -63,9 +64,9 @@ const Header = ({
         )}
 
         {searchShow && (
-          <Pressable onPress={() => navigator.navigate("search")}>
+          <CustomPressable onPress={() => navigator.navigate("search")}>
             <Icon type="stroke" icon={SearchIcon} />
-          </Pressable>
+          </CustomPressable>
         )}
       </HeaderContainer>
     </Container>
