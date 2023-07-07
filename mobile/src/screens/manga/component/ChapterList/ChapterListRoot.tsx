@@ -44,8 +44,8 @@ const ChapterListRoot = ({ id, children }: Props) => {
         onEndReached={loadMoreData}
         keyExtractor={(item) => item.number}
         showsVerticalScrollIndicator={false}
-        initialNumToRender={30}
-        numColumns={5}
+        initialNumToRender={60}
+        numColumns={6}
         onEndReachedThreshold={0.1}
         columnWrapperStyle={{ gap: 4 }}
         contentContainerStyle={{
