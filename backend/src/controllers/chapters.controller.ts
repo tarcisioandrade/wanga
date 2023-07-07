@@ -86,4 +86,53 @@ export class ChaptersController {
         }
       });
   }
+
+  async getDoubleChapterPerPage(req: Request, res: Response) {
+    const id = req.params.id;
+    const page = Number(req.params.page);
+
+    let pageInMangalivre = page;
+    const pageDouble = Number(page) + 1;
+
+    if (pageInMangalivre >= 2) {
+      pageInMangalivre = pageInMangalivre + 1;
+    }
+
+    if (!id) {
+      handleError(res, 400, "Please send id.");
+    }
+
+    let return_data = {
+      id_serie: 0,
+      name: "",
+      url_name: "",
+      chapters: [],
+    } as Chapter;
+
+    for (let i = pageInMangalivre; i <= pageDouble; i++) {
+      try {
+        const result = await chapterModel.getChapters(id, i);
+
+        if (!result) {
+          res.send({
+            chapters: false,
+            current_page: page,
+          });
+          return;
+        }
+
+        return_data.chapters = return_data.chapters.concat(result.chapters);
+        
+      } catch (error) {
+        if (error instanceof Error) {
+          handleError(res, 400, error.message);
+        }
+      }
+    }
+
+    res.send({
+      chapters: return_data.chapters,
+      current_page: Number(page),
+    });
+  }
 }

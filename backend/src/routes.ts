@@ -14,7 +14,7 @@ router.get("/search/", searchController.getSearchManga);
 
 router.get("/chapters/:id/", chaptersController.getAllChapters);
 
-router.get("/chapters/:id/:page/", chaptersController.getChapterPerPage);
+router.get("/chapters/:id/:page/", chaptersController.getDoubleChapterPerPage);
 
 router.get("/pages/:id", pagesController.getPages);
 
