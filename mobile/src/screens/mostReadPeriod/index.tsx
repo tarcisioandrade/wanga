@@ -58,7 +58,7 @@ const MostReadPeriod = ({ route }: RootStackScreenProps<"mostReadPeriod">) => {
 
   return (
     <Layout>
-      <Header backShow searchShow />
+      <Header backShow searchShow title="Mais Lidos" />
       <Container>
         <Stack pb={23}>
           <Tabs

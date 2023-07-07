@@ -58,7 +58,7 @@ const Home = ({ navigation }: RootStackScreenProps<"home">) => {
   // TODO: Tratar os erros dos carrousel, ta tudo com ! la na data deles.
   return (
     <Layout>
-      <Header menuShow searchShow />
+      <Header menuShow searchShow logoShow />
       <ScrollContainer>
         <GestureHandlerRootView>
           <Parallax featured={featuredResult.data?.featured} />
@@ -98,7 +98,7 @@ const Home = ({ navigation }: RootStackScreenProps<"home">) => {
           <Carousel.Container>
             <Carousel.Header
               handleScreen={goToScreenMostRead}
-              title="Mais Lidos"
+              title="Populares"
             />
             <Carousel.Wrapper
               data={mostReadResult.data?.most_read}
