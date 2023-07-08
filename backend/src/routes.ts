@@ -4,6 +4,7 @@ import { PagesController } from "./controllers/pages.controller";
 import { SearchController } from "./controllers/search.controller";
 import { ChaptersController } from "./controllers/chapters.controller";
 import got from "got";
+
 const pagesController = new PagesController();
 const searchController = new SearchController();
 const chaptersController = new ChaptersController();
@@ -65,11 +66,6 @@ router.get("/manga/:id", async (req, res) => {
   getMangaById(id).then((response) => {
     res.send(response);
   });
-});
-
-router.get("*", (req, res) => {
-  res.header("401");
-  res.render("html/401.html");
 });
 
 export default router;

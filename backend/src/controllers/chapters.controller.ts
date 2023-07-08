@@ -113,21 +113,23 @@ export class ChaptersController {
       try {
         const result = await chapterModel.getChapters(id, i);
 
-        if (!result) {
-          res.send({
-            chapters: false,
-            current_page: page,
-          });
-          return;
-        }
+        if (!result) break;
 
         return_data.chapters = return_data.chapters.concat(result.chapters);
-        
       } catch (error) {
         if (error instanceof Error) {
           handleError(res, 400, error.message);
+          break;
         }
       }
+    }
+
+    if (!return_data.chapters.length) {
+      res.send({
+        chapters: false,
+        current_page: Number(page),
+      });
+      return;
     }
 
     res.send({

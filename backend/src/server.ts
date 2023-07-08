@@ -5,9 +5,6 @@ const app = express();
 
 const port = process.env.PORT ?? 8080;
 
-app.set("views", "./static/");
-app.use(express.static("./public/"));
-
 app.use("/", routes);
 
 app.use((_req, _res, next) => {
