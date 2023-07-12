@@ -1,10 +1,9 @@
-import { View, Text, ActivityIndicator } from "react-native";
-import React, { useState } from "react";
+import { View, ActivityIndicator } from "react-native";
+import React from "react";
 import { Page } from "src/@types/page";
 import WebView from "react-native-webview";
-import FooterReader from "./FooterReader";
-import HeaderReader from "./HeaderReader";
-import { useDisclose } from "src/hooks/useDisclose";
+import { WebViewScrollEvent } from "react-native-webview/lib/WebViewTypes";
+import { useTheme } from "styled-components";
 
 type Props = {
   page: Page | undefined;
@@ -12,7 +11,7 @@ type Props = {
 };
 
 const Reader = ({ page, close }: Props) => {
-  const [pageNumber, setPageNumber] = useState<number | undefined>(0);
+  const theme = useTheme();
 
   const images = page?.images.map(({ legacy }) => ({
     url: legacy,
@@ -24,6 +23,10 @@ const Reader = ({ page, close }: Props) => {
         return `<img src="${url}" alt="Image ${index}" style="width: 100%;" />`;
       })
       .join("");
+  };
+
+  const handleScroll = (event: WebViewScrollEvent) => {
+    close();
   };
 
   const htmlContent = `
@@ -46,7 +49,7 @@ const Reader = ({ page, close }: Props) => {
     <WebView
       startInLoadingState
       onLoadEnd={() => setTimeout(() => close(), 4000)}
-      onScroll={() => close()}
+      onScroll={handleScroll}
       renderLoading={() => (
         <View
           style={{
@@ -57,7 +60,7 @@ const Reader = ({ page, close }: Props) => {
             height: "100%",
           }}
         >
-          <ActivityIndicator size="large" color="#fb5" />
+          <ActivityIndicator size="large" color={theme.PRIMARY} />
         </View>
       )}
       showsVerticalScrollIndicator={false}

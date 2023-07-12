@@ -4,7 +4,7 @@ import { Layout } from "src/components/Layout";
 import { useQuery } from "@tanstack/react-query";
 import { queryKeys } from "src/constants/queryKeys";
 import { getPages } from "src/api/wangaServices";
-import { StatusBar } from "react-native";
+import { Alert, StatusBar } from "react-native";
 import Reader from "./components/Reader";
 import { useDisclose } from "src/hooks/useDisclose";
 import FooterReader from "./components/FooterReader";
@@ -35,14 +35,16 @@ const MangaReader = ({ route }: RootStackScreenProps<"mangaReader">) => {
     }
   };
 
+  // TODO: Tratar error
   if (error) {
-    console.error(error);
-    return null;
+    if (error instanceof Error) {
+      Alert.alert("Server Error", error.message);
+    }
   }
 
   if (isLoading) return null;
   return (
-    <Layout style={{ flex: 1 }}>
+    <Layout>
       <StatusBar hidden />
       <HeaderReader
         show={state}
