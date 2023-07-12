@@ -1,13 +1,20 @@
 import { PressableProps, Pressable } from "react-native";
 import React, { ReactNode } from "react";
 import * as S from "./styled";
+import { DefaultTheme } from "styled-components";
 
 type Props = PressableProps & {
   children: ReactNode;
   innerSpace?: number;
+  bgPressed?: string;
 };
 
-const CustomPressable = ({ children, innerSpace, ...props }: Props) => {
+const CustomPressable = ({
+  children,
+  innerSpace,
+  bgPressed,
+  ...props
+}: Props) => {
   return (
     <Pressable
       {...props}
@@ -19,7 +26,11 @@ const CustomPressable = ({ children, innerSpace, ...props }: Props) => {
       }}
     >
       {({ pressed }) => (
-        <S.PressableWrapper innerSpace={innerSpace} pressed={pressed}>
+        <S.PressableWrapper
+          innerSpace={innerSpace}
+          pressed={pressed}
+          bgPressed={bgPressed}
+        >
           {children}
         </S.PressableWrapper>
       )}

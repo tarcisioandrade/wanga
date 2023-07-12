@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Text } from "src/components/Text";
 import { truncateString } from "src/utils/truncateString";
 import { FeaturedElement } from "src/@types/featured";
@@ -51,4 +51,4 @@ const FeaturedCard = ({ data }: Props) => {
   );
 };
 
-export default FeaturedCard;
+export default memo(FeaturedCard);

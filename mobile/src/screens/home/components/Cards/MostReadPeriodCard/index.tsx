@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { MostReadPeriodElement } from "src/@types/mostReadPeriod";
 import {
   CarouselMangaCardBadge,
@@ -47,4 +47,4 @@ const MostPeriodCard = ({ data }: Props) => {
   );
 };
 
-export default MostPeriodCard;
+export default memo(MostPeriodCard);

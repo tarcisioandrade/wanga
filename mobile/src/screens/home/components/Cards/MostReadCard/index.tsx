@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { truncateString } from "src/utils/truncateString";
 import {
   CarouselMangaCardContainer,
@@ -55,4 +55,4 @@ const MostReadCard = ({ data, position }: Props) => {
   );
 };
 
-export default MostReadCard;
+export default memo(MostReadCard);

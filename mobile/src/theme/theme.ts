@@ -22,11 +22,13 @@ const lightTheme = {
   BG_COLOR: "#FFFFFF",
   TEXT_COLOR: "#2E2E2E",
 
-  // other
+  // others
   MENU_ITEM_COLOR: "#185DCF",
   TAB_ITEM_COLOR: "#FFFFFF",
   CHAPTER_READ: "#F2F2F2",
   SEKELETON_COLOR: "#F2F2F2",
+
+  // Font
   FONT_4XS: pms(11),
   FONT_3XS: pms(12),
   FONT_2XS: pms(13),

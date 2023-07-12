@@ -6,4 +6,5 @@ export const queryKeys = {
   featured: "featured-key",
   mangaInfo: "manga-info-key",
   chapters: "manga-chapters-key",
+  pages: "pages-key",
 };
