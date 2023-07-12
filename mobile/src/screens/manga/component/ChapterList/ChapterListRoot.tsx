@@ -18,12 +18,15 @@ const ChapterListRoot = ({ id, children }: Props) => {
       queryKey: [queryKeys.chapters, id],
       queryFn: ({ pageParam = 1 }) => getChapters(id, pageParam),
       getNextPageParam: (lastPage) => {
-        if (lastPage.chapters.length < 30) return false;
+        if (!lastPage.chapters.length) return false;
         return lastPage.current_page + 1;
       },
     });
 
-  const chaptersData = data?.pages.map((page) => page.chapters).flat();
+  const chaptersData = data?.pages
+    .map((page) => page.chapters)
+    .flat()
+    .filter((item) => item);
 
   const loadMoreData = () => {
     if (hasNextPage) {
