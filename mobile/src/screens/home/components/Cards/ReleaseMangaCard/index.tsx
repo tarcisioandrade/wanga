@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { ReleaseElement } from "src/@types/release";
 import { truncateString } from "src/utils/truncateString";
 import { Text } from "src/components/Text";
@@ -58,4 +58,4 @@ const ReleaseMangaCard = ({ data }: Props) => {
   );
 };
 
-export default ReleaseMangaCard;
+export default memo(ReleaseMangaCard);

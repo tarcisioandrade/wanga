@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import {
   MangaCardBadge,
   MangaCardContainer,
@@ -57,4 +57,4 @@ const MangaCard = ({ data, width, height }: Props) => {
   );
 };
 
-export default MangaCard;
+export default memo(MangaCard);
