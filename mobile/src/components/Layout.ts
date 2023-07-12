@@ -20,6 +20,7 @@ type StackProps = {
   my?: number;
   px?: number;
   py?: number;
+  height?: number;
 };
 
 export const Layout = styled.SafeAreaView`
@@ -98,5 +99,11 @@ export const Stack = styled.View<StackProps>`
     css`
       padding-top: ${pvs(props.py)};
       padding-bottom: ${pvs(props.py)};
+    `}
+
+    ${(props) =>
+    props.height &&
+    css`
+      height: ${pvs(props.height)};
     `}
 `;

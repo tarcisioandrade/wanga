@@ -1,5 +1,6 @@
 import React, { memo } from "react";
 import { ChapterBadgeBox, ChapterBadgeText } from "./styled";
+import { useNavigation } from "@react-navigation/native";
 
 export type ChapterListBadgeProps = {
   read?: boolean;
@@ -10,8 +11,12 @@ export type ChapterListBadgeProps = {
 
 const ChapterListBadge = memo(
   ({ number, id_release }: ChapterListBadgeProps) => {
+    const navigator = useNavigation();
+
     const goToMangaReaderPage = () => {
-      console.log(id_release);
+      navigator.navigate("mangaReader", {
+        id: id_release,
+      });
     };
 
     return (

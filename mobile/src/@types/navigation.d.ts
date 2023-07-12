@@ -1,4 +1,5 @@
 import { DrawerScreenProps } from "@react-navigation/drawer";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 export type RootStackParamList = {
   home: undefined;
@@ -8,6 +9,9 @@ export type RootStackParamList = {
   };
   mostReadPeriod: {
     type: string;
+  };
+  mangaReader: {
+    id: number;
   };
 };
 
@@ -24,4 +28,7 @@ declare global {
 }
 
 export type RootStackScreenProps<T extends keyof RootStackParamList> =
-  DrawerScreenProps<RootStackParamList, T>;
+  NativeStackScreenProps<RootStackParamList, T>;
+
+export type RootDrawerScreenProps<T extends keyof DrawerParamList> =
+  DrawerScreenProps<DrawerParamList, T>;
