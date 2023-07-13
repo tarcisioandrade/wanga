@@ -25,7 +25,7 @@ const lightTheme = {
   // others
   MENU_ITEM_COLOR: "#185DCF",
   TAB_ITEM_COLOR: "#FFFFFF",
-  CHAPTER_READ: "#F2F2F2",
+  CHAPTER_READ: "#e0e0e0",
   SEKELETON_COLOR: "#F2F2F2",
 
   // Font

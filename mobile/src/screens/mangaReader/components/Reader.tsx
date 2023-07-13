@@ -1,24 +1,23 @@
-import { View, ActivityIndicator } from "react-native";
 import React from "react";
-import { Page } from "src/@types/page";
 import WebView from "react-native-webview";
 import { WebViewScrollEvent } from "react-native-webview/lib/WebViewTypes";
-import { useTheme } from "styled-components";
+import LoadingReader from "./LoadingReader";
+import { TouchableWithoutFeedback } from "react-native";
+import { setFavoriteChapter } from "src/utils/favoriteChapter";
 
 type Props = {
-  page: Page | undefined;
+  data: { url: string }[] | undefined;
+  id_release: number;
+  mangaName: string;
   close: () => void;
+  open: () => void;
 };
 
-const Reader = ({ page, close }: Props) => {
-  const theme = useTheme();
-
-  const images = page?.images.map(({ legacy }) => ({
-    url: legacy,
-  }));
+const Reader = ({ data, close, open, id_release, mangaName }: Props) => {
+  let favorited = false;
 
   const renderImages = () => {
-    return images
+    return data
       ?.map(({ url }, index) => {
         return `<img src="${url}" alt="Image ${index}" style="width: 100%;" />`;
       })
@@ -26,7 +25,21 @@ const Reader = ({ page, close }: Props) => {
   };
 
   const handleScroll = (event: WebViewScrollEvent) => {
+    const { contentSize, contentOffset, layoutMeasurement } = event.nativeEvent;
+    const scrollPosition = contentOffset.y + layoutMeasurement.height;
+    const scrollEndOffset = contentSize.height * 0.5;
+
     close();
+
+    // Chegou na metade do scroll
+    if (scrollPosition >= scrollEndOffset && !favorited) {
+      setFavoriteChapter(mangaName, id_release);
+      favorited = true;
+    }
+  };
+
+  const handleTouch = () => {
+    open();
   };
 
   const htmlContent = `
@@ -46,27 +59,17 @@ const Reader = ({ page, close }: Props) => {
   `;
 
   return (
-    <WebView
-      startInLoadingState
-      onLoadEnd={() => setTimeout(() => close(), 4000)}
-      onScroll={handleScroll}
-      renderLoading={() => (
-        <View
-          style={{
-            position: "absolute",
-            justifyContent: "center",
-            alignItems: "center",
-            width: "100%",
-            height: "100%",
-          }}
-        >
-          <ActivityIndicator size="large" color={theme.PRIMARY} />
-        </View>
-      )}
-      showsVerticalScrollIndicator={false}
-      source={{ html: htmlContent }}
-      style={{ flex: 1 }}
-    />
+    <TouchableWithoutFeedback onLongPress={handleTouch}>
+      <WebView
+        startInLoadingState
+        onLoadEnd={() => setTimeout(() => close(), 4000)}
+        onScroll={handleScroll}
+        renderLoading={() => <LoadingReader />}
+        showsVerticalScrollIndicator={false}
+        source={{ html: htmlContent }}
+        style={{ flex: 1 }}
+      />
+    </TouchableWithoutFeedback>
   );
 };
 

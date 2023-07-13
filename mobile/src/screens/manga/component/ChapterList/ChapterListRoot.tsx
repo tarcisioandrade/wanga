@@ -10,9 +10,10 @@ import ChapterListBadge from "./ChapterListBadge";
 type Props = {
   id: number;
   children: ReactElement;
+  name: string | undefined;
 };
 
-const ChapterListRoot = ({ id, children }: Props) => {
+const ChapterListRoot = ({ id, children, name }: Props) => {
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage, error } =
     useInfiniteQuery({
       queryKey: [queryKeys.chapters, id],
@@ -56,7 +57,11 @@ const ChapterListRoot = ({ id, children }: Props) => {
           paddingBottom: vs(150),
         }}
         renderItem={({ item }) => (
-          <ChapterListBadge number={item.number} id_release={item.id_release} />
+          <ChapterListBadge
+            number={item.number}
+            id_release={item.id_release}
+            mangaName={name}
+          />
         )}
         ListHeaderComponent={children}
         ListFooterComponent={
