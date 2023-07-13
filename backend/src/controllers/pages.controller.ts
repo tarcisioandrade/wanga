@@ -14,11 +14,12 @@ export class PagesController {
     const id = req.params.id;
     let return_data = {} as Pages;
     try {
-      const { chapter_number, next_chapter, prev_chapter } =
-        await pagesModel.getPNPages(id);
+      const { chapter_number, next_chapter, prev_chapter, name } =
+        await pagesModel.getInfoPages(id);
       const images = await pagesModel.getPagesImages(id);
 
       return_data = {
+        name,
         chapter_number,
         next_chapter,
         images,
@@ -28,7 +29,7 @@ export class PagesController {
       res.send(return_data);
     } catch (error) {
       if (error instanceof Error) {
-        handleError(res, 404, error.message);
+        handleError(res, 400, error.message);
       } else {
         console.error(error);
       }

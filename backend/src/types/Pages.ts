@@ -1,4 +1,5 @@
 export interface Pages {
+  name: string;
   chapter_number: string;
   images: Image[];
   next_chapter: NextChapter;

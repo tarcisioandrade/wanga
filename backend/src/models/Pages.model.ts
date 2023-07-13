@@ -2,13 +2,14 @@ import got from "got";
 import { Image, Pages } from "../types/Pages";
 
 interface IPages {
-  getPNPages: (release_id: string) => Promise<Omit<Pages, "images">>;
+  getInfoPages: (release_id: string) => Promise<Omit<Pages, "images">>;
   getPagesImages: (release_id: string) => Promise<Image[]>;
 }
 
 export class PagesModel implements IPages {
-  async getPNPages(release_id: string) {
+  async getInfoPages(release_id: string) {
     const return_data: Omit<Pages, "images"> = {
+      name: "",
       next_chapter: { number: null, release_id: null },
       prev_chapter: { number: null, release_id: null },
       chapter_number: "",
@@ -24,12 +25,16 @@ export class PagesModel implements IPages {
       .trim();
 
     // Todos os capitulos do mangá
+    // TODO: Tirar o Reverse para da sort e começar do capitulo 1
     let chapters = JSON.parse(
       response.body.match(/(?<=chapters = ).*?(?=;)/gm)![0].trim()
     ).reverse();
 
-    //
+    return_data.name = response.body.match(
+      /(?<=span class="title">).*(?=<\/span>)/gm
+    )![0];
 
+    
     for (const chapter of chapters) {
       let chapter_index = chapters.indexOf(chapter);
       if (chapter.number == return_data.chapter_number) {
