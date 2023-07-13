@@ -9,7 +9,6 @@ import { useTheme } from "styled-components";
 
 type Props = {
   show: boolean;
-  toggle: () => void;
   nextChapter: () => void;
   prevChapter: () => void;
   hasNextChapter: boolean;
@@ -18,7 +17,6 @@ type Props = {
 
 const FooterReader = ({
   show,
-  toggle,
   nextChapter,
   prevChapter,
   hasNextChapter,
@@ -26,45 +24,42 @@ const FooterReader = ({
 }: Props) => {
   const theme = useTheme();
 
+  if (!show) return null;
+
   return (
     <View
       style={[
         styles.container,
         {
-          backgroundColor: show ? theme.BLACK_TRANSPARENT : "transparent",
+          backgroundColor: theme.BLACK_TRANSPARENT,
         },
       ]}
-      onTouchEnd={() => toggle()}
     >
-      {show && (
-        <>
-          <CustomPressable
-            bgPressed="#ffffff14"
-            innerSpace={2}
-            onPress={prevChapter}
-            disabled={!hasPrevChapter}
-          >
-            <Icon
-              icon={ArrowLeftLight}
-              type="fill"
-              color={hasPrevChapter ? "#fff" : "#a3a3a3"}
-            />
-          </CustomPressable>
+      <CustomPressable
+        bgPressed="#ffffff14"
+        innerSpace={2}
+        onPress={prevChapter}
+        disabled={!hasPrevChapter}
+      >
+        <Icon
+          icon={ArrowLeftLight}
+          type="fill"
+          color={hasPrevChapter ? "#fff" : "#a3a3a3"}
+        />
+      </CustomPressable>
 
-          <CustomPressable
-            bgPressed="#ffffff14"
-            innerSpace={2}
-            onPress={nextChapter}
-            disabled={!hasNextChapter}
-          >
-            <Icon
-              icon={ArrowRightLight}
-              type="fill"
-              color={hasNextChapter ? "#fff" : "#a3a3a3"}
-            />
-          </CustomPressable>
-        </>
-      )}
+      <CustomPressable
+        bgPressed="#ffffff14"
+        innerSpace={2}
+        onPress={nextChapter}
+        disabled={!hasNextChapter}
+      >
+        <Icon
+          icon={ArrowRightLight}
+          type="fill"
+          color={hasNextChapter ? "#fff" : "#a3a3a3"}
+        />
+      </CustomPressable>
     </View>
   );
 };

@@ -6,7 +6,6 @@ import DownloadIcon from "assets/svg-icon/download-simple.svg";
 import CustomPressable from "src/components/CustomPressable";
 import { Stack } from "src/components/Layout";
 import { hs, vs } from "src/utils/metrics";
-import Constants from "expo-constants";
 import { useNavigation } from "@react-navigation/native";
 import { Text } from "src/components/Text";
 import { useTheme } from "styled-components";
@@ -14,41 +13,37 @@ import { useTheme } from "styled-components";
 type Props = {
   show: boolean;
   currentChapter: string | undefined;
-  toggle: () => void;
+  startDownload: () => Promise<void>;
 };
 
-const HeaderReader = ({ show, currentChapter, toggle }: Props) => {
+const HeaderReader = ({ show, currentChapter, startDownload }: Props) => {
   const navigator = useNavigation();
   const theme = useTheme();
 
+  if (!show) return null;
   return (
     <View
       style={[
         styles.container,
         {
-          backgroundColor: show ? theme.BLACK_TRANSPARENT : "transparent",
+          backgroundColor: theme.BLACK_TRANSPARENT,
         },
       ]}
-      onTouchEnd={() => toggle()}
     >
-      {show && (
-        <>
-          <Stack align_items="center" direction="row" gap={20}>
-            <CustomPressable
-              onPress={() => navigator.goBack()}
-              bgPressed="#ffffff14"
-            >
-              <Icon type="fill" icon={ArrowLeft} color="#fff" />
-            </CustomPressable>
-            <Text color="WHITE" size="FONT_LG">
-              {currentChapter}
-            </Text>
-          </Stack>
-          <CustomPressable bgPressed="#ffffff14">
-            <Icon type="fill" icon={DownloadIcon} color="#fff" />
-          </CustomPressable>
-        </>
-      )}
+      <Stack align_items="center" direction="row" gap={20}>
+        <CustomPressable
+          onPress={() => navigator.goBack()}
+          bgPressed="#ffffff14"
+        >
+          <Icon type="fill" icon={ArrowLeft} color="#fff" />
+        </CustomPressable>
+        <Text color="WHITE" size="FONT_LG">
+          {currentChapter}
+        </Text>
+      </Stack>
+      <CustomPressable bgPressed="#ffffff14" onPress={startDownload}>
+        <Icon type="fill" icon={DownloadIcon} color="#fff" />
+      </CustomPressable>
     </View>
   );
 };
