@@ -7,6 +7,7 @@ import Routes from "./src/routes/Navigator";
 import { StatusBar } from "expo-status-bar";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { useAppStateChange } from "./src/hooks/useAppStateChange";
+import Toast from "react-native-toast-message";
 import {
   useFonts,
   Inter_400Regular,
@@ -15,6 +16,8 @@ import {
   Inter_700Bold,
   Inter_800ExtraBold,
 } from "@expo-google-fonts/inter";
+import { toastConfig } from "src/components/CustomToast";
+
 export default function App() {
   // const [fontsLoaded] = useFonts({
   //   "SF-Pro-Display-Regular": require("./assets/fonts/SFPRODISPLAYREGULAR.otf"),
@@ -32,16 +35,16 @@ export default function App() {
 
   const { theme } = useThemeMode();
   const statusStyle = theme === "dark" ? "light" : "dark";
-
   const queryClient = new QueryClient();
   useAppStateChange();
 
   if (!fontsLoaded) return <Text>Loading</Text>;
   return (
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={lightTheme}>
       <QueryClientProvider client={queryClient}>
         <StatusBar style={"dark"} />
         <Routes />
+        <Toast config={toastConfig} />
       </QueryClientProvider>
     </ThemeProvider>
   );
