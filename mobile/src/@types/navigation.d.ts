@@ -11,7 +11,7 @@ export type RootStackParamList = {
     type: string;
   };
   mangaReader: {
-    id: number;
+    id_release: number;
   };
 };
 

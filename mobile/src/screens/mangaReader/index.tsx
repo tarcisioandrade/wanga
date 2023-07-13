@@ -4,21 +4,31 @@ import { Layout } from "src/components/Layout";
 import { useQuery } from "@tanstack/react-query";
 import { queryKeys } from "src/constants/queryKeys";
 import { getPages } from "src/api/wangaServices";
-import { Alert, StatusBar } from "react-native";
+import { Alert, StatusBar, Linking } from "react-native";
 import Reader from "./components/Reader";
 import { useDisclose } from "src/hooks/useDisclose";
 import FooterReader from "./components/FooterReader";
 import HeaderReader from "./components/HeaderReader";
+import { useDownload } from "src/hooks/useDownload";
+import * as MediaLibrary from "expo-media-library";
+import Toast from "react-native-toast-message";
+import LoadingReader from "./components/LoadingReader";
 
 const MangaReader = ({ route }: RootStackScreenProps<"mangaReader">) => {
-  const { id } = route.params;
-  const [chapter, setChapter] = useState(id);
-  const { state, close, toggle } = useDisclose(true);
+  const { id_release } = route.params;
+  const [chapter, setChapter] = useState(id_release);
+  const { state, close, toggle, open } = useDisclose(true);
 
   const { data, isLoading, error } = useQuery({
     queryKey: [queryKeys.pages, chapter],
     queryFn: () => getPages(chapter),
   });
+
+  const { handleDownload, saveDownloadInHistory } = useDownload();
+
+  const images = data?.images.map(({ legacy }) => ({
+    url: legacy,
+  }));
 
   const hasNextChapter = !!data?.next_chapter.release_id;
   const hasPrevChapter = !!data?.prev_chapter.release_id;
@@ -42,18 +52,59 @@ const MangaReader = ({ route }: RootStackScreenProps<"mangaReader">) => {
     }
   }
 
-  if (isLoading) return null;
+  const downloadInit = async () => {
+    const albumName = `${data?.name}-${data?.chapter_number}`;
+
+    if (!images) return;
+
+    const { status } = await MediaLibrary.requestPermissionsAsync();
+    if (status === "granted") {
+      for (let i = 0; i < images.length; i++) {
+        try {
+          await handleDownload(images[i].url, i, albumName);
+        } catch (error) {
+          return;
+        }
+      }
+      saveDownloadInHistory(albumName);
+      Toast.show({
+        type: "success",
+        text1: "Download Efetuado!",
+        position: "bottom",
+        bottomOffset: 90,
+      });
+    } else if (status === "denied") {
+      Alert.alert(
+        "Permisão Negada",
+        "Por favor, aceite a permissão para iniciar o download.",
+        [
+          { text: "Cancelar" },
+          { text: "Configurações", onPress: () => Linking.openSettings() },
+        ]
+      );
+      return;
+    }
+  };
+
+  // TODO: Criar o modal para falar ao usuario da um longPress para aparecer o header/footer;
+
+  if (isLoading) return <LoadingReader />;
   return (
     <Layout>
       <StatusBar hidden />
       <HeaderReader
         show={state}
-        toggle={toggle}
+        startDownload={downloadInit}
         currentChapter={data?.chapter_number}
       />
-      <Reader page={data} close={close} />
+      <Reader
+        mangaName={data?.name!}
+        id_release={id_release}
+        data={images}
+        close={close}
+        open={open}
+      />
       <FooterReader
-        toggle={toggle}
         show={state}
         nextChapter={nextChapter}
         prevChapter={prevChapter}
