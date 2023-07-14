@@ -24,7 +24,7 @@ export const ChapterBadgeText = styled.Text<
 `;
 
 export const ChapterCount = styled.View`
-  background-color: ${(props) => props.theme.PRIMARY};
+  background-color: ${(props) => props.theme.WARNING};
   padding: 4px;
   border-radius: 4px;
   flex-direction: row;
@@ -33,4 +33,12 @@ export const ChapterCount = styled.View`
   gap: 4px;
   margin-top: 4px;
   width: ${phs(120)};
+`;
+
+export const LastReadButton = styled.TouchableOpacity.attrs({
+  activeOpacity: 0.9,
+})`
+  background-color: ${(props) => props.theme.PRIMARY};
+  border-radius: 8px;
+  padding: 6px 8px;
 `;
