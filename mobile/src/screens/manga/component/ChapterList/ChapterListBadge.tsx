@@ -12,59 +12,62 @@ export type ChapterListBadgeProps = {
   id_release: number;
 };
 
-const ChapterListBadge = memo(
-  ({ number, id_release, mangaName }: ChapterListBadgeProps) => {
-    const [lastRead, setLastRead] = useState(false);
-    const [read, setRead] = useState(false);
+const ChapterListBadge = ({
+  number,
+  id_release,
+  mangaName,
+}: ChapterListBadgeProps) => {
+  const [lastRead, setLastRead] = useState(false);
+  const [read, setRead] = useState(false);
 
-    const navigator = useNavigation();
+  const navigator = useNavigation();
 
-    const goToMangaReaderPage = () => {
-      navigator.navigate("mangaReader", {
-        id_release,
-      });
-    };
+  const goToMangaReaderPage = () => {
+    navigator.navigate("mangaReader", {
+      id_release,
+    });
+  };
 
-    const handleChaptersStatus = async () => {
-      const favorites = await getFavoriteChapters();
-      setLastRead(false);
-      setRead(false);
+  const handleChaptersStatus = async () => {
+    const favorites = await getFavoriteChapters();
+    setLastRead(false);
+    setRead(false);
 
-      if (favorites && mangaName) {
-        const target = favorites.find((fav) => fav[mangaName]);
+    if (favorites && mangaName) {
+      const target = favorites.find((fav) => fav[mangaName]);
 
-        if (target) {
-          const isLastRead = target[mangaName].reads.at(-1);
+      if (target) {
+        const isLastRead = target[mangaName].reads.at(-1);
 
-          if (isLastRead === id_release) {
-            setLastRead(true);
-            return;
-          }
-
-          const isRead = target[mangaName].reads.some(
-            (read) => read === id_release
-          );
-          setRead(isRead);
+        if (isLastRead === id_release) {
+          setLastRead(true);
+          return;
         }
+
+        const isRead = target[mangaName].reads.some(
+          (read) => read === id_release
+        );
+        setRead(isRead);
       }
-    };
+    }
+  };
 
-    useFocusEffect(
-      useCallback(() => {
-        handleChaptersStatus();
-      }, [])
-    );
+  useFocusEffect(
+    useCallback(() => {
+      handleChaptersStatus();
+    }, [])
+  );
 
-    return (
-      <ChapterBadgeBox
-        read={read}
-        lastRead={lastRead}
-        onPress={goToMangaReaderPage}
-      >
-        <ChapterBadgeText lastRead={lastRead}>{number}</ChapterBadgeText>
-      </ChapterBadgeBox>
-    );
-  }
-);
+  return (
+    <ChapterBadgeBox
+      style={{ justifyContent: "center" }}
+      read={read}
+      lastRead={lastRead}
+      onPress={goToMangaReaderPage}
+    >
+      <ChapterBadgeText lastRead={lastRead}>{number}</ChapterBadgeText>
+    </ChapterBadgeBox>
+  );
+};
 
-export default ChapterListBadge;
+export default memo(ChapterListBadge);

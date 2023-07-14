@@ -12,7 +12,6 @@ import ArrowDown from "assets/svg-icon/arrow-down.svg";
 import ArrowUp from "assets/svg-icon/arrow-up.svg";
 import BooksIcon from "assets/svg-icon/books.svg";
 import ChapterListSkeleton from "./ChapterListSkeleton";
-import Button from "src/components/Button";
 import { getFavoriteChapters } from "src/utils/favoriteChapter";
 import { useNavigation } from "@react-navigation/native";
 

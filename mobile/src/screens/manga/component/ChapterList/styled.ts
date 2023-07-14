@@ -7,12 +7,12 @@ export const ChapterBadgeBox = styled.Pressable.attrs({
 })<Pick<ChapterListBadgeProps, "lastRead" | "read">>`
   background-color: ${({ theme, read, lastRead }) =>
     read ? theme.CHAPTER_READ : lastRead ? theme.PRIMARY : "transparent"};
-  padding: ${pvs(8)} 0;
   border-radius: 4px;
   border: 1px solid
     ${(props) => (props.lastRead ? "transparent" : props.theme.DARK_700)};
   align-items: center;
   width: ${phs(54)};
+  height: ${pvs(33)};
 `;
 export const ChapterBadgeText = styled.Text<
   Pick<ChapterListBadgeProps, "lastRead">
