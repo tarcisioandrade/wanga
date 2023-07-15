@@ -15,7 +15,7 @@ import Toast from "react-native-toast-message";
 import LoadingReader from "./components/LoadingReader";
 
 const MangaReader = ({ route }: RootStackScreenProps<"mangaReader">) => {
-  const { id_release } = route.params;
+  const { id_release, id_manga } = route.params;
   const [chapter, setChapter] = useState(id_release);
   const { state, close, toggle, open } = useDisclose(true);
 
@@ -54,6 +54,7 @@ const MangaReader = ({ route }: RootStackScreenProps<"mangaReader">) => {
 
   const downloadInit = async () => {
     const albumName = `${data?.name}-${data?.chapter_number}`;
+    let fileSize = 0;
 
     if (!images) return;
 
@@ -61,12 +62,13 @@ const MangaReader = ({ route }: RootStackScreenProps<"mangaReader">) => {
     if (status === "granted") {
       for (let i = 0; i < images.length; i++) {
         try {
-          await handleDownload(images[i].url, i, albumName);
+          const size = await handleDownload(images[i].url, i, albumName);
+          if (size) fileSize += size;
         } catch (error) {
           return;
         }
       }
-      saveDownloadInHistory(albumName);
+      saveDownloadInHistory(albumName, fileSize, id_manga!, images[3]?.url);
       Toast.show({
         type: "success",
         text1: "Download Efetuado!",

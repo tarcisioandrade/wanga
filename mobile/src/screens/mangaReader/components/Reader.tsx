@@ -24,6 +24,8 @@ const Reader = ({ data, close, open, id_release, mangaName }: Props) => {
       .join("");
   };
 
+  //TODO: Mostrar header/footer ao chegar no topo;
+
   const handleScroll = (event: WebViewScrollEvent) => {
     const { contentSize, contentOffset, layoutMeasurement } = event.nativeEvent;
     const scrollPosition = contentOffset.y + layoutMeasurement.height;

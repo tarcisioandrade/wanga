@@ -7,6 +7,7 @@ import {
 import HomeIcon from "assets/svg-icon/home.svg";
 import FavoritesIcon from "assets/svg-icon/favorites.svg";
 import HistoricIcon from "assets/svg-icon/historic.svg";
+import DownloadIcon from "assets/svg-icon/paper-download.svg";
 import MoreIcon from "assets/svg-icon/more-icon.svg";
 import Logo from "assets/logo.svg";
 import { SvgProps } from "react-native-svg";
@@ -42,6 +43,9 @@ const iconAndLabelMappings: IconAndLabelMappings = {
   },
   drawerHistoric: {
     icon: HistoricIcon,
+  },
+  drawerDownloads: {
+    icon: DownloadIcon,
   },
 };
 

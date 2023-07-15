@@ -1,21 +1,33 @@
 import * as FileSystem from "expo-file-system";
 import * as MediaLibrary from "expo-media-library";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { formatFileSizeInMB } from "src/utils/formatFileSizeInMB";
 
 export type DownloadHistory = {
+  image: string | null;
   fileName: string;
   downloadDate: string;
-  directory: string;
+  id_manga: number;
+  size: string;
 };
 
 const EXTENSION_IMAGE_REGEXP = /\.(gif|jpe?g|tiff?|png|webp|bmp)$/i;
 
 export const useDownload = () => {
-  const saveDownloadInHistory = async (albumName: string) => {
+  const saveDownloadInHistory = async (
+    albumName: string,
+    fileSize: number,
+    id_manga: number,
+    image: string | undefined
+  ) => {
+    const fileSizeToMB = formatFileSizeInMB(fileSize);
+
     const downloadDetails: DownloadHistory = {
+      image: image ?? null,
       fileName: albumName,
       downloadDate: new Date().toISOString(),
-      directory: FileSystem.documentDirectory + albumName,
+      id_manga,
+      size: `${fileSizeToMB}MB`,
     };
 
     let existingHistory = await AsyncStorage.getItem("downloadHistory");
@@ -63,7 +75,11 @@ export const useDownload = () => {
       // }
 
       const res = await FileSystem.downloadAsync(imageUrl, fileUri);
+      const fileSize = parseFloat(res.headers["content-length"]);
+
       saveFile(res.uri, albumName);
+
+      return fileSize;
     } catch (err) {
       console.log("FS Err: ", err);
     }

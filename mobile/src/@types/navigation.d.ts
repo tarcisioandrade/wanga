@@ -12,13 +12,16 @@ export type RootStackParamList = {
   };
   mangaReader: {
     id_release: number;
+    id_manga?: number;
   };
+  downloads: undefined;
 };
 
 export type DrawerParamList = {
   drawerHome: undefined;
   drawerFavorites: undefined;
   drawerHistoric: undefined;
+  drawerDownloads: undefined;
 };
 
 declare global {

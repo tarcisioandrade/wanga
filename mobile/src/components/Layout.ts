@@ -6,6 +6,7 @@ type ContainerProps = {
   bg?: keyof Theme;
   py?: number;
   pb?: number;
+  mt?: number;
 };
 
 type StackProps = {
@@ -43,6 +44,12 @@ export const Container = styled.View<ContainerProps>`
     props.pb &&
     css`
       padding-bottom: ${pvs(props.pb)};
+    `}
+
+     ${(props) =>
+    props.mt &&
+    css`
+      margin-top: ${pvs(props.mt)};
     `}
 `;
 

@@ -65,6 +65,7 @@ const ChapterListRoot = ({ id, children, name }: Props) => {
         renderItem={({ item }) => (
           <ChapterListBadge
             number={item.number}
+            id={id}
             id_release={item.id_release}
             mangaName={name}
           />

@@ -10,12 +10,14 @@ export type ChapterListBadgeProps = {
   lastRead?: boolean;
   number: string;
   id_release: number;
+  id: number;
 };
 
 const ChapterListBadge = ({
   number,
   id_release,
   mangaName,
+  id
 }: ChapterListBadgeProps) => {
   const [lastRead, setLastRead] = useState(false);
   const [read, setRead] = useState(false);
@@ -25,6 +27,7 @@ const ChapterListBadge = ({
   const goToMangaReaderPage = () => {
     navigator.navigate("mangaReader", {
       id_release,
+      id_manga: id
     });
   };
 
