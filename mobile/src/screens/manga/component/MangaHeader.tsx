@@ -12,7 +12,7 @@ import StarIcon from "assets/svg-icon/star.svg";
 import CustomPressable from "src/components/CustomPressable";
 
 type Props = {
-  score: string;
+  score: string | undefined;
 };
 
 const MangaHeader = ({ score }: Props) => {

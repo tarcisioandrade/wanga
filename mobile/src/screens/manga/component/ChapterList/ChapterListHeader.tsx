@@ -1,5 +1,5 @@
 import { Pressable } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState, useCallback } from "react";
 import Badge from "src/components/Badge";
 import Icon from "src/components/Icon";
 import { Stack } from "src/components/Layout";
@@ -11,16 +11,16 @@ import { Text } from "src/components/Text";
 import ArrowDown from "assets/svg-icon/arrow-down.svg";
 import ArrowUp from "assets/svg-icon/arrow-up.svg";
 import BooksIcon from "assets/svg-icon/books.svg";
-import ChapterListSkeleton from "./ChapterListSkeleton";
 import { getFavoriteChapters } from "src/utils/favoriteChapter";
 import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect } from "@react-navigation/native";
 
 type Props = {
   manga: Manga | undefined;
-  loading: boolean;
+  chapterError: boolean;
 };
 
-const ChapterListHeader = ({ manga, loading }: Props) => {
+const ChapterListHeader = ({ manga, chapterError }: Props) => {
   const [showAllDescription, setShowAllDescription] = useState(false);
   const [lastChapterRead, setLastChapterRead] = useState<number | null>(null);
 
@@ -54,11 +54,12 @@ const ChapterListHeader = ({ manga, loading }: Props) => {
     }
   };
 
-  useEffect(() => {
-    getLastReadChapter();
-  }, [loading]);
+  useFocusEffect(
+    useCallback(() => {
+      getLastReadChapter();
+    }, [])
+  );
 
-  if (loading) return <ChapterListSkeleton />;
   return (
     <>
       <Stack direction="row" gap={12}>
@@ -138,6 +139,13 @@ const ChapterListHeader = ({ manga, loading }: Props) => {
           )}
         </Pressable>
       </Stack>
+      {chapterError && (
+        <Stack mt={10} align_items="center">
+          <Text color="RED_500" size="FONT_3XS">
+            Não foi possivel carregar os capítulos.
+          </Text>
+        </Stack>
+      )}
     </>
   );
 };
