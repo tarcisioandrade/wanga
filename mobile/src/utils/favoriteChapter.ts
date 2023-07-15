@@ -21,21 +21,23 @@ export const setFavoriteChapter = async (name: string, id_release: number) => {
 
   if (alreadySaveInFavorites) {
     favorites.forEach((fav) => {
-      const itemToRemove = fav[name].reads.indexOf(id_release);
+      if (fav[name]) {
+        const itemToRemove = fav[name].reads.indexOf(id_release);
 
-      if (itemToRemove !== -1) {
-        fav[name].reads.splice(itemToRemove, 1);
+        if (itemToRemove !== -1) {
+          fav[name].reads.splice(itemToRemove, 1);
+        }
+
+        fav[name].reads.push(id_release);
       }
-
-      fav[name].reads.push(id_release);
+    });
+  } else {
+    favorites.push({
+      [name]: {
+        reads: [id_release],
+      },
     });
   }
-
-  favorites.push({
-    [name]: {
-      reads: [id_release],
-    },
-  });
 
   AsyncStorage.setItem("chapterFavorites", JSON.stringify(favorites));
 };
