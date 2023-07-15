@@ -38,7 +38,7 @@ export function parseManga(html: string, id: string) {
     )![0]
     .trim();
   manga.image = series_desc_div
-    .match(/(?<=div class=\"cover\"> *?<img src=").*?().(?:jpg|jpeg|png)/gm)![0]
+    .match(/(?<=div class=\"cover\"> *?<img src=").*().(?:jpg|jpeg|png)/gm)![0]
     .trim();
   manga.score = series_desc_div
     .match(/(?<=<div class="score-number">).*?(?=<\/div>)/gm)![0]
