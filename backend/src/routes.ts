@@ -63,9 +63,11 @@ router.get("/top/", async (_req, res) => {
 
 router.get("/manga/:id", async (req, res) => {
   const id = req.params.id;
-  getMangaById(id).then((response) => {
-    res.send(response);
-  });
+  getMangaById(id)
+    .then((response) => {
+      res.send(response);
+    })
+    .catch(() => res.sendStatus(404));
 });
 
 export default router;

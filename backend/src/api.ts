@@ -269,11 +269,8 @@ export function getMangaById(id: string) {
       let response = await got("https://mangalivre.net/manga/null/" + id);
       return_data.manga = parseManga(response.body, id);
     } catch (error) {
-      if (error instanceof Error) {
-        console.error(error.message);
-        return;
-      }
       console.error(error);
+      throw error;
     }
     return return_data;
   })();

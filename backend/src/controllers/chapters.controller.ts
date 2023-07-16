@@ -119,6 +119,7 @@ export class ChaptersController {
       } catch (error) {
         if (error instanceof Error) {
           handleError(res, 400, error.message);
+          console.error("chapters error", error.message);
           break;
         }
       }
@@ -129,12 +130,11 @@ export class ChaptersController {
         chapters: false,
         current_page: Number(page),
       });
-      return;
+    } else {
+      res.send({
+        chapters: return_data.chapters,
+        current_page: Number(page),
+      });
     }
-
-    res.send({
-      chapters: return_data.chapters,
-      current_page: Number(page),
-    });
   }
 }
