@@ -2,8 +2,10 @@ import * as FileSystem from "expo-file-system";
 import * as MediaLibrary from "expo-media-library";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { formatFileSizeInMB } from "src/utils/formatFileSizeInMB";
+import * as Crypto from "expo-crypto";
 
 export type DownloadHistory = {
+  id: string;
   image: string | null;
   fileName: string;
   downloadDate: string;
@@ -21,8 +23,10 @@ export const useDownload = () => {
     image: string | undefined
   ) => {
     const fileSizeToMB = formatFileSizeInMB(fileSize);
+    const uuid = Crypto.randomUUID();
 
     const downloadDetails: DownloadHistory = {
+      id: uuid,
       image: image ?? null,
       fileName: albumName,
       downloadDate: new Date().toISOString(),
@@ -44,6 +48,10 @@ export const useDownload = () => {
     const history = await AsyncStorage.getItem("downloadHistory");
 
     return history ? (JSON.parse(history) as DownloadHistory[]) : null;
+  };
+
+  const updateDownloadHistory = async (newValue: DownloadHistory[]) => {
+    await AsyncStorage.setItem("downloadHistory", JSON.stringify(newValue));
   };
 
   //TODO: Testar a criação de pasta no prebuild;
@@ -101,5 +109,10 @@ export const useDownload = () => {
     }
   };
 
-  return { handleDownload, saveDownloadInHistory, getDownloadHistory };
+  return {
+    handleDownload,
+    saveDownloadInHistory,
+    getDownloadHistory,
+    updateDownloadHistory,
+  };
 };

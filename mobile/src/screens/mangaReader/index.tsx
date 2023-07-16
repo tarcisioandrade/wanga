@@ -17,7 +17,7 @@ import LoadingReader from "./components/LoadingReader";
 const MangaReader = ({ route }: RootStackScreenProps<"mangaReader">) => {
   const { id_release, id_manga } = route.params;
   const [chapter, setChapter] = useState(id_release);
-  const { state, close, toggle, open } = useDisclose(true);
+  const { state, close, open } = useDisclose(true);
 
   const { data, isLoading, error } = useQuery({
     queryKey: [queryKeys.pages, chapter],
@@ -55,8 +55,9 @@ const MangaReader = ({ route }: RootStackScreenProps<"mangaReader">) => {
   const downloadInit = async () => {
     const albumName = `${data?.name}-${data?.chapter_number}`;
     let fileSize = 0;
-
     if (!images) return;
+
+    const imageToSave = images[3]?.url || images[2]?.url;
 
     const { status } = await MediaLibrary.requestPermissionsAsync();
     if (status === "granted") {
@@ -68,7 +69,7 @@ const MangaReader = ({ route }: RootStackScreenProps<"mangaReader">) => {
           return;
         }
       }
-      saveDownloadInHistory(albumName, fileSize, id_manga!, images[3]?.url);
+      saveDownloadInHistory(albumName, fileSize, id_manga!, imageToSave);
       Toast.show({
         type: "success",
         text1: "Download Efetuado!",

@@ -6,25 +6,45 @@ import { Stack } from "src/components/Layout";
 import { Text } from "src/components/Text";
 import Icon from "src/components/Icon";
 import ArrowRight from "assets/svg-icon/arrow-right-iconly.svg";
+import { PressableProps, View } from "react-native";
+import Checkbox from "expo-checkbox";
+import { useTheme } from "styled-components";
 
-type Props = {
+type Props = PressableProps & {
   downloadInfo: DownloadHistory;
   navigate: (id_manga: number) => void;
+  handleDeleteItems: (id: string) => void;
+  deleteMode: boolean;
+  checked: boolean;
 };
 
-const DownloadItem = ({ downloadInfo, navigate }: Props) => {
+const DownloadItem = ({
+  downloadInfo,
+  navigate,
+  handleDeleteItems,
+  deleteMode,
+  checked,
+  ...props
+}: Props) => {
   const imageURI = downloadInfo.image
-    ? downloadInfo.image
-    : "https://github.com/tarcisioandrade.png";
+    ? { uri: downloadInfo.image }
+    : require("assets/images/no-asset.jpg");
 
   const date = new Date(downloadInfo.downloadDate).toLocaleDateString("pt-BR");
+  const theme = useTheme();
+
+  const handleOnPressFunction = deleteMode
+    ? () => handleDeleteItems(downloadInfo.id)
+    : () => navigate(downloadInfo.id_manga);
 
   return (
-    <S.DownloadItemContainer onPress={() => navigate(downloadInfo.id_manga)}>
+    <S.DownloadItemContainer
+      onPress={handleOnPressFunction}
+      onLongPress={() => handleDeleteItems(downloadInfo.id)}
+      {...props}
+    >
       <Image
-        source={{
-          uri: imageURI,
-        }}
+        source={imageURI}
         width={65}
         height={96}
         radius={4}
@@ -34,15 +54,24 @@ const DownloadItem = ({ downloadInfo, navigate }: Props) => {
         <Text numberOfLines={2} weight="WEIGHT_MEDIUM">
           {downloadInfo.fileName}
         </Text>
-        <Text color="DARK_700" size="FONT_2XS">
+        <Text color="GRAY_600" size="FONT_2XS">
           {date}
         </Text>
         <Text color="GRAY_600" size="FONT_4XS">
           {downloadInfo.size}
         </Text>
       </Stack>
-
-      <Icon icon={ArrowRight} type="stroke" color="#969696" />
+      <S.IconWrapper>
+        {deleteMode ? (
+          <Checkbox
+            value={checked}
+            color={theme.PRIMARY}
+            onValueChange={() => handleDeleteItems(downloadInfo.id)}
+          />
+        ) : (
+          <Icon icon={ArrowRight} type="stroke" color={theme.GRAY_600} />
+        )}
+      </S.IconWrapper>
     </S.DownloadItemContainer>
   );
 };

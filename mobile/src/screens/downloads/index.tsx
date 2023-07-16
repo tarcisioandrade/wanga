@@ -1,22 +1,71 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import Header from "src/components/Header";
 import { Container, Layout } from "src/components/Layout";
 import { DownloadHistory, useDownload } from "src/hooks/useDownload";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FlatList } from "react-native-gesture-handler";
 import DownloadItem from "./components/DowloadItem";
-import { Text } from "src/components/Text";
+import Empty from "src/components/Empty";
+import DownloadHeader from "./components/DownloadHeader";
+import { vs } from "src/utils/metrics";
+
+const fakeHistory: DownloadHistory[] = [
+  {
+    id: "assnajshas",
+    downloadDate: new Date().toISOString(),
+    fileName: `teste - ${Math.random()}`,
+    id_manga: 45 + Math.random(),
+    image: "http://github.com/tarcisioandrade.png",
+    size: "45mb",
+  },
+  {
+    id: "assnas",
+    downloadDate: new Date().toISOString(),
+    fileName: `teste - ${Math.random()}`,
+    id_manga: 45 + Math.random(),
+    image: "http://github.com/tarcisioandrade.png",
+    size: "45mb",
+  },
+  {
+    id: "oie",
+    downloadDate: new Date().toISOString(),
+    fileName: `teste - ${Math.random()}`,
+    id_manga: 45 + Math.random(),
+    image: "http://github.com/tarcisioandrade.png",
+    size: "45mb",
+  },
+  {
+    id: "as34sdff",
+    downloadDate: new Date().toISOString(),
+    fileName: `teste - ${Math.random()}`,
+    id_manga: 45 + Math.random(),
+    image: "http://github.com/tarcisioandrade.png",
+    size: "45mb",
+  },
+  {
+    id: "assd54ffas",
+    downloadDate: new Date().toISOString(),
+    fileName: `teste - ${Math.random()}`,
+    id_manga: 45 + Math.random(),
+    image: "http://github.com/tarcisioandrade.png",
+    size: "45mb",
+  },
+];
 
 const Downloads = () => {
   const [downloadHistory, setDownloadHistory] = useState<DownloadHistory[]>([]);
-  const { getDownloadHistory } = useDownload();
+  const { getDownloadHistory, updateDownloadHistory } = useDownload();
+  const [deleteList, setDeleteList] = useState<string[]>([]);
 
   const navigator = useNavigation();
+  const deleteMode = deleteList.length > 0;
 
   const fetchDownloadHistory = async () => {
     try {
-      const downloads = await getDownloadHistory();
+      //TODO: Change in PROD
+      // const downloads = await getDownloadHistory();
+      const downloads = fakeHistory;
+
       if (downloads) {
         setDownloadHistory(downloads);
       }
@@ -38,24 +87,74 @@ const Downloads = () => {
     });
   };
 
-  console.log(JSON.stringify(downloadHistory[0], null, 2));
+  const handleDeleteItems = (id: string) => {
+    const hasAddedInList = deleteList.some((del) => del === id);
+    if (hasAddedInList) {
+      const newList = deleteList.filter((del) => del != id);
+      setDeleteList(newList);
+    } else {
+      setDeleteList((prev) => [...prev, id]);
+    }
+  };
+
+  const onDeleteDownloadHistoy = async () => {
+    if (deleteList.length && downloadHistory) {
+      const newHistory = downloadHistory.filter(
+        (item) => !deleteList.includes(item.id)
+      );
+      updateDownloadHistory(newHistory);
+      setDownloadHistory(newHistory);
+      setDeleteList([]);
+    }
+  };
+
+  const selectAllToDelete = () => {
+    const alreadySelected = downloadHistory
+      .filter((item) => !deleteList.includes(item.id))
+      .map((item) => item.id);
+
+    setDeleteList((prev) => [...prev, ...alreadySelected]);
+  };
+
   return (
     <Layout>
-      <Header menuShow logoShow searchShow />
+      {deleteMode ? (
+        <DownloadHeader
+          cancelAction={() => setDeleteList([])}
+          deleteAction={onDeleteDownloadHistoy}
+          selectAllAction={selectAllToDelete}
+        />
+      ) : (
+        <Header menuShow logoShow searchShow />
+      )}
       <Container mt={10}>
         {!downloadHistory.length ? (
-          <Text>Não há nada aqui.</Text>
+          <Empty />
         ) : (
           <FlatList
             showsVerticalScrollIndicator={false}
             contentContainerStyle={{
               gap: 10,
+              paddingBottom: vs(150),
             }}
-            keyExtractor={(item) => item.id_manga.toString()}
+            keyExtractor={(item) => item.id}
             data={downloadHistory}
-            renderItem={({ item }) => (
-              <DownloadItem downloadInfo={item} navigate={goToMangaPage} />
-            )}
+            renderItem={({ item }) => {
+              const checked = deleteList.includes(item.id);
+
+              return (
+                <DownloadItem
+                  deleteMode={deleteMode}
+                  downloadInfo={item}
+                  navigate={goToMangaPage}
+                  handleDeleteItems={handleDeleteItems}
+                  checked={checked}
+                  style={({ pressed }) => ({
+                    opacity: pressed ? 0.75 : 1,
+                  })}
+                />
+              );
+            }}
           />
         )}
       </Container>

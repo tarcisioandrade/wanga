@@ -2,8 +2,8 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../@types/navigation";
 import Search from "../screens/search";
-import MangaReader from "src/screens/mangaReader";
 import Downloads from "src/screens/downloads";
+import MangaScreen from "src/screens/manga";
 
 const { Navigator, Screen } = createNativeStackNavigator<RootStackParamList>();
 
@@ -18,7 +18,7 @@ const DownloadsStackNavigator = () => {
     >
       <Screen name="downloads" component={Downloads} />
       <Screen name="search" component={Search} />
-      <Screen name="mangaReader" component={MangaReader} />
+      <Screen name="manga" component={MangaScreen} />
     </Navigator>
   );
 };
