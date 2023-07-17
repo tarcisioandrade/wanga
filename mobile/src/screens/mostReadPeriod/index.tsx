@@ -1,45 +1,29 @@
-import React, { useState, useCallback } from "react";
+import React from "react";
 import { FlatList } from "react-native";
 import { RootStackScreenProps } from "src/@types/navigation";
 import Header from "src/components/Header";
 import { Container, Layout, Stack } from "src/components/Layout";
 import MangaCard from "./components/MangaCard";
-import Tabs, { TabType } from "src/components/Tabs";
+import Tabs from "src/components/Tabs";
 import { useMangaQueries } from "src/hooks/useMangaQueries";
 import { vs } from "src/utils/metrics";
-import MostReadPeriodScreenSkeleton from "./components/MostReadPeriodScreenSkeleton";
-
-const periodTabs: TabType[] = [
-  { value: "day", label: "Dia" },
-  { value: "week", label: "Semana" },
-  { value: "month", label: "Mês" },
-  { value: "year", label: "Ano" },
-];
-
-const typeMangaTabs: TabType[] = [
-  { value: "", label: "Todos" },
-  { value: "manga", label: "Mangás" },
-  { value: "manhua", label: "Manhuas" },
-  { value: "webtoon", label: "Webtoons" },
-  { value: "novel", label: "Novels" },
-];
+import CardsScreenSkeleton from "../../components/CardsScreenSkeleton";
+import { useTabs } from "src/hooks/useTabs";
 
 const MostReadPeriod = ({ route }: RootStackScreenProps<"mostReadPeriod">) => {
   const { type: typeDefault } = route.params;
-  const [period, setPeriod] = useState("week");
-  const [type, setType] = useState(typeDefault);
+  const {
+    type,
+    period,
+    handlePeriodTabChange,
+    handleTypeTabChange,
+    typeMangaTabs,
+    periodTabs,
+  } = useTabs(typeDefault);
 
   const {
     mostReadPeriodResult: { data, error, isLoading },
   } = useMangaQueries(type, period);
-
-  const handlePeriodTabChange = useCallback((value: string) => {
-    setPeriod(value);
-  }, []);
-
-  const handleTypeTabChange = useCallback((value: string) => {
-    setType(value);
-  }, []);
 
   const dataFitred = data?.most_read.map(
     ({ chapter_number, series_image, id_serie, series_name }) => ({
@@ -58,7 +42,7 @@ const MostReadPeriod = ({ route }: RootStackScreenProps<"mostReadPeriod">) => {
 
   return (
     <Layout>
-      <Header backShow searchShow title="Mais Lidos" />
+      <Header backShow title="Mais Lidos" searchShow />
       <Container>
         <Stack pb={23}>
           <Tabs
@@ -75,7 +59,7 @@ const MostReadPeriod = ({ route }: RootStackScreenProps<"mostReadPeriod">) => {
         </Stack>
 
         {isLoading ? (
-          <MostReadPeriodScreenSkeleton />
+          <CardsScreenSkeleton />
         ) : (
           <FlatList
             data={dataFitred}
