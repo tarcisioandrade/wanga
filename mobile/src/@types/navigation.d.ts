@@ -4,6 +4,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 export type RootStackParamList = {
   home: undefined;
   search: undefined;
+  downloads: undefined;
   manga: {
     id: number;
   };
@@ -14,7 +15,9 @@ export type RootStackParamList = {
     id_release: number;
     id_manga?: number;
   };
-  downloads: undefined;
+  release: {
+    type: string;
+  };
 };
 
 export type DrawerParamList = {
