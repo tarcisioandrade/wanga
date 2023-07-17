@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
-import { CarouselMangaCardContainer } from "./Cards/ReleaseMangaCard/styled";
+import { CarouselMangaCardContainer } from "../../../components/ReleaseMangaCard/styled";
 import { useTheme } from "styled-components";
 
 const Skeleton = () => {

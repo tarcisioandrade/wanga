@@ -106,6 +106,7 @@ const MangaReader = ({ route }: RootStackScreenProps<"mangaReader">) => {
         data={images}
         close={close}
         open={open}
+        state={state}
       />
       <FooterReader
         show={state}

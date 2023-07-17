@@ -5,20 +5,23 @@ import {
   CarouselMangaCardBadge,
   CarouselMangaCardImage,
   CarouselMangaCardFooter,
-} from "../ReleaseMangaCard/styled";
+} from "src/components/ReleaseMangaCard/styled";
 import { MostReadElement } from "src/@types/mostRead";
 import { Text } from "src/components/Text";
 import { useNavigation } from "@react-navigation/native";
 
 type Props = {
   data: MostReadElement;
-  position: {
-    name: string;
-    ranking: number;
-  }[];
+  position:
+    | {
+        name: string;
+        ranking: number;
+      }[]
+    | undefined;
+  size?: "sm";
 };
 
-const MostReadCard = ({ data, position }: Props) => {
+const MostReadCard = ({ data, position, size }: Props) => {
   const positionTarget = position?.find(({ name }) => name === data.serie_name);
 
   const navigator = useNavigation();
@@ -32,7 +35,10 @@ const MostReadCard = ({ data, position }: Props) => {
   // TODO: TRANSFORMAR ESSES CARDS EM PATTERN COMPOSITION
 
   return (
-    <CarouselMangaCardContainer onPress={() => goToMangaScreen(data.id_serie)}>
+    <CarouselMangaCardContainer
+      onPress={() => goToMangaScreen(data.id_serie)}
+      size={size}
+    >
       <CarouselMangaCardBadge>
         <Text color="WHITE" size="FONT_XS" weight="WEIGHT_MEDIUM">
           {`#${positionTarget?.ranking}`}

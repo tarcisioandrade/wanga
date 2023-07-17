@@ -5,7 +5,7 @@ import {
   CarouselMangaCardContainer,
   CarouselMangaCardFooter,
   CarouselMangaCardImage,
-} from "../ReleaseMangaCard/styled";
+} from "../../../../../components/ReleaseMangaCard/styled";
 import { truncateString } from "src/utils/truncateString";
 import { Text } from "src/components/Text";
 import { useNavigation } from "@react-navigation/native";

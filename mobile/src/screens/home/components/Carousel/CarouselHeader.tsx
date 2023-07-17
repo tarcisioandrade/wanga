@@ -8,21 +8,23 @@ import { Stack } from "src/components/Layout";
 
 type CarouselHeaderProps = {
   title: string;
-  handleScreen: () => void;
+  handleScreen?: () => void;
 };
 
 const CarouselHeader = ({ title, handleScreen }: CarouselHeaderProps) => {
   return (
     <S.CarouselHeader>
       <Text weight="WEIGHT_SEMIBOLD">{title}</Text>
-      <CustomPressable innerSpace={2} onPress={handleScreen}>
-        <Stack direction="row" align_items="center" pl={8}>
-          <Text size="FONT_4XS" color="GRAY_600" weight="WEIGHT_SEMIBOLD">
-            Ver Tudo
-          </Text>
-          <Icon icon={ArrowRightIconly} type="stroke" color="#969696" />
-        </Stack>
-      </CustomPressable>
+      {handleScreen && (
+        <CustomPressable innerSpace={2} onPress={handleScreen}>
+          <Stack direction="row" align_items="center" pl={8}>
+            <Text size="FONT_4XS" color="GRAY_600" weight="WEIGHT_SEMIBOLD">
+              Ver Tudo
+            </Text>
+            <Icon icon={ArrowRightIconly} type="stroke" color="#969696" />
+          </Stack>
+        </CustomPressable>
+      )}
     </S.CarouselHeader>
   );
 };

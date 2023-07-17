@@ -6,17 +6,19 @@ import { vs, hs } from "src/utils/metrics";
 import FeaturedCard from "../Cards/FeaturedCard";
 import { FeaturedSkeleton } from "../Cards/FeaturedCard/styled";
 import { Stack } from "src/components/Layout";
+import { useTheme } from "styled-components";
 
 type Props = {
   featured: FeaturedElement[] | undefined;
 };
 
 const Parallax = ({ featured }: Props) => {
+  const theme = useTheme();
   return (
     <Stack justify_content="center" align_items="center">
       {!featured ? (
         <FeaturedSkeleton>
-          <ActivityIndicator size="large" />
+          <ActivityIndicator size="large" color={theme.PRIMARY} />
         </FeaturedSkeleton>
       ) : (
         <Carousel
