@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 import { ReleaseElement } from "src/@types/release";
 import { truncateString } from "src/utils/truncateString";
 import { Text } from "src/components/Text";
@@ -15,10 +15,11 @@ type Props = {
 };
 
 const ReleaseMangaCard = ({ data }: Props) => {
+  const [imageError, setImageError] = useState(false);
   const navigator = useNavigation();
 
   const firstChapt = data.chapters.at(-1)!;
-
+  
   const chapterFormat =
     Number(firstChapt?.number) < 9
       ? "0" + firstChapt?.number
@@ -33,6 +34,10 @@ const ReleaseMangaCard = ({ data }: Props) => {
     });
   };
 
+  const handleImageError = () => {
+    setImageError(true);
+  };
+
   return (
     <CarouselMangaCardContainer onPress={() => goToMangaScreen(data.id_serie)}>
       <CarouselMangaCardBadge>
@@ -41,13 +46,22 @@ const ReleaseMangaCard = ({ data }: Props) => {
         </Text>
       </CarouselMangaCardBadge>
 
-      <CarouselMangaCardImage
-        source={{
-          uri: data.image,
-        }}
-        resizeMode="cover"
-        alt={data.name}
-      />
+      {imageError ? (
+        <CarouselMangaCardImage
+          source={require("assets/images/no-asset.jpg")}
+          resizeMode="cover"
+          alt={data.name}
+        />
+      ) : (
+        <CarouselMangaCardImage
+          source={{
+            uri: data.image,
+          }}
+          onError={handleImageError}
+          resizeMode="cover"
+          alt={data.name}
+        />
+      )}
 
       <CarouselMangaCardFooter>
         <Text color="WHITE" size="FONT_4XS" weight="WEIGHT_SEMIBOLD">

@@ -9,7 +9,7 @@ type SkeletonProps = {
 };
 
 export const Skeleton = styled.View<SkeletonProps>`
-  background-color: ${(props) => props.theme.SEKELETON_COLOR};
+  background-color: ${(props) => props.theme.SKELETON_COLOR};
   width: ${(props) =>
     typeof props.width === "string" ? props.width : phs(props.width)};
   height: ${(props) => phs(props.height)};

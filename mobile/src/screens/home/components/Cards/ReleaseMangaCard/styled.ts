@@ -14,6 +14,7 @@ export const CarouselMangaCardContainer = styled.TouchableOpacity.attrs({
 
 export const CarouselMangaCardImage = styled.Image`
   height: ${pvs(166)};
+  width: 100%;
 `;
 
 export const CarouselMangaCardFooter = styled.View`
