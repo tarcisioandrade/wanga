@@ -11,9 +11,10 @@ type Props = {
   mangaName: string;
   close: () => void;
   open: () => void;
+  state: boolean;
 };
 
-const Reader = ({ data, close, open, id_release, mangaName }: Props) => {
+const Reader = ({ data, close, open, id_release, mangaName, state }: Props) => {
   let favorited = false;
 
   const renderImages = () => {
@@ -24,14 +25,15 @@ const Reader = ({ data, close, open, id_release, mangaName }: Props) => {
       .join("");
   };
 
-  //TODO: Mostrar header/footer ao chegar no topo;
-
   const handleScroll = (event: WebViewScrollEvent) => {
     const { contentSize, contentOffset, layoutMeasurement } = event.nativeEvent;
     const scrollPosition = contentOffset.y + layoutMeasurement.height;
     const scrollEndOffset = contentSize.height * 0.5;
 
-    close();
+    if (state) close();
+
+    // Chegou ao topo
+    if (contentOffset.y === 0 && !state) open();
 
     // Chegou na metade do scroll
     if (scrollPosition >= scrollEndOffset && !favorited) {
