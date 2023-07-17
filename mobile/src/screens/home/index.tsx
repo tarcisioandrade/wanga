@@ -74,37 +74,43 @@ const Home = ({ navigation }: RootStackScreenProps<"home">) => {
           <Carousel.Container>
             <Carousel.Header
               handleScreen={goToScreenRelease}
-              title="Lançados Recentemente"
+              title="🔥 Lançados Recentemente"
             />
             <Carousel.Wrapper
               data={release_data_sliced}
               loading={releasesResult.isLoading}
               card={ReleaseMangaCard}
+              error={releasesResult.isError}
+              refresh={releasesResult.refetch}
             />
           </Carousel.Container>
 
           <Carousel.Container>
             <Carousel.Header
               handleScreen={goToScreenMostReadPeriod}
-              title="Mais Lidos da Semana"
+              title="🤩 Mais Lidos da Semana"
             />
             <Carousel.Wrapper
               data={most_read_period_sliced}
               loading={mostReadPeriodResult.isLoading}
               card={MostPeriodCard}
+              error={mostReadPeriodResult.isError}
+              refresh={mostReadPeriodResult.refetch}
             />
           </Carousel.Container>
 
           <Carousel.Container>
             <Carousel.Header
               handleScreen={goToScreenMostRead}
-              title="Populares"
+              title="🏅 Populares"
             />
             <Carousel.Wrapper
               data={mostReadResult.data?.most_read}
               loading={mostReadResult.isLoading}
               card={MostReadCard}
               position={mostReadRanking}
+              error={mostReadResult.isError}
+              refresh={mostReadResult.refetch}
             />
           </Carousel.Container>
         </GestureHandlerRootView>
