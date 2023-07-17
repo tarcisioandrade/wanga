@@ -16,7 +16,7 @@ const HomeStackNavigator = () => {
       initialRouteName="home"
       screenOptions={{
         headerShown: false,
-        animation: "fade",
+        animation: "slide_from_right",
       }}
     >
       <Screen name="home" component={Home} />
