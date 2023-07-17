@@ -59,6 +59,7 @@ const CarouselWrapper = ({
             activeOffsetX: [-10, 10],
           }}
           autoFillData={false}
+          overscrollEnabled={false}
           loop={false}
           data={data}
           renderItem={({ item }) =>
