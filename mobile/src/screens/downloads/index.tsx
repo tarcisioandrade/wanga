@@ -63,8 +63,8 @@ const Downloads = () => {
   const fetchDownloadHistory = async () => {
     try {
       //TODO: Change in PROD
-      // const downloads = await getDownloadHistory();
-      const downloads = fakeHistory;
+      const downloads = await getDownloadHistory();
+      // const downloads = fakeHistory;
 
       if (downloads) {
         setDownloadHistory(downloads);

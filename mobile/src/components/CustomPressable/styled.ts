@@ -13,7 +13,7 @@ export const PressableWrapper = styled.View<Props>`
     props.pressed
       ? props.bgPressed
         ? props.bgPressed
-        : props.theme.SEKELETON_COLOR
+        : props.theme.SKELETON_COLOR
       : "transparent"};
   padding: ${(props) =>
     props.innerSpace

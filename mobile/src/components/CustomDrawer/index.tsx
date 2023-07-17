@@ -29,6 +29,7 @@ import Icon from "../Icon";
 import { useTheme } from "styled-components/native";
 import { Text } from "../Text";
 import CustomPressable from "../CustomPressable";
+import { useThemeMode } from "src/hooks/useThemeMode";
 
 type IconAndLabelMappings = {
   [key: string]: { icon: React.FC<SvgProps> };
@@ -50,6 +51,7 @@ const iconAndLabelMappings: IconAndLabelMappings = {
 };
 
 const CustomDrawer = (props: DrawerContentComponentProps) => {
+  const { theme: themeMode } = useThemeMode();
   const theme = useTheme();
   const progress = useDrawerProgress();
   const user = false;
@@ -58,7 +60,6 @@ const CustomDrawer = (props: DrawerContentComponentProps) => {
     inputRange: [0, 1],
     outputRange: [-100, 0],
   });
-
   return (
     <DrawerContainer style={{ transform: [{ translateX }] }}>
       <Container bg="SECONDARY">
@@ -116,7 +117,11 @@ const CustomDrawer = (props: DrawerContentComponentProps) => {
                   width={phs(24)}
                   height={pvs(24)}
                 />
-                <Text color="PRIMARY" size="FONT_XS" weight="WEIGHT_MEDIUM">
+                <Text
+                  color={themeMode === "dark" ? "GRAY_500" : "PRIMARY"}
+                  size="FONT_XS"
+                  weight="WEIGHT_MEDIUM"
+                >
                   {options.title}
                 </Text>
               </CustomDrawerItem>

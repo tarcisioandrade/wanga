@@ -21,6 +21,7 @@ type StackProps = {
   my?: number;
   px?: number;
   py?: number;
+  pl?: number;
   height?: number;
 };
 
@@ -106,6 +107,12 @@ export const Stack = styled.View<StackProps>`
     css`
       padding-top: ${pvs(props.py)};
       padding-bottom: ${pvs(props.py)};
+    `}
+
+    ${(props) =>
+    props.pl &&
+    css`
+      padding-left: ${phs(props.pl)};
     `}
 
     ${(props) =>

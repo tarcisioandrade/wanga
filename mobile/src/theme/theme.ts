@@ -26,7 +26,7 @@ const lightTheme = {
   MENU_ITEM_COLOR: "#185DCF",
   TAB_ITEM_COLOR: "#FFFFFF",
   CHAPTER_READ: "#e0e0e0",
-  SEKELETON_COLOR: "#F2F2F2",
+  SKELETON_COLOR: "#F2F2F2",
 
   // Font
   FONT_4XS: pms(11),
@@ -53,7 +53,7 @@ const darkTheme = {
 
   MENU_ITEM_COLOR: "#FFFFFF",
   TAB_ITEM_COLOR: "#3F3F3F",
-  SEKELETON_COLOR: "#3F3F3F",
+  SKELETON_COLOR: "#3F3F3F",
   CHAPTER_READ: "#3F3F3F",
 
   BG_COLOR: "#2A2A2A",
