@@ -10,7 +10,8 @@ import Release from "src/screens/Release";
 import About from "src/screens/About";
 import Settings from "src/screens/Settings";
 
-const { Navigator, Screen } = createNativeStackNavigator<RootStackParamList>();
+const { Navigator, Screen, Group } =
+  createNativeStackNavigator<RootStackParamList>();
 
 const HomeStackNavigator = () => {
   return (
@@ -27,12 +28,10 @@ const HomeStackNavigator = () => {
       <Screen name="mostReadPeriod" component={MostReadPeriod} />
       <Screen name="mangaReader" component={MangaReader} />
       <Screen name="release" component={Release} />
-      <Screen name="about" component={About} options={{ animation: "none" }} />
-      <Screen
-        name="settings"
-        component={Settings}
-        options={{ animation: "none" }}
-      />
+      <Group screenOptions={{ animation: "none" }}>
+        <Screen name="about" component={About} />
+        <Screen name="settings" component={Settings} />
+      </Group>
     </Navigator>
   );
 };
