@@ -1,18 +1,19 @@
 import { PressableProps, Pressable } from "react-native";
 import React, { ReactNode } from "react";
 import * as S from "./styled";
-import { DefaultTheme } from "styled-components";
 
 type Props = PressableProps & {
   children: ReactNode;
   innerSpace?: number;
   bgPressed?: string;
+  radius?: number;
 };
 
 const CustomPressable = ({
   children,
   innerSpace,
   bgPressed,
+  radius,
   ...props
 }: Props) => {
   return (
@@ -30,6 +31,7 @@ const CustomPressable = ({
           innerSpace={innerSpace}
           pressed={pressed}
           bgPressed={bgPressed}
+          radius={radius}
         >
           {children}
         </S.PressableWrapper>

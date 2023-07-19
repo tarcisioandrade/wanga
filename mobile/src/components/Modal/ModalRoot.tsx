@@ -20,10 +20,10 @@ const ModalRoot = ({ children, isOpen, onClose, ...props }: Props) => {
 
   if (!isOpen) return null;
   return (
-    <S.ModalWrapper onTouchEnd={() => console.log("first")}>
+    <S.ModalWrapper>
       <ModalRN
         transparent
-        animationType="fade"
+        animationType="none"
         visible={isOpen}
         onRequestClose={onClose}
         {...props}

@@ -1,9 +1,5 @@
 import { Pressable } from "react-native";
 import React from "react";
-import {
-  DrawerContentComponentProps,
-  useDrawerProgress,
-} from "@react-navigation/drawer";
 import HomeIcon from "assets/svg-icon/home.svg";
 import FavoritesIcon from "assets/svg-icon/favorites.svg";
 import HistoricIcon from "assets/svg-icon/historic.svg";
@@ -12,17 +8,6 @@ import MoreIcon from "assets/svg-icon/more-icon.svg";
 import Logo from "assets/logo.svg";
 import { SvgProps } from "react-native-svg";
 import Animated from "react-native-reanimated";
-import {
-  DrawerAvatar,
-  DrawerContainer,
-  DrawerHeaderContainer,
-  DrawerHeaderFlex,
-  DrawerItemContainer,
-  CustomDrawerItem,
-  LinkToLogin,
-  NoAuthContainer,
-  UserLabel,
-} from "./styled";
 import { Container } from "../Layout";
 import { hs, phs, pvs, vs } from "src/utils/metrics";
 import Icon from "../Icon";
@@ -30,6 +15,13 @@ import { useTheme } from "styled-components/native";
 import { Text } from "../Text";
 import CustomPressable from "../CustomPressable";
 import { useThemeMode } from "src/hooks/useThemeMode";
+import { useDisclose } from "src/hooks/useDisclose";
+import * as S from "./styled";
+import ModalOptions from "../ModalOptions";
+import {
+  DrawerContentComponentProps,
+  useDrawerProgress,
+} from "@react-navigation/drawer";
 
 type IconAndLabelMappings = {
   [key: string]: { icon: React.FC<SvgProps> };
@@ -54,28 +46,31 @@ const CustomDrawer = (props: DrawerContentComponentProps) => {
   const { theme: themeMode } = useThemeMode();
   const theme = useTheme();
   const progress = useDrawerProgress();
-  const user = false;
+  const { state, open, close } = useDisclose(false);
+  const user = true;
+
   // @ts-expect-error
   const translateX = Animated.interpolateNode(progress, {
     inputRange: [0, 1],
     outputRange: [-100, 0],
   });
+
   return (
-    <DrawerContainer style={{ transform: [{ translateX }] }}>
+    <S.DrawerContainer style={{ transform: [{ translateX }] }}>
       <Container bg="SECONDARY">
-        <DrawerHeaderContainer>
-          <DrawerHeaderFlex>
+        <S.DrawerHeaderContainer>
+          <S.DrawerHeaderFlex>
             {user ? (
-              <DrawerAvatar>
+              <S.DrawerAvatar>
                 <Text size="FONT_LG" color="WHITE" weight="WEIGHT_SEMIBOLD">
                   W
                 </Text>
-              </DrawerAvatar>
+              </S.DrawerAvatar>
             ) : (
               <Logo width={hs(40)} height={vs(40)} />
             )}
 
-            <CustomPressable>
+            <CustomPressable onPress={open}>
               <Icon
                 type="fill"
                 icon={MoreIcon}
@@ -83,29 +78,29 @@ const CustomDrawer = (props: DrawerContentComponentProps) => {
                 height={vs(24)}
               />
             </CustomPressable>
-          </DrawerHeaderFlex>
+          </S.DrawerHeaderFlex>
           {user ? (
-            <UserLabel>Woltz-senpai</UserLabel>
+            <S.UserLabel>Woltz-senpai</S.UserLabel>
           ) : (
-            <NoAuthContainer>
+            <S.NoAuthContainer>
               <Text color="GRAY_600" size="FONT_XS" weight="WEIGHT_MEDIUM">
-                Você não está logado.{" "}
+                Você não está logado.
               </Text>
               <Pressable>
-                <LinkToLogin>Login</LinkToLogin>
+                <S.LinkToLogin>Login</S.LinkToLogin>
               </Pressable>
-            </NoAuthContainer>
+            </S.NoAuthContainer>
           )}
-        </DrawerHeaderContainer>
+        </S.DrawerHeaderContainer>
       </Container>
       <Container>
-        <DrawerItemContainer>
+        <S.DrawerItemContainer>
           {props.state.routes.map(({ name, key }, index) => {
             const { options } = props.descriptors[key];
             const isFocused = props.state.index === index;
             const IconDrawer = iconAndLabelMappings[name].icon;
             return (
-              <CustomDrawerItem
+              <S.CustomDrawerItem
                 key={key}
                 active={isFocused}
                 onPress={() => props.navigation.navigate(name)}
@@ -124,12 +119,15 @@ const CustomDrawer = (props: DrawerContentComponentProps) => {
                 >
                   {options.title}
                 </Text>
-              </CustomDrawerItem>
+              </S.CustomDrawerItem>
             );
           })}
-        </DrawerItemContainer>
+        </S.DrawerItemContainer>
       </Container>
-    </DrawerContainer>
+
+      {/* Modal More  */}
+      <ModalOptions isOpen={state} onClose={close} />
+    </S.DrawerContainer>
   );
 };
 
