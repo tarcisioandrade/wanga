@@ -14,7 +14,7 @@ import Icon from "../Icon";
 import { useTheme } from "styled-components/native";
 import { Text } from "../Text";
 import CustomPressable from "../CustomPressable";
-import { useThemeMode } from "src/hooks/useThemeMode";
+import { useThemeMode } from "src/contexts/ThemeContext";
 import { useDisclose } from "src/hooks/useDisclose";
 import * as S from "./styled";
 import ModalOptions from "../ModalOptions";
