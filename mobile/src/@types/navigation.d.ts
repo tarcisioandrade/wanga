@@ -5,6 +5,8 @@ export type RootStackParamList = {
   home: undefined;
   search: undefined;
   downloads: undefined;
+  about: undefined;
+  settings: undefined;
   manga: {
     id: number;
   };

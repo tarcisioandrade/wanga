@@ -17,6 +17,7 @@ import {
   Inter_800ExtraBold,
 } from "@expo-google-fonts/inter";
 import { toastConfig } from "src/components/CustomToast";
+import { useConfirmExit } from "src/hooks/useConfirmExit";
 
 export default function App() {
   // const [fontsLoaded] = useFonts({
@@ -34,15 +35,20 @@ export default function App() {
   });
 
   const { theme } = useThemeMode();
+
   const statusStyle = theme === "dark" ? "light" : "dark";
+  const themeStyle = theme === "dark" ? darkTheme : lightTheme;
+
   const queryClient = new QueryClient();
+
   useAppStateChange();
+  useConfirmExit();
 
   if (!fontsLoaded) return <Text>Loading</Text>;
   return (
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={themeStyle}>
       <QueryClientProvider client={queryClient}>
-        <StatusBar style={"dark"} />
+        <StatusBar style={statusStyle} />
         <Routes />
         <Toast config={toastConfig} />
       </QueryClientProvider>
