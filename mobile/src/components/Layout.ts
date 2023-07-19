@@ -63,12 +63,21 @@ export const ScrollContainer = styled.ScrollView.attrs({
 
 export const Stack = styled.View<StackProps>`
   flex-direction: ${(props) => (props.direction ? props.direction : "column")};
-  align-items: ${(props) =>
-    props.align_items ? props.align_items : "flex-start"};
-  justify-content: ${(props) =>
-    props.justify_content ? props.justify_content : "flex-start"};
   gap: ${(props) => (props.gap ? props.gap + "px" : 0)};
   padding-bottom: ${(props) => (props.pb ? pvs(props.pb) : 0)};
+
+  ${(props) =>
+    props.justify_content &&
+    css`
+      justify-content: ${props.justify_content};
+    `}
+
+  ${(props) =>
+    props.align_items &&
+    css`
+      align-items: ${props.align_items};
+    `}
+
   ${(props) =>
     props.wrap &&
     css`
