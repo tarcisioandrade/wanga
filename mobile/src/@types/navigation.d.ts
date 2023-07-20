@@ -1,10 +1,12 @@
 import { DrawerScreenProps } from "@react-navigation/drawer";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { Manga } from "./manga";
 
 export type RootStackParamList = {
   home: undefined;
   search: undefined;
   downloads: undefined;
+  historic: undefined;
   about: undefined;
   settings: undefined;
   manga: {
@@ -15,7 +17,7 @@ export type RootStackParamList = {
   };
   mangaReader: {
     id_release: number;
-    id_manga?: number;
+    manga?: Manga | undefined;
   };
   release: {
     type: string;

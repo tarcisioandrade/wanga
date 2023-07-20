@@ -1,46 +1,49 @@
+import { PressableProps } from "react-native";
 import React from "react";
-import { DownloadHistoric } from "src/hooks/useDownload";
-import * as S from "./styled";
+import { ReadHistoric } from "src/hooks/useReadHistoric";
 import { Image } from "src/components/Image";
 import { Stack } from "src/components/Layout";
 import { Text } from "src/components/Text";
+import { formattDatePassed } from "src/utils/formatDate";
 import Icon from "src/components/Icon";
 import ArrowRight from "assets/svg-icon/arrow-right-iconly.svg";
-import { PressableProps, View } from "react-native";
 import Checkbox from "expo-checkbox";
 import { useTheme } from "styled-components";
+import {
+  DownloadItemContainer,
+  IconWrapper,
+} from "src/screens/downloads/components/DowloadItem/styled";
 
 type Props = PressableProps & {
-  downloadInfo: DownloadHistoric;
+  historic: ReadHistoric;
   navigate: (id_manga: number) => void;
   handleDeleteItems: (id: string) => void;
   deleteMode: boolean;
   checked: boolean;
 };
 
-const DownloadItem = ({
-  downloadInfo,
+const HistoricItem = ({
+  historic,
   navigate,
   handleDeleteItems,
   deleteMode,
   checked,
   ...props
 }: Props) => {
-  const imageURI = downloadInfo.image
-    ? { uri: downloadInfo.image }
+  const theme = useTheme();
+  const imageURI = historic.image
+    ? { uri: historic.image }
     : require("assets/images/no-asset.jpg");
 
-  const date = new Date(downloadInfo.downloadDate).toLocaleDateString("pt-BR");
-  const theme = useTheme();
-
   const handleOnPressFunction = deleteMode
-    ? () => handleDeleteItems(downloadInfo.id)
-    : () => navigate(downloadInfo.id_manga);
+    ? () => handleDeleteItems(historic.id)
+    : () => navigate(Number(historic.id));
 
+  const time = `Há ${formattDatePassed(historic.last_read_time)}`;
   return (
-    <S.DownloadItemContainer
+    <DownloadItemContainer
       onPress={handleOnPressFunction}
-      onLongPress={() => handleDeleteItems(downloadInfo.id)}
+      onLongPress={() => handleDeleteItems(historic.id)}
       {...props}
     >
       <Image
@@ -50,30 +53,31 @@ const DownloadItem = ({
         radius={4}
         resizeMode="cover"
       />
+
       <Stack flex={1} gap={10} style={{ alignSelf: "flex-start" }}>
         <Text numberOfLines={2} weight="WEIGHT_MEDIUM">
-          {downloadInfo.fileName}
+          {historic.name}
         </Text>
         <Text color="GRAY_600" size="FONT_2XS">
-          {date}
+          Cápitulo: {historic.last_chapter_read}
         </Text>
-        <Text color="GRAY_600" size="FONT_4XS">
-          {downloadInfo.size}
+        <Text color="WARNING" weight="WEIGHT_BOLD" size="FONT_4XS">
+          {time}
         </Text>
       </Stack>
-      <S.IconWrapper>
+      <IconWrapper>
         {deleteMode ? (
           <Checkbox
             value={checked}
             color={theme.PRIMARY}
-            onValueChange={() => handleDeleteItems(downloadInfo.id)}
+            onValueChange={() => handleDeleteItems(historic.id)}
           />
         ) : (
           <Icon icon={ArrowRight} type="stroke" color={theme.GRAY_600} />
         )}
-      </S.IconWrapper>
-    </S.DownloadItemContainer>
+      </IconWrapper>
+    </DownloadItemContainer>
   );
 };
 
-export default DownloadItem;
+export default HistoricItem;

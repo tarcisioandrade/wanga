@@ -12,7 +12,7 @@ type Props = {
   selectAllAction: () => void;
 };
 
-const DownloadHeader = ({
+const DeleteHeader = ({
   cancelAction,
   deleteAction,
   selectAllAction,
@@ -42,4 +42,4 @@ const DownloadHeader = ({
   );
 };
 
-export default DownloadHeader;
+export default DeleteHeader;

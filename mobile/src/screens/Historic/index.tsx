@@ -1,79 +1,31 @@
-import React, { useState, useCallback } from "react";
-import { useFocusEffect, useNavigation } from "@react-navigation/native";
-import Header from "src/components/Header";
+import React, { useState, useCallback, useEffect } from "react";
 import { Container, Layout } from "src/components/Layout";
-import { DownloadHistoric, useDownload } from "src/hooks/useDownload";
-import { FlatList } from "react-native-gesture-handler";
-import DownloadItem from "./components/DowloadItem";
+import Header from "src/components/Header";
+import { ReadHistoric, useReadHistoric } from "src/hooks/useReadHistoric";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import { FlatList, BackHandler } from "react-native";
 import Empty from "src/components/Empty";
-import DownloadHeader from "src/components/DeleteHeader";
+import HistoricItem from "./components/HistoricItem";
 import { vs } from "src/utils/metrics";
-import { BackHandler } from "react-native";
+import DownloadHeader from "src/components/DeleteHeader";
 
-const fakeHistoric: DownloadHistoric[] = [
-  {
-    id: "assnajshas",
-    downloadDate: new Date().toISOString(),
-    fileName: `teste - ${Math.random()}`,
-    id_manga: 45 + Math.random(),
-    image: "http://github.com/tarcisioandrade.png",
-    size: "45mb",
-  },
-  {
-    id: "assnas",
-    downloadDate: new Date().toISOString(),
-    fileName: `teste - ${Math.random()}`,
-    id_manga: 45 + Math.random(),
-    image: "http://github.com/tarcisioandrade.png",
-    size: "45mb",
-  },
-  {
-    id: "oie",
-    downloadDate: new Date().toISOString(),
-    fileName: `teste - ${Math.random()}`,
-    id_manga: 45 + Math.random(),
-    image: "http://github.com/tarcisioandrade.png",
-    size: "45mb",
-  },
-  {
-    id: "as34sdff",
-    downloadDate: new Date().toISOString(),
-    fileName: `teste - ${Math.random()}`,
-    id_manga: 45 + Math.random(),
-    image: "http://github.com/tarcisioandrade.png",
-    size: "45mb",
-  },
-  {
-    id: "assd54ffas",
-    downloadDate: new Date().toISOString(),
-    fileName: `teste - ${Math.random()}`,
-    id_manga: 45 + Math.random(),
-    image: "http://github.com/tarcisioandrade.png",
-    size: "45mb",
-  },
-];
-
-const Downloads = () => {
-  const [downloadHistoric, setDownloadHistoric] = useState<DownloadHistoric[]>(
-    []
-  );
-  const { getDownloadHistoric, updateDownloadHistoric } = useDownload();
+const Historic = () => {
+  const [historic, setHistoric] = useState<ReadHistoric[]>([]);
+  const { getReadHistoric, updateReadHistoric } = useReadHistoric();
   const [deleteList, setDeleteList] = useState<string[]>([]);
 
   const navigator = useNavigation();
   const deleteMode = deleteList.length > 0;
 
-  const fetchDownloadHistoric = async () => {
+  const fetchReadHistoric = async () => {
     try {
-      //TODO: Change in PROD
-      const downloads = await getDownloadHistoric();
-      // const downloads = fakeHistoric;
+      const currentHistoric = await getReadHistoric();
 
-      if (downloads) {
-        setDownloadHistoric(downloads.reverse());
+      if (currentHistoric) {
+        setHistoric(currentHistoric.reverse());
       }
     } catch (error) {
-      console.error("Erro ao buscar histórico de downloads:", error);
+      console.error("Erro ao buscar histórico:", error);
       throw error;
     }
   };
@@ -95,18 +47,18 @@ const Downloads = () => {
   };
 
   const onDeleteDownloadHistoy = async () => {
-    if (deleteList.length && downloadHistoric) {
-      const newHistoric = downloadHistoric.filter(
+    if (deleteList.length && historic) {
+      const newHistoric = historic.filter(
         (item) => !deleteList.includes(item.id)
       );
-      updateDownloadHistoric(newHistoric);
-      setDownloadHistoric(newHistoric);
+      updateReadHistoric(newHistoric);
+      setHistoric(newHistoric);
       cancelDeleteMode();
     }
   };
 
   const selectAllToDelete = () => {
-    const alreadySelected = downloadHistoric
+    const alreadySelected = historic
       .filter((item) => !deleteList.includes(item.id))
       .map((item) => item.id);
 
@@ -119,7 +71,7 @@ const Downloads = () => {
 
   useFocusEffect(
     useCallback(() => {
-      fetchDownloadHistoric();
+      fetchReadHistoric();
     }, [])
   );
 
@@ -155,23 +107,23 @@ const Downloads = () => {
         <Header menuShow logoShow searchShow />
       )}
       <Container mt={10}>
-        {!downloadHistoric.length ? (
+        {!historic?.length ? (
           <Empty />
         ) : (
           <FlatList
+            data={historic}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={{
               gap: 10,
               paddingBottom: vs(150),
             }}
             keyExtractor={(item) => item.id}
-            data={downloadHistoric}
             renderItem={({ item }) => {
               const checked = deleteList.includes(item.id);
 
               return (
-                <DownloadItem
-                  downloadInfo={item}
+                <HistoricItem
+                  historic={item}
                   deleteMode={deleteMode}
                   navigate={goToMangaPage}
                   handleDeleteItems={handleDeleteItems}
@@ -189,4 +141,4 @@ const Downloads = () => {
   );
 };
 
-export default Downloads;
+export default Historic;

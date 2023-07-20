@@ -24,8 +24,12 @@ export function delay<T>(t: number, v: T): Promise<T> {
   });
 }
 
+const DEV_MODE = true;
+
 export async function getReleases(page: number = 1, type?: string) {
-  // return delay<Release>(2000, release);
+  if (DEV_MODE) {
+    return delay<Release>(2000, release);
+  }
 
   const { data } = await mangaDBApi.get<Release>("/home/releases", {
     params: {
@@ -42,7 +46,9 @@ export async function getMostReadPeriod(
   period: string,
   type?: string
 ) {
-  // return delay<MostReadPeriod>(2000, most_read_period);
+  if (DEV_MODE) {
+    return delay<MostReadPeriod>(2000, most_read_period);
+  }
 
   const { data } = await mangaDBApi.get<MostReadPeriod>(
     "/home/most_read_period",
@@ -59,7 +65,9 @@ export async function getMostReadPeriod(
 }
 
 export async function getMostRead(page: number = 1, type?: string) {
-  // return delay<MostRead>(2000, most_read);
+  if (DEV_MODE) {
+    return delay<MostRead>(2000, most_read);
+  }
 
   const { data } = await mangaDBApi.get<MostRead>("/home/most_read", {
     params: {
@@ -92,7 +100,9 @@ export async function getSearch(searchValue: string) {
 }
 
 export async function getFeatured() {
-  // return delay<Featured>(2000, featured_data);
+  if (DEV_MODE) {
+    return delay<Featured>(2000, featured_data);
+  }
 
   const res = await mangaDBApi.get<Featured>("/home/getFeaturedSeries.json");
 

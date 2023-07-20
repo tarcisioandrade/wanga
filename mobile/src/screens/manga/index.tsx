@@ -68,10 +68,9 @@ const MangaScreen = ({ route }: RootStackScreenProps<"manga">) => {
             }}
             renderItem={({ item }) => (
               <ChapterList.Badge
-                number={item.number}
-                id={id}
+                chapter_number={item.number}
                 id_release={item.id_release}
-                mangaName={data?.manga.name}
+                manga={data?.manga}
               />
             )}
             ListHeaderComponent={() => (

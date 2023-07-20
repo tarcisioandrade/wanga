@@ -2,10 +2,10 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
 import { DrawerParamList } from "../@types/navigation";
 import Favorites from "../screens/Favorites";
-import Historic from "../screens/Historic";
 import CustomDrawer from "src/components/CustomDrawer";
 import HomeStackNavigator from "./HomeStackNavigator";
 import DownloadsStackNavigator from "./DownloadsStackNavigator";
+import HistoricStackNavigator from "./HistoricStackNavigator";
 
 const { Screen, Navigator } = createDrawerNavigator<DrawerParamList>();
 
@@ -43,7 +43,7 @@ const Routes = () => {
           options={{
             title: "Histórico",
           }}
-          component={Historic}
+          component={HistoricStackNavigator}
         />
         <Screen
           name="drawerDownloads"

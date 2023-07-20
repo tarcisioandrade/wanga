@@ -4,7 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { formatFileSizeInMB } from "src/utils/formatFileSizeInMB";
 import * as Crypto from "expo-crypto";
 
-export type DownloadHistory = {
+export type DownloadHistoric = {
   id: string;
   image: string | null;
   fileName: string;
@@ -16,7 +16,7 @@ export type DownloadHistory = {
 const EXTENSION_IMAGE_REGEXP = /\.(gif|jpe?g|tiff?|png|webp|bmp)$/i;
 
 export const useDownload = () => {
-  const saveDownloadInHistory = async (
+  const saveDownloadInHistoric = async (
     albumName: string,
     fileSize: number,
     id_manga: number,
@@ -25,7 +25,7 @@ export const useDownload = () => {
     const fileSizeToMB = formatFileSizeInMB(fileSize);
     const uuid = Crypto.randomUUID();
 
-    const downloadDetails: DownloadHistory = {
+    const downloadDetails: DownloadHistoric = {
       id: uuid,
       image: image ?? null,
       fileName: albumName,
@@ -34,24 +34,24 @@ export const useDownload = () => {
       size: `${fileSizeToMB}MB`,
     };
 
-    let existingHistory = await AsyncStorage.getItem("downloadHistory");
-    const history = existingHistory
-      ? (JSON.parse(existingHistory) as DownloadHistory[])
+    let existingHistoric = await AsyncStorage.getItem("downloadHistoric");
+    const history = existingHistoric
+      ? (JSON.parse(existingHistoric) as DownloadHistoric[])
       : [];
 
     history.push(downloadDetails);
 
-    AsyncStorage.setItem("downloadHistory", JSON.stringify(history));
+    AsyncStorage.setItem("downloadHistoric", JSON.stringify(history));
   };
 
-  const getDownloadHistory = async () => {
-    const history = await AsyncStorage.getItem("downloadHistory");
+  const getDownloadHistoric = async () => {
+    const history = await AsyncStorage.getItem("downloadHistoric");
 
-    return history ? (JSON.parse(history) as DownloadHistory[]) : null;
+    return history ? (JSON.parse(history) as DownloadHistoric[]) : null;
   };
 
-  const updateDownloadHistory = async (newValue: DownloadHistory[]) => {
-    await AsyncStorage.setItem("downloadHistory", JSON.stringify(newValue));
+  const updateDownloadHistoric = async (newValue: DownloadHistoric[]) => {
+    await AsyncStorage.setItem("downloadHistoric", JSON.stringify(newValue));
   };
 
   //TODO: Testar a criação de pasta no prebuild;
@@ -111,8 +111,8 @@ export const useDownload = () => {
 
   return {
     handleDownload,
-    saveDownloadInHistory,
-    getDownloadHistory,
-    updateDownloadHistory,
+    saveDownloadInHistoric,
+    getDownloadHistoric,
+    updateDownloadHistoric,
   };
 };

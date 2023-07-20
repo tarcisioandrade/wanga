@@ -3,32 +3,42 @@ import { ChapterBadgeBox, ChapterBadgeText } from "./styled";
 import { useNavigation } from "@react-navigation/native";
 import { getFavoriteChapters } from "src/utils/favoriteChapter";
 import { useFocusEffect } from "@react-navigation/native";
+import { Manga } from "src/@types/manga";
+import { ReadHistoric, useReadHistoric } from "src/hooks/useReadHistoric";
 
 export type ChapterListBadgeProps = {
-  mangaName: string | undefined;
-  read?: boolean;
-  lastRead?: boolean;
-  number: string;
+  manga: Manga | undefined;
+  chapter_number: string;
   id_release: number;
-  id: number;
 };
 
 const ChapterListBadge = ({
-  number,
+  chapter_number,
   id_release,
-  mangaName,
-  id
+  manga,
 }: ChapterListBadgeProps) => {
   const [lastRead, setLastRead] = useState(false);
   const [read, setRead] = useState(false);
-
+  const { setReadHistoric } = useReadHistoric();
   const navigator = useNavigation();
 
   const goToMangaReaderPage = () => {
     navigator.navigate("mangaReader", {
       id_release,
-      id_manga: id
+      manga,
     });
+
+    if (manga) {
+      const historyObject: ReadHistoric = {
+        id: manga.id_serie,
+        name: manga.name,
+        id_release,
+        last_chapter_read: chapter_number,
+        last_read_time: new Date().toISOString(),
+        image: manga.image,
+      };
+      setReadHistoric(historyObject);
+    }
   };
 
   const handleChaptersStatus = async () => {
@@ -36,18 +46,18 @@ const ChapterListBadge = ({
     setLastRead(false);
     setRead(false);
 
-    if (favorites && mangaName) {
-      const target = favorites.find((fav) => fav[mangaName]);
+    if (favorites && manga) {
+      const target = favorites.find((fav) => fav[manga.name]);
 
       if (target) {
-        const isLastRead = target[mangaName].reads.at(-1);
+        const isLastRead = target[manga.name].reads.at(-1);
 
         if (isLastRead === id_release) {
           setLastRead(true);
           return;
         }
 
-        const isRead = target[mangaName].reads.some(
+        const isRead = target[manga.name].reads.some(
           (read) => read === id_release
         );
         setRead(isRead);
@@ -68,7 +78,7 @@ const ChapterListBadge = ({
       lastRead={lastRead}
       onPress={goToMangaReaderPage}
     >
-      <ChapterBadgeText lastRead={lastRead}>{number}</ChapterBadgeText>
+      <ChapterBadgeText lastRead={lastRead}>{chapter_number}</ChapterBadgeText>
     </ChapterBadgeBox>
   );
 };

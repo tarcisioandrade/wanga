@@ -15,7 +15,7 @@ import Toast from "react-native-toast-message";
 import LoadingReader from "./components/LoadingReader";
 
 const MangaReader = ({ route }: RootStackScreenProps<"mangaReader">) => {
-  const { id_release, id_manga } = route.params;
+  const { id_release, manga } = route.params;
   const [chapter, setChapter] = useState(id_release);
   const { state, close, open } = useDisclose(true);
 
@@ -24,7 +24,7 @@ const MangaReader = ({ route }: RootStackScreenProps<"mangaReader">) => {
     queryFn: () => getPages(chapter),
   });
 
-  const { handleDownload, saveDownloadInHistory } = useDownload();
+  const { handleDownload, saveDownloadInHistoric } = useDownload();
 
   const images = data?.images.map(({ legacy }) => ({
     url: legacy,
@@ -55,9 +55,8 @@ const MangaReader = ({ route }: RootStackScreenProps<"mangaReader">) => {
   const downloadInit = async () => {
     const albumName = `${data?.name}-${data?.chapter_number}`;
     let fileSize = 0;
-    if (!images) return;
 
-    const imageToSave = images[3]?.url || images[2]?.url;
+    if (!images || !manga) return;
 
     const { status } = await MediaLibrary.requestPermissionsAsync();
     if (status === "granted") {
@@ -69,7 +68,12 @@ const MangaReader = ({ route }: RootStackScreenProps<"mangaReader">) => {
           return;
         }
       }
-      saveDownloadInHistory(albumName, fileSize, id_manga!, imageToSave);
+      saveDownloadInHistoric(
+        albumName,
+        fileSize,
+        Number(manga.id_serie),
+        manga.image
+      );
       Toast.show({
         type: "success",
         text1: "Download Efetuado!",
