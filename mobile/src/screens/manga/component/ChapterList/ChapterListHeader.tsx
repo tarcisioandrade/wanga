@@ -78,7 +78,7 @@ const ChapterListHeader = ({ manga, chapterError }: Props) => {
             {manga?.author}
           </Text>
 
-          <Stack flex={1}>
+          <Stack flex={1} align_items="flex-start">
             {lastChapterRead && (
               <LastReadButton onPress={goToLastReadChapterScreen}>
                 <Text size="FONT_3XS" color="WHITE" weight="WEIGHT_MEDIUM">
