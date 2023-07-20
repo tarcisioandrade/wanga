@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import React, { useState } from "react";
 import { ReleaseElement } from "src/@types/release";
 import { truncateString } from "src/utils/truncateString";
 import { Text } from "src/components/Text";
@@ -78,4 +78,4 @@ const ReleaseMangaCard = ({ data, size }: Props) => {
   );
 };
 
-export default memo(ReleaseMangaCard);
+export default ReleaseMangaCard;

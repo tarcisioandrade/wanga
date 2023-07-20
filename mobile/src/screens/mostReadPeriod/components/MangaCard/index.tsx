@@ -1,11 +1,6 @@
-import React, { memo } from "react";
-import {
-  MangaCardBadge,
-  MangaCardContainer,
-  MangaCardFooter,
-  MangaCardImage,
-} from "./styled";
-import { Text } from "../../../../components/Text";
+import React from "react";
+import * as S from "./styled";
+import { Text } from "src/components/Text";
 import { truncateString } from "src/utils/truncateString";
 import { useNavigation } from "@react-navigation/native";
 import { MostReadPeriodElement } from "src/@types/mostReadPeriod";
@@ -29,18 +24,18 @@ const MangaCard = ({ data, width, height }: Props) => {
   };
 
   return (
-    <MangaCardContainer
+    <S.MangaCardContainer
       onPress={() => goToMangaScreen(data.id_serie)}
       width={width}
       height={height}
     >
-      <MangaCardBadge>
+      <S.MangaCardBadge>
         <Text color="WHITE" size="FONT_XS" weight="WEIGHT_MEDIUM">
           {data.chapter_number}
         </Text>
-      </MangaCardBadge>
+      </S.MangaCardBadge>
 
-      <MangaCardImage
+      <S.MangaCardImage
         source={{
           uri: data.series_image,
         }}
@@ -48,13 +43,13 @@ const MangaCard = ({ data, width, height }: Props) => {
         alt={data.series_name}
       />
 
-      <MangaCardFooter>
+      <S.MangaCardFooter>
         <Text color="WHITE" size="FONT_4XS" weight="WEIGHT_SEMIBOLD">
           {truncateString(data.series_name, 16)}
         </Text>
-      </MangaCardFooter>
-    </MangaCardContainer>
+      </S.MangaCardFooter>
+    </S.MangaCardContainer>
   );
 };
 
-export default memo(MangaCard);
+export default MangaCard;

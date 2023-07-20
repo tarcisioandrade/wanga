@@ -2,7 +2,7 @@ import React, { ElementType } from "react";
 import * as S from "./styled";
 import Carousel from "react-native-reanimated-carousel";
 import { hs, vs } from "src/utils/metrics";
-import Skeleton from "../Skeleton";
+import CarouselSkeleton from "../CarouselSkeleton";
 import { Text } from "src/components/Text";
 import { Stack } from "src/components/Layout";
 import RefreshIcon from "assets/svg-icon/refresh.svg";
@@ -49,7 +49,7 @@ const CarouselWrapper = ({
           </CustomPressable>
         </Stack>
       ) : loading ? (
-        <Skeleton />
+        <CarouselSkeleton />
       ) : (
         <Carousel
           width={hs(125)}

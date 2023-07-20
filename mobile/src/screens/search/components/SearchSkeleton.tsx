@@ -1,7 +1,7 @@
 import React from "react";
 import { BadgesContainer, SearchInfoContainer } from "./styled";
-import { Skeleton } from "src/components/Skeleton";
 import { Stack } from "src/components/Layout";
+import Skeleton from "src/components/Skeleton";
 
 const SearchSkeleton = () => {
   return (

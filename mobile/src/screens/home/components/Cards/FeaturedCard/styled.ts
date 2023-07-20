@@ -49,14 +49,3 @@ export const FeaturedBoxInfo = styled.View`
   justify-content: center;
   gap: 4px;
 `;
-
-// TODO: Trocar o skeleton;
-
-export const FeaturedSkeleton = styled.View`
-  width: ${phs(350)};
-  height: ${pvs(229)};
-  background-color: #00000016;
-  border-radius: 8px;
-  justify-content: center;
-  align-items: center;
-`;

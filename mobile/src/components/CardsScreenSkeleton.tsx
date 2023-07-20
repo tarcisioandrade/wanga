@@ -1,6 +1,6 @@
 import React from "react";
-import { Skeleton } from "src/components/Skeleton";
 import { Stack } from "src/components/Layout";
+import Skeleton from "./Skeleton";
 
 const CardsScreenSkeleton = () => {
   return (
