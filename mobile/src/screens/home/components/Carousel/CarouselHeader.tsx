@@ -21,7 +21,12 @@ const CarouselHeader = ({ title, handleScreen }: CarouselHeaderProps) => {
             <Text size="FONT_4XS" color="GRAY_600" weight="WEIGHT_SEMIBOLD">
               Ver Tudo
             </Text>
-            <Icon icon={ArrowRightIconly} type="stroke" color="#969696" />
+            <Icon
+              icon={ArrowRightIconly}
+              type="stroke"
+              color="#969696"
+              size={18}
+            />
           </Stack>
         </CustomPressable>
       )}

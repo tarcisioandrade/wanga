@@ -54,8 +54,9 @@ const Settings = () => {
                   <Icon
                     icon={id === "dark" ? DarkModeIcon : LightModeIcon}
                     type="fill"
+                    size={22}
                   />
-                  <Text size="FONT_SM">{value}</Text>
+                  <Text size="FONT_2XS">{value}</Text>
                 </Stack>
                 <RadioButton
                   selected={themeMode === id}
@@ -63,7 +64,7 @@ const Settings = () => {
                   id={id}
                   onPress={handleTheme}
                   color={themeProps.TEXT_COLOR}
-                  size={20}
+                  size={16}
                 />
               </Stack>
             ))}

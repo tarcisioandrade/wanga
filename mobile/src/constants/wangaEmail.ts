@@ -1,1 +1,1 @@
-export const WANGA_EMAIL = "leldomeldo@gmail.com";
+export const WANGA_EMAIL = "wanga.reader@gmail.com";

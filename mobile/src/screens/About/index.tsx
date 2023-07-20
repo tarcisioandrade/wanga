@@ -64,6 +64,7 @@ const About = () => {
                   icon={ArrowRightLight}
                   type="stroke"
                   color={theme.GRAY_600}
+                  size={18}
                 />
               </S.AboutText>
             </S.AboutItem>
