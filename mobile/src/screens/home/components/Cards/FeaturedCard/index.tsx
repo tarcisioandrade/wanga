@@ -1,16 +1,11 @@
 import React, { memo } from "react";
-import { Text } from "src/components/Text";
-import { truncateString } from "src/utils/truncateString";
 import { FeaturedElement } from "src/@types/featured";
-import BooksIcon from "assets/svg-icon/books.svg";
 import { Stack } from "src/components/Layout";
-import {
-  FeaturedBoxInfo,
-  FeaturedContainer,
-  FeaturedHeader,
-  FeaturedImage,
-} from "./styled";
+import { FeaturedBoxInfo, FeaturedContainer, FeaturedImage } from "./styled";
 import { useNavigation } from "@react-navigation/native";
+import { Text } from "react-native";
+import { useTheme } from "styled-components";
+import { ms } from "src/utils/metrics";
 
 type Props = {
   data: FeaturedElement;
@@ -18,6 +13,7 @@ type Props = {
 
 const FeaturedCard = ({ data }: Props) => {
   const navigator = useNavigation();
+  const theme = useTheme();
 
   const goToMangaScreen = (id: number) => {
     navigator.navigate("manga", {
@@ -31,18 +27,34 @@ const FeaturedCard = ({ data }: Props) => {
       onPress={() => goToMangaScreen(data.id_serie)}
     >
       <FeaturedImage resizeMode="cover" source={{ uri: data.featured_image }} />
-      <FeaturedHeader>
-        <Text color="WHITE" size="FONT_4XS">
-          Destaque
-        </Text>
-      </FeaturedHeader>
       <FeaturedBoxInfo>
-        <Text color="WHITE" size="FONT_XS" weight="WEIGHT_MEDIUM">
-          {truncateString(data.series_name, 16)}
+        <Text
+          numberOfLines={2}
+          style={{
+            fontFamily: theme.FONT_FEATURED,
+            color: theme.ORANGE_500,
+            fontSize: ms(26),
+          }}
+        >
+          {data.series_name}
         </Text>
         <Stack direction="row" gap={4}>
-          <BooksIcon />
-          <Text color="WHITE" size="FONT_BASE" weight="WEIGHT_MEDIUM">
+          <Text
+            style={{
+              fontFamily: theme.FONT_FEATURED,
+              color: theme.ORANGE_500,
+              fontSize: ms(16),
+            }}
+          >
+            Cap
+          </Text>
+          <Text
+            style={{
+              fontFamily: theme.FONT_FEATURED,
+              color: theme.ORANGE_500,
+              fontSize: ms(16),
+            }}
+          >
             {data.chapter.number}
           </Text>
         </Stack>

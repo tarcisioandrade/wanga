@@ -14,14 +14,14 @@ const Parallax = ({ featured }: Props) => {
   return (
     <Stack justify_content="center" align_items="center">
       {!featured ? (
-        <Skeleton width={350} height={229} radius={8} />
+        <Skeleton width={350} height={219} radius={8} />
       ) : (
         <Carousel
           width={hs(350)}
           autoPlay
           autoPlayInterval={4000}
           loop
-          height={vs(228)}
+          height={vs(219)}
           style={{ width: "100%" }}
           data={featured}
           renderItem={({ item }) => <FeaturedCard data={item} />}
