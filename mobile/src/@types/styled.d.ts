@@ -1,5 +1,5 @@
 import "styled-components/native";
-import { lightTheme } from "../theme/theme";
+import { lightTheme } from "../theme";
 
 // and extend them!
 declare module "styled-components/native" {

@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import { ThemeProvider } from "styled-components/native";
 import { useThemeMode } from "src/contexts/ThemeContext";
-import { darkTheme, lightTheme } from "src/theme/theme";
+import { darkTheme, lightTheme } from "src/theme";
 import { StatusBar } from "expo-status-bar";
 //TODO: Trocar o expo google font dev para o do HankenGrotesk
 import {

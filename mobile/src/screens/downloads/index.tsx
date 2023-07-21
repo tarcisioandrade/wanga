@@ -152,7 +152,7 @@ const Downloads = () => {
           selectAllAction={selectAllToDelete}
         />
       ) : (
-        <Header menuShow logoShow searchShow />
+        <Header menuShow logoShow searchShow categoryShow />
       )}
       <Container mt={10}>
         {!downloadHistoric.length ? (

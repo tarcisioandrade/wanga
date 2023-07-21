@@ -42,7 +42,7 @@ const iconAndLabelMappings: IconAndLabelMappings = {
   },
 };
 
-const CustomDrawer = (props: DrawerContentComponentProps) => {
+const MenuDrawer = (props: DrawerContentComponentProps) => {
   const { theme: themeMode } = useThemeMode();
   const theme = useTheme();
   const progress = useDrawerProgress();
@@ -131,4 +131,4 @@ const CustomDrawer = (props: DrawerContentComponentProps) => {
   );
 };
 
-export default CustomDrawer;
+export default MenuDrawer;

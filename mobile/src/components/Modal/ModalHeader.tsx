@@ -14,7 +14,7 @@ const ModalHeader = ({ children, onClose }: Props) => {
     <S.ModalHeader>
       <Text>{children}</Text>
       <CustomPressable onPress={onClose}>
-        <Icon icon={CloseIcon} type="fill" />
+        <Icon icon={CloseIcon} type="fill" size={20} />
       </CustomPressable>
     </S.ModalHeader>
   );

@@ -1,6 +1,7 @@
 import { View, Text, Button, Linking, ToastAndroid } from "react-native";
 import React from "react";
 import { Layout } from "src/components/Layout";
+import Header from "src/components/Header";
 
 const Favorites = () => {
   const showToastWithGravityAndOffset = () => {
@@ -14,6 +15,7 @@ const Favorites = () => {
   };
   return (
     <Layout>
+      <Header menuShow logoShow searchShow categoryShow />
       <Text>Favorites</Text>
       <Button title="Email" onPress={() => showToastWithGravityAndOffset()} />
     </Layout>

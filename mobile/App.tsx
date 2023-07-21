@@ -1,5 +1,5 @@
 import "react-native-gesture-handler";
-import Routes from "./src/routes/Navigator";
+import Routes from "./src/routes/Routes";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { useAppStateChange } from "./src/hooks/useAppStateChange";
 import Toast from "react-native-toast-message";

@@ -31,6 +31,10 @@ export type DrawerParamList = {
   drawerDownloads: undefined;
 };
 
+export type CategoryDrawerParamList = {
+  drawerMenu: undefined;
+}
+
 declare global {
   namespace ReactNavigation {
     interface RootParamList extends RootStackParamList {}

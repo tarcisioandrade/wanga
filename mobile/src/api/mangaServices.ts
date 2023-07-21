@@ -8,15 +8,18 @@ import fakeDataMostReadPeriod from "fakeData/most_read_period.json";
 import fakeDataMostRead from "fakeData/most_read.json";
 import fakeDataSearch from "fakeData/search.json";
 import fakeDataFeatured from "fakeData/featured.json";
+import fakeCategoryList from "fakeData/categories_list.json";
 
 import { Search } from "../@types/search";
 import { Featured } from "src/@types/featured";
+import { CategoryBody } from "src/@types/category";
 
 const release = fakeDataRelease as Release;
 const most_read_period = fakeDataMostReadPeriod as MostReadPeriod;
 const most_read = fakeDataMostRead as MostRead;
 const search_data = fakeDataSearch as Search;
 const featured_data = fakeDataFeatured as Featured;
+const categories_list_data = fakeCategoryList as CategoryBody;
 
 export function delay<T>(t: number, v: T): Promise<T> {
   return new Promise(function (resolve) {
@@ -24,7 +27,7 @@ export function delay<T>(t: number, v: T): Promise<T> {
   });
 }
 
-const DEV_MODE = false;
+const DEV_MODE = true;
 
 export async function getReleases(page: number = 1, type?: string) {
   if (DEV_MODE) {
@@ -105,6 +108,18 @@ export async function getFeatured() {
   }
 
   const res = await mangaDBApi.get<Featured>("/home/getFeaturedSeries.json");
+
+  return res.data;
+}
+
+export async function getCategoriesList() {
+  if (DEV_MODE) {
+    return delay<CategoryBody>(2000, categories_list_data);
+  }
+
+  const res = await mangaDBApi.get<CategoryBody>(
+    "/categories/categories_list.json"
+  );
 
   return res.data;
 }

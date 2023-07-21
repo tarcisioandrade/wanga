@@ -1,15 +1,11 @@
 import React from "react";
-import {
-  HeaderContainer,
-  InputSearch,
-  LogoContainer,
-  LogoText,
-} from "./styled";
+import * as S from "./styled";
 import Hamburguer from "assets/svg-icon/hamburger.svg";
 import SearchIcon from "assets/svg-icon/search.svg";
 import ArrowLeft from "assets/svg-icon/arrow-left.svg";
+import Category from "assets/svg-icon/category.svg";
 import Logo from "assets/logo.svg";
-import { Container, Layout, Stack } from "../Layout";
+import { Container, Stack } from "../Layout";
 import { vs, hs } from "src/utils/metrics";
 import Icon from "../Icon";
 import { useNavigation, DrawerActions } from "@react-navigation/native";
@@ -22,6 +18,7 @@ type Props = {
   menuShow?: boolean;
   searchShow?: boolean;
   logoShow?: boolean;
+  categoryShow?: boolean;
   title?: string;
   value?: string;
   onChangeValue?: (value: string) => void;
@@ -32,6 +29,7 @@ const Header = ({
   menuShow,
   searchShow,
   logoShow,
+  categoryShow,
   title,
   onChangeValue,
   value,
@@ -40,7 +38,7 @@ const Header = ({
 
   return (
     <Container bg="BG_COLOR">
-      <HeaderContainer>
+      <S.HeaderContainer>
         {backShow && (
           <Stack direction="row" gap={16} align_items="center">
             <CustomPressable onPress={navigator.goBack}>
@@ -63,7 +61,7 @@ const Header = ({
         )}
 
         {inputShow && (
-          <InputSearch
+          <S.InputSearch
             onChangeText={onChangeValue}
             value={value}
             autoFocus={inputShow}
@@ -71,18 +69,33 @@ const Header = ({
         )}
 
         {logoShow && (
-          <LogoContainer>
+          <S.LogoContainer>
             <Logo width={hs(24)} height={vs(24)} />
-            <LogoText>Wanga</LogoText>
-          </LogoContainer>
+            <S.LogoText>Wanga</S.LogoText>
+          </S.LogoContainer>
         )}
 
         {searchShow && (
-          <CustomPressable onPress={() => navigator.navigate("search")}>
-            <Icon type="stroke" icon={SearchIcon} />
-          </CustomPressable>
+          <Stack direction="row" gap={16} align_items="center">
+            <CustomPressable onPress={() => navigator.navigate("search")}>
+              <Icon type="stroke" icon={SearchIcon} />
+            </CustomPressable>
+
+            {categoryShow && (
+              <CustomPressable
+                onPress={() =>
+                  navigator
+                    .getParent()
+                    ?.getParent()
+                    ?.dispatch(DrawerActions.openDrawer)
+                }
+              >
+                <Icon type="stroke" icon={Category} />
+              </CustomPressable>
+            )}
+          </Stack>
         )}
-      </HeaderContainer>
+      </S.HeaderContainer>
     </Container>
   );
 };

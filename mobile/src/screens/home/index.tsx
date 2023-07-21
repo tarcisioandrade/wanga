@@ -68,7 +68,7 @@ const Home = ({ navigation }: RootStackScreenProps<"home">) => {
 
   return (
     <Layout>
-      <Header menuShow searchShow logoShow />
+      <Header menuShow logoShow searchShow categoryShow />
       <ScrollContainer
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
