@@ -30,9 +30,10 @@ export const ChapterCount = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: 6px;
   margin-top: 4px;
   width: ${phs(120)};
+  height: ${pvs(30)};
 `;
 
 export const LastReadButton = styled.TouchableOpacity.attrs({

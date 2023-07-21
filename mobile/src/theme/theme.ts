@@ -7,6 +7,7 @@ const lightTheme = {
   WARNING: "#FDBD31",
   RED_500: "#F24E1E",
   WHITE: "#FFFFFF",
+  ORANGE_500: "#FFA500",
 
   BLACK: "#000",
   BLACK_TRANSPARENT: "rgba(0, 0, 0, 0.5)",
@@ -38,12 +39,12 @@ const lightTheme = {
   FONT_MD: pms(17),
   FONT_LG: pms(18),
 
-  FONT_FAMILY: "Inter_400Regular",
-
-  WEIGHT_MEDIUM: "Inter_500Medium",
-  WEIGHT_SEMIBOLD: "Inter_600SemiBold",
-  WEIGHT_BOLD: "Inter_700Bold",
-  WEIGHT_EXTRABOLD: "Inter_800ExtraBold",
+  FONT_FAMILY: "HankenGrotesk_400Regular",
+  FONT_FEATURED: "BungeeSpice_400Regular",
+  WEIGHT_MEDIUM: "HankenGrotesk_500Medium",
+  WEIGHT_SEMIBOLD: "HankenGrotesk_600SemiBold",
+  WEIGHT_BOLD: "HankenGrotesk_700Bold",
+  WEIGHT_EXTRABOLD: "HankenGrotesk_800ExtraBold",
 };
 
 const darkTheme = {

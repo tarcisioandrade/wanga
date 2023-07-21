@@ -3,14 +3,16 @@ import { ThemeProvider } from "styled-components/native";
 import { useThemeMode } from "src/contexts/ThemeContext";
 import { darkTheme, lightTheme } from "src/theme/theme";
 import { StatusBar } from "expo-status-bar";
+//TODO: Trocar o expo google font dev para o do HankenGrotesk
 import {
   useFonts,
-  Inter_400Regular,
-  Inter_500Medium,
-  Inter_600SemiBold,
-  Inter_700Bold,
-  Inter_800ExtraBold,
-} from "@expo-google-fonts/inter";
+  HankenGrotesk_400Regular,
+  HankenGrotesk_600SemiBold,
+  BungeeSpice_400Regular,
+  HankenGrotesk_500Medium,
+  HankenGrotesk_700Bold,
+  HankenGrotesk_800ExtraBold,
+} from "@expo-google-fonts/dev";
 import LoadingScreen from "src/screens/LoadingScreen";
 
 type Props = {
@@ -18,18 +20,13 @@ type Props = {
 };
 
 const GlobalConfigs = ({ children }: Props) => {
-  // const [fontsLoaded] = useFonts({
-  //   "SF-Pro-Display-Regular": require("./assets/fonts/SFPRODISPLAYREGULAR.otf"),
-  //   "SF-Pro-Display-Medium": require("./assets/fonts/SFPRODISPLAYMEDIUM.otf"),
-  //   "SF-Pro-Display-SemiBold": require("./assets/fonts/SF-Pro-Display-Semibold.otf"),
-  //   "SF-Pro-Display-Bold": require("./assets/fonts/SFPRODISPLAYBOLD.otf"),
-  // });
   let [fontsLoaded] = useFonts({
-    Inter_400Regular,
-    Inter_500Medium,
-    Inter_600SemiBold,
-    Inter_700Bold,
-    Inter_800ExtraBold,
+    HankenGrotesk_400Regular,
+    HankenGrotesk_500Medium,
+    HankenGrotesk_600SemiBold,
+    HankenGrotesk_700Bold,
+    HankenGrotesk_800ExtraBold,
+    BungeeSpice_400Regular,
   });
   const { theme, themeLoaded } = useThemeMode();
 

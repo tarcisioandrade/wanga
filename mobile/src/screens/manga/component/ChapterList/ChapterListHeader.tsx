@@ -14,6 +14,7 @@ import BooksIcon from "assets/svg-icon/books.svg";
 import { getFavoriteChapters } from "src/utils/favoriteChapter";
 import { useNavigation } from "@react-navigation/native";
 import { useFocusEffect } from "@react-navigation/native";
+import { useTheme } from "styled-components";
 
 type Props = {
   manga: Manga | undefined;
@@ -23,6 +24,7 @@ type Props = {
 const ChapterListHeader = ({ manga, chapterError }: Props) => {
   const [showAllDescription, setShowAllDescription] = useState(false);
   const [lastChapterRead, setLastChapterRead] = useState<number | null>(null);
+  const theme = useTheme();
 
   const navigator = useNavigation();
 
@@ -90,7 +92,7 @@ const ChapterListHeader = ({ manga, chapterError }: Props) => {
         </Stack>
       </Stack>
       <ChapterCount>
-        <Icon type="fill" icon={BooksIcon} />
+        <Icon type="fill" icon={BooksIcon} color={theme.WHITE} size={16} />
         <Text color="WHITE" weight="WEIGHT_EXTRABOLD" size="FONT_3XS">
           {manga?.chapters_count} Capítulos
         </Text>
