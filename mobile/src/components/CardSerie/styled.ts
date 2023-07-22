@@ -1,7 +1,7 @@
 import styled from "styled-components/native";
 import { phs, pvs } from "src/utils/metrics";
 
-export const SearchWrapper = styled.TouchableOpacity.attrs({
+export const SerieWrapper = styled.TouchableOpacity.attrs({
   activeOpacity: 0.9,
 })`
   background-color: ${(props) => props.theme.SECONDARY};
@@ -12,12 +12,12 @@ export const SearchWrapper = styled.TouchableOpacity.attrs({
   border-bottom-color: ${(props) => props.theme.PRIMARY};
 `;
 
-export const SearchInfoContainer = styled.View`
+export const SerieInfoContainer = styled.View`
   gap: 5px;
-  max-width: 250px;
+  max-width: ${phs(250)};
 `;
 
-export const SearchImage = styled.Image`
+export const SerieImage = styled.Image`
   width: ${phs(80)};
   height: ${pvs(118)};
   border-radius: 8px;
@@ -25,7 +25,7 @@ export const SearchImage = styled.Image`
   flex: 1;
 `;
 
-export const SearchTitle = styled.Text`
+export const SerieTitle = styled.Text`
   font-size: ${(props) => props.theme.FONT_BASE};
   font-family: ${(props) => props.theme.WEIGHT_SEMIBOLD};
   max-width: ${phs(180)};
@@ -72,6 +72,17 @@ export const BadgeStatus = styled.View`
   border-bottom-left-radius: 8px;
 `;
 
-export const SearchImageContainer = styled.View`
-  position: relative;
+export const ChapterBox = styled.View`
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  background-color: ${(props) => props.theme.PRIMARY};
+  border-radius: 8px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  min-width: ${phs(35)};
+  padding: 0 ${phs(4)};
+  height: ${pvs(25)};
+  gap: 2px;
 `;

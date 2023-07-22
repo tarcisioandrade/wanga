@@ -33,7 +33,12 @@ const CategoryDrawer = ({ navigation }: DrawerContentComponentProps) => {
     outputRange: [0, 0],
   });
 
-  const goToCategoryPage = (id_category: number) => {};
+  const goToCategoryPage = (id_category: number, name: string) => {
+    navigation.navigate("category", {
+      id_category,
+      name,
+    });
+  };
 
   // TODO: Tratar Error
   if (error) {
@@ -70,7 +75,7 @@ const CategoryDrawer = ({ navigation }: DrawerContentComponentProps) => {
 
 type CategoryItemProps = {
   category: CategoryElement;
-  handlePress: (id: number) => void;
+  handlePress: (id: number, name: string) => void;
 };
 
 const CategoryItem = memo(({ category, handlePress }: CategoryItemProps) => {
@@ -78,7 +83,7 @@ const CategoryItem = memo(({ category, handlePress }: CategoryItemProps) => {
 
   return (
     <S.CategoryItem
-      onPress={() => handlePress(category.id_category)}
+      onPress={() => handlePress(category.id_category, category.name)}
       style={({ pressed }) => ({
         opacity: pressed ? 0.8 : 1,
       })}

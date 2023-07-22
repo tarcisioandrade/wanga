@@ -8,4 +8,5 @@ export const queryKeys = {
   chapters: "manga-chapters-key",
   pages: "pages-key",
   categories: "categories-key",
+  categoriesSeries: "categories-series-key",
 };

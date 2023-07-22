@@ -33,7 +33,7 @@ export const CarouselMangaCardFooter = styled.View`
   bottom: 0;
   left: 0;
   right: 0;
-  height: 21px;
+  height: ${pvs(21)};
   background-color: ${(props) => props.theme.BLACK_TRANSPARENT};
   padding-left: 8px;
   justify-content: center;
@@ -42,7 +42,7 @@ export const CarouselMangaCardFooter = styled.View`
 
 export const CarouselMangaCardBadge = styled.View`
   background-color: ${(props) => props.theme.PRIMARY};
-  padding: 3px 10px;
+  padding: ${pvs(3)} ${phs(10)};
   border-radius: 8px;
   align-self: flex-start;
   position: absolute;

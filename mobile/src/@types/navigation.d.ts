@@ -9,6 +9,10 @@ export type RootStackParamList = {
   historic: undefined;
   about: undefined;
   settings: undefined;
+  category: {
+    id_category: number;
+    name: string;
+  };
   manga: {
     id: number;
   };
@@ -33,7 +37,7 @@ export type DrawerParamList = {
 
 export type CategoryDrawerParamList = {
   drawerMenu: undefined;
-}
+};
 
 declare global {
   namespace ReactNavigation {

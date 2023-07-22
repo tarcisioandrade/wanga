@@ -5,7 +5,7 @@ import { FeaturedBoxInfo, FeaturedContainer, FeaturedImage } from "./styled";
 import { useNavigation } from "@react-navigation/native";
 import { Text } from "react-native";
 import { useTheme } from "styled-components";
-import { ms } from "src/utils/metrics";
+import { hs, ms } from "src/utils/metrics";
 
 type Props = {
   data: FeaturedElement;
@@ -34,6 +34,7 @@ const FeaturedCard = ({ data }: Props) => {
             fontFamily: theme.FONT_FEATURED,
             color: theme.ORANGE_500,
             fontSize: ms(26),
+            maxWidth: hs(300),
           }}
         >
           {data.series_name}

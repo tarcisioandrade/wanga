@@ -9,10 +9,12 @@ import fakeDataMostRead from "fakeData/most_read.json";
 import fakeDataSearch from "fakeData/search.json";
 import fakeDataFeatured from "fakeData/featured.json";
 import fakeCategoryList from "fakeData/categories_list.json";
+import fakeCategorySeries from "fakeData/categories_series_list.json";
 
 import { Search } from "../@types/search";
 import { Featured } from "src/@types/featured";
 import { CategoryBody } from "src/@types/category";
+import { CategorySeriesBody } from "src/@types/categorySerie";
 
 const release = fakeDataRelease as Release;
 const most_read_period = fakeDataMostReadPeriod as MostReadPeriod;
@@ -20,6 +22,8 @@ const most_read = fakeDataMostRead as MostRead;
 const search_data = fakeDataSearch as Search;
 const featured_data = fakeDataFeatured as Featured;
 const categories_list_data = fakeCategoryList as CategoryBody;
+// @ts-ignore
+const categories_series_data = fakeCategorySeries as CategorySeriesBody;
 
 export function delay<T>(t: number, v: T): Promise<T> {
   return new Promise(function (resolve) {
@@ -122,4 +126,31 @@ export async function getCategoriesList() {
   );
 
   return res.data;
+}
+
+export async function getCategoriesSeries(id_category: number, page: number) {
+  if (DEV_MODE) {
+    return delay<CategorySeriesBody>(2000, {
+      series: categories_series_data.series,
+      nextPage: page + 1,
+    });
+  }
+
+  const res = await mangaDBApi.get<CategorySeriesBody>(
+    `/categories/series_list.json?page=${page}`,
+    {
+      params: {
+        id_category,
+      },
+      headers: {
+        "x-requested-with": "XMLHttpRequest",
+        "content-type": "application/x-www-form-urlencoded",
+      },
+    }
+  );
+
+  return {
+    series: res.data.series,
+    nextPage: page + 1,
+  };
 }

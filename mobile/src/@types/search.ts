@@ -18,6 +18,7 @@ export interface Serie {
   cover_avif: string;
   cover_thumb_avif: string;
   link: string;
+  chapters?: number;
   is_complete: boolean;
 }
 

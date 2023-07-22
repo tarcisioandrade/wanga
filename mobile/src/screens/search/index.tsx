@@ -5,8 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import useDebounce from "src/hooks/useDebounce";
 import { queryKeys } from "src/constants/queryKeys";
 import { getSearch } from "src/api/mangaServices";
-import { SearchCardsContainer } from "./styled";
-import SearchCard from "./components/SearchCard";
+import CardSerie from "../../components/CardSerie";
 import SearchSkeleton from "./components/SearchSkeleton";
 import { Text } from "src/components/Text";
 
@@ -40,11 +39,11 @@ const Search = () => {
             <Text>Nenhum resultado encontrado.</Text>
           ) : null}
           {data && typeof data.series !== "boolean" ? (
-            <SearchCardsContainer>
+            <>
               {data?.series.map((serie) => (
-                <SearchCard mangaSearch={serie} key={serie.id_serie} />
+                <CardSerie serie={serie} key={serie.id_serie} />
               ))}
-            </SearchCardsContainer>
+            </>
           ) : null}
         </Container>
       </ScrollContainer>
