@@ -9,6 +9,7 @@ import MangaReader from "src/screens/mangaReader";
 import Release from "src/screens/Release";
 import About from "src/screens/About";
 import Settings from "src/screens/Settings";
+import Category from "src/screens/Category";
 
 const { Navigator, Screen, Group } =
   createNativeStackNavigator<RootStackParamList>();
@@ -32,6 +33,7 @@ const HomeStackNavigator = () => {
         <Screen name="about" component={About} />
         <Screen name="settings" component={Settings} />
       </Group>
+      <Screen name="category" component={Category} />
     </Navigator>
   );
 };
