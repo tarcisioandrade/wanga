@@ -37,7 +37,7 @@ const Header = ({
   const navigator = useNavigation();
 
   return (
-    <Container bg="BG_COLOR">
+    <Container bg="BG_COLOR" style={{ zIndex: 9999 }}>
       <S.HeaderContainer>
         {backShow && (
           <Stack direction="row" gap={16} align_items="center">

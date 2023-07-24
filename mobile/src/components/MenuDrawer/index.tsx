@@ -55,6 +55,10 @@ const MenuDrawer = (props: DrawerContentComponentProps) => {
     outputRange: [-100, 0],
   });
 
+  const goToLoginScreen = () => {
+    props.navigation.navigate("login");
+  };
+
   return (
     <S.DrawerContainer style={{ transform: [{ translateX }] }}>
       <Container bg="SECONDARY">
@@ -67,7 +71,9 @@ const MenuDrawer = (props: DrawerContentComponentProps) => {
                 </Text>
               </S.DrawerAvatar>
             ) : (
-              <Logo width={hs(40)} height={vs(40)} />
+              <Pressable onPress={goToLoginScreen}>
+                <Logo width={hs(40)} height={vs(40)} />
+              </Pressable>
             )}
 
             <CustomPressable onPress={open}>

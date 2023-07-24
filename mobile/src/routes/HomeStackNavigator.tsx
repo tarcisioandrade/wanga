@@ -10,6 +10,8 @@ import Release from "src/screens/Release";
 import About from "src/screens/About";
 import Settings from "src/screens/Settings";
 import Category from "src/screens/Category";
+import Login from "src/screens/Login";
+import Register from "src/screens/Register";
 
 const { Navigator, Screen, Group } =
   createNativeStackNavigator<RootStackParamList>();
@@ -29,11 +31,15 @@ const HomeStackNavigator = () => {
       <Screen name="mostReadPeriod" component={MostReadPeriod} />
       <Screen name="mangaReader" component={MangaReader} />
       <Screen name="release" component={Release} />
+      <Screen name="category" component={Category} />
       <Group screenOptions={{ animation: "none" }}>
         <Screen name="about" component={About} />
         <Screen name="settings" component={Settings} />
       </Group>
-      <Screen name="category" component={Category} />
+      <Group screenOptions={{ animation: "none" }}>
+        <Screen name="login" component={Login} />
+        <Screen name="register" component={Register} />
+      </Group>
     </Navigator>
   );
 };

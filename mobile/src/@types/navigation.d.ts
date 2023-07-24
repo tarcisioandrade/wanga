@@ -9,6 +9,8 @@ export type RootStackParamList = {
   historic: undefined;
   about: undefined;
   settings: undefined;
+  register: undefined;
+  login: undefined;
   category: {
     id_category: number;
     name: string;
