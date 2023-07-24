@@ -94,12 +94,12 @@ const CategoryItem = memo(({ category, handlePress }: CategoryItemProps) => {
         justify_content="center"
         gap={16}
       >
-        <Text size="FONT_XS" style={{ width: 90 }}>
+        <Text size="FONT_3XS" style={{ width: 90 }}>
           {category.name}
         </Text>
         <S.AmountBox>
           <Icon type="fill" icon={BooksIcon} size={14} color={theme.WHITE} />
-          <Text size="FONT_XS" color="WHITE">
+          <Text size="FONT_3XS" color="WHITE">
             {category.titles}
           </Text>
         </S.AmountBox>

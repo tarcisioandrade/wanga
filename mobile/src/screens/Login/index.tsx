@@ -32,7 +32,7 @@ const Login = ({ navigation }: RootStackScreenProps<"login">) => {
     <>
       <Header backShow title="Entre na sua conta" />
       <Layout>
-        <KeyboardAvoidingView keyboardVerticalOffset={50} behavior="padding">
+        <KeyboardAvoidingView>
           <Container>
             <View style={{ justifyContent: "flex-end" }}>
               <S.Intro>

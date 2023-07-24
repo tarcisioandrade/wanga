@@ -92,9 +92,6 @@ const MenuDrawer = (props: DrawerContentComponentProps) => {
               <Text color="GRAY_600" size="FONT_XS" weight="WEIGHT_MEDIUM">
                 Você não está logado.
               </Text>
-              <Pressable>
-                <S.LinkToLogin>Login</S.LinkToLogin>
-              </Pressable>
             </S.NoAuthContainer>
           )}
         </S.DrawerHeaderContainer>

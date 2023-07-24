@@ -39,12 +39,6 @@ export const NoAuthContainer = styled.View`
   margin-top: ${pvs(10)};
 `;
 
-export const LinkToLogin = styled.Text`
-  color: ${(props) => props.theme.PRIMARY};
-  font-size: ${(props) => props.theme.FONT_XS};
-  text-decoration: underline;
-`;
-
 export const UserLabel = styled.Text`
   font-size: ${(props) => props.theme.FONT_BASE};
   color: ${(props) => props.theme.GRAY_600};
