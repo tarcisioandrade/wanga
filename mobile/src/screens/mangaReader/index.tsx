@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { RootStackScreenProps } from "src/@types/navigation";
 import { Layout } from "src/components/Layout";
 import { useQuery } from "@tanstack/react-query";
@@ -103,8 +103,8 @@ const MangaReader = ({ route }: RootStackScreenProps<"mangaReader">) => {
         currentChapter={data?.chapter_number}
       />
       <Reader
-        mangaName={data?.name!}
-        id_release={id_release}
+        mangaName={data?.name}
+        id_release={data?.release_id}
         data={images}
         close={close}
         open={open}

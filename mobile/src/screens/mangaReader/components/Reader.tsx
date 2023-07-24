@@ -3,12 +3,12 @@ import WebView from "react-native-webview";
 import { WebViewScrollEvent } from "react-native-webview/lib/WebViewTypes";
 import LoadingReader from "./LoadingReader";
 import { PanResponder } from "react-native";
-import { setFavoriteChapter } from "src/utils/favoriteChapter";
+import { setReadChapter } from "src/utils/readsChapters";
 
 type Props = {
   data: { url: string }[] | undefined;
-  id_release: number;
-  mangaName: string;
+  id_release: number | undefined;
+  mangaName: string | undefined;
   close: () => void;
   open: () => void;
   toggle: () => void;
@@ -45,8 +45,8 @@ const Reader = ({
     if (contentOffset.y === 0 && !state) open();
 
     // Chegou na metade do scroll
-    if (scrollPosition >= scrollEndOffset && !favorited) {
-      setFavoriteChapter(mangaName, id_release);
+    if (scrollPosition >= scrollEndOffset && !favorited && id_release && mangaName) {
+      setReadChapter(mangaName, id_release);
       favorited = true;
     }
   };

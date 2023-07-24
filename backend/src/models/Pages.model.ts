@@ -13,6 +13,7 @@ export class PagesModel implements IPages {
       next_chapter: { number: null, release_id: null },
       prev_chapter: { number: null, release_id: null },
       chapter_number: "",
+      release_id: 0,
     };
 
     const response = await got(
@@ -34,10 +35,11 @@ export class PagesModel implements IPages {
       /(?<=span class="title">).*(?=<\/span>)/gm
     )![0];
 
-    
     for (const chapter of chapters) {
       let chapter_index = chapters.indexOf(chapter);
       if (chapter.number == return_data.chapter_number) {
+        return_data.release_id = chapters[chapter_index].id_release;
+
         if (chapter_index < chapters.length - 1) {
           let next_chapter = chapters[chapter_index + 1];
           return_data.next_chapter.number = next_chapter.number;

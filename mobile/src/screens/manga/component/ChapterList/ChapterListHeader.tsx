@@ -11,7 +11,7 @@ import { Text } from "src/components/Text";
 import ArrowDown from "assets/svg-icon/arrow-down.svg";
 import ArrowUp from "assets/svg-icon/arrow-up.svg";
 import BooksIcon from "assets/svg-icon/books.svg";
-import { getFavoriteChapters } from "src/utils/favoriteChapter";
+import { getReadChapters } from "src/utils/readsChapters";
 import { useNavigation } from "@react-navigation/native";
 import { useFocusEffect } from "@react-navigation/native";
 import { useTheme } from "styled-components";
@@ -43,7 +43,7 @@ const ChapterListHeader = ({ manga, chapterError }: Props) => {
   };
 
   const getLastReadChapter = async () => {
-    const favorites = await getFavoriteChapters();
+    const favorites = await getReadChapters();
 
     if (manga && favorites) {
       const currentMangaFavorite = favorites.find((fav) => fav[manga.name]);

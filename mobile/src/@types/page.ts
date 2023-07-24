@@ -1,6 +1,7 @@
 export interface Page {
   name: string;
   chapter_number: string;
+  release_id: number;
   next_chapter: ChapterPage;
   images: ImagePage[];
   prev_chapter: ChapterPage;

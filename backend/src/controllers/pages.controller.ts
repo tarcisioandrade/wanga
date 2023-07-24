@@ -14,16 +14,17 @@ export class PagesController {
     const id = req.params.id;
     let return_data = {} as Pages;
     try {
-      const { chapter_number, next_chapter, prev_chapter, name } =
+      const { chapter_number, next_chapter, prev_chapter, name, release_id } =
         await pagesModel.getInfoPages(id);
       const images = await pagesModel.getPagesImages(id);
 
       return_data = {
         name,
         chapter_number,
+        release_id,
+        prev_chapter,
         next_chapter,
         images,
-        prev_chapter,
       };
 
       res.send(return_data);

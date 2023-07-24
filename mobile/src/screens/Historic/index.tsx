@@ -20,9 +20,14 @@ const Historic = () => {
   const fetchReadHistoric = async () => {
     try {
       const currentHistoric = await getReadHistoric();
-
       if (currentHistoric) {
-        setHistoric(currentHistoric.reverse());
+        const historisSortedToDate = currentHistoric.sort(
+          (a, b) =>
+            new Date(b.last_read_time).getTime() -
+            new Date(a.last_read_time).getTime()
+        );
+
+        setHistoric(historisSortedToDate);
       }
     } catch (error) {
       console.error("Erro ao buscar histórico:", error);

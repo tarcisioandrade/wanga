@@ -1,9 +1,10 @@
 export interface Pages {
   name: string;
   chapter_number: string;
+  release_id: number;
   images: Image[];
-  next_chapter: NextChapter;
-  prev_chapter: PrevChapter;
+  next_chapter: ChapterProps;
+  prev_chapter: ChapterProps;
 }
 
 export type Image = {
@@ -11,12 +12,7 @@ export type Image = {
   avif: string;
 };
 
-export type NextChapter = {
-  number: string | null;
-  release_id: number | null;
-};
-
-export type PrevChapter = {
+export type ChapterProps = {
   number: string | null;
   release_id: number | null;
 };

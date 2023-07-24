@@ -1,7 +1,7 @@
 import React, { memo, useState, useCallback } from "react";
 import { ChapterBadgeBox, ChapterBadgeText } from "./styled";
 import { useNavigation } from "@react-navigation/native";
-import { getFavoriteChapters } from "src/utils/favoriteChapter";
+import { getReadChapters } from "src/utils/readsChapters";
 import { useFocusEffect } from "@react-navigation/native";
 import { Manga } from "src/@types/manga";
 import { ReadHistoric, useReadHistoric } from "src/hooks/useReadHistoric";
@@ -42,7 +42,7 @@ const ChapterListBadge = ({
   };
 
   const handleChaptersStatus = async () => {
-    const favorites = await getFavoriteChapters();
+    const favorites = await getReadChapters();
     setLastRead(false);
     setRead(false);
 
