@@ -47,7 +47,7 @@ const MenuDrawer = (props: DrawerContentComponentProps) => {
   const theme = useTheme();
   const progress = useDrawerProgress();
   const { state, open, close } = useDisclose(false);
-  const user = true;
+  const user = false;
 
   // @ts-expect-error
   const translateX = Animated.interpolateNode(progress, {
@@ -113,7 +113,7 @@ const MenuDrawer = (props: DrawerContentComponentProps) => {
                   height={pvs(24)}
                 />
                 <Text
-                  color={themeMode === "dark" ? "GRAY_500" : "PRIMARY"}
+                  color={themeMode.type === "dark" ? "GRAY_500" : "PRIMARY"}
                   size="FONT_XS"
                   weight="WEIGHT_MEDIUM"
                 >

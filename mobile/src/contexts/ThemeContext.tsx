@@ -11,7 +11,7 @@ import { ColorSchemeName, useColorScheme } from "react-native";
 interface ThemeContexProps {
   getTheme: () => void;
   changeTheme: (theme: ColorSchemeName) => void;
-  theme: ColorSchemeName;
+  theme: ThemeType;
   themeLoaded: boolean;
 }
 
@@ -23,9 +23,17 @@ type Props = {
   children: ReactNode;
 };
 
+export type ThemeType = {
+  type: ColorSchemeName;
+  origin: "system" | "localStorage";
+};
+
 export const ThemeProvider = ({ children }: Props) => {
   const defaultTheme = useColorScheme();
-  const [theme, setTheme] = useState<ColorSchemeName>(defaultTheme);
+  const [theme, setTheme] = useState<ThemeType>({
+    type: defaultTheme,
+    origin: "system",
+  });
   const [themeLoaded, setThemeLoaded] = useState(false);
 
   useEffect(() => {
@@ -36,8 +44,12 @@ export const ThemeProvider = ({ children }: Props) => {
     try {
       const themeValue = (await AsyncStorage.getItem(
         "@theme"
-      )) as ColorSchemeName;
-      if (themeValue) setTheme(themeValue);
+      )) as ColorSchemeName | null;
+      if (themeValue)
+        setTheme({
+          type: themeValue,
+          origin: "localStorage",
+        });
     } catch (error) {
       console.log(error);
     } finally {
@@ -45,16 +57,21 @@ export const ThemeProvider = ({ children }: Props) => {
     }
   };
 
-  const changeTheme = async (theme: ColorSchemeName) => {
+  const changeTheme = async (theme: ColorSchemeName | null) => {
     try {
       if (!theme) {
-        await AsyncStorage.removeItem("@theme");
-        setTheme(defaultTheme);
+        setTheme({
+          type: defaultTheme,
+          origin: "system",
+        });
+        AsyncStorage.removeItem("@theme");
         return;
       }
-
-      await AsyncStorage.setItem("@theme", theme);
-      setTheme(theme);
+      setTheme({
+        type: theme,
+        origin: "localStorage",
+      });
+      AsyncStorage.setItem("@theme", theme);
     } catch (error) {
       console.log(error);
     }

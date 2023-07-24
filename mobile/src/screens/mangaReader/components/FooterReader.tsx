@@ -1,8 +1,8 @@
 import { View, Dimensions, StyleSheet } from "react-native";
 import React from "react";
 import { vs, hs } from "src/utils/metrics";
-import ArrowLeftLight from "assets/svg-icon/arrow-left-light.svg";
-import ArrowRightLight from "assets/svg-icon/arrow-right-light.svg";
+import ArrowLeftLight from "assets/svg-icon/arrow-left-iconly.svg";
+import ArrowRightLight from "assets/svg-icon/arrow-right-iconly.svg";
 import Icon from "src/components/Icon";
 import CustomPressable from "src/components/CustomPressable";
 import { useTheme } from "styled-components";
@@ -43,8 +43,9 @@ const FooterReader = ({
       >
         <Icon
           icon={ArrowLeftLight}
-          type="fill"
+          type="stroke"
           color={hasPrevChapter ? "#fff" : "#a3a3a3"}
+          size={36}
         />
       </CustomPressable>
 
@@ -56,8 +57,9 @@ const FooterReader = ({
       >
         <Icon
           icon={ArrowRightLight}
-          type="fill"
+          type="stroke"
           color={hasNextChapter ? "#fff" : "#a3a3a3"}
+          size={36}
         />
       </CustomPressable>
     </View>

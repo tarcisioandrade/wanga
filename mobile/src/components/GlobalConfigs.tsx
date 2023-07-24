@@ -30,8 +30,8 @@ const GlobalConfigs = ({ children }: Props) => {
   });
   const { theme, themeLoaded } = useThemeMode();
 
-  const statusStyle = theme === "dark" ? "light" : "dark";
-  const themeStyle = theme === "dark" ? darkTheme : lightTheme;
+  const statusStyle = theme.type === "dark" ? "light" : "dark";
+  const themeStyle = theme.type === "dark" ? darkTheme : lightTheme;
 
   if (!themeLoaded || !fontsLoaded) return <LoadingScreen />;
   return (

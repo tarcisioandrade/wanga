@@ -2,21 +2,25 @@ import { phs, pvs } from "src/utils/metrics";
 import styled from "styled-components/native";
 import { ChapterListBadgeProps } from "./ChapterListBadge";
 
+type StatusChapter = {
+  lastRead?: boolean;
+  read?: boolean;
+};
+
 export const ChapterBadgeBox = styled.Pressable.attrs({
   hitSlop: { top: 10, bottom: 10, left: 10, right: 10 },
-})<Pick<ChapterListBadgeProps, "lastRead" | "read">>`
+})<StatusChapter>`
   background-color: ${({ theme, read, lastRead }) =>
     read ? theme.CHAPTER_READ : lastRead ? theme.PRIMARY : "transparent"};
   border-radius: 4px;
   border: 1px solid
-    ${(props) => (props.lastRead ? "transparent" : props.theme.DARK_700)};
+    ${({ theme, read, lastRead }) =>
+      lastRead || read ? "transparent" : theme.DARK_700};
   align-items: center;
   width: ${phs(54)};
   height: ${pvs(33)};
 `;
-export const ChapterBadgeText = styled.Text<
-  Pick<ChapterListBadgeProps, "lastRead">
->`
+export const ChapterBadgeText = styled.Text<StatusChapter>`
   font-size: ${(props) => props.theme.FONT_4XS};
   color: ${(props) =>
     props.lastRead ? props.theme.WHITE : props.theme.TEXT_COLOR};
