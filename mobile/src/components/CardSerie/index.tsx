@@ -48,7 +48,9 @@ const CardSerie = ({ serie }: Props) => {
       </S.SerieInfoContainer>
       <S.SerieInfoContainer>
         <S.SerieTitle numberOfLines={3}>{serie.name}</S.SerieTitle>
-        {serie.artist ? <S.Artist>{serie.artist}</S.Artist> : null}
+        {serie.artist ? (
+          <S.Artist numberOfLines={3}>{serie.artist}</S.Artist>
+        ) : null}
         {categories.length ? (
           <S.BadgesContainer>
             {categories.map(({ name, id_category }) => (

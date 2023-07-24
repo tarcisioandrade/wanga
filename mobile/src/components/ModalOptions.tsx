@@ -7,7 +7,7 @@ import Modal from "./Modal";
 import SettingsIcon from "assets/svg-icon/settings.svg";
 import AboutIcon from "assets/svg-icon/about.svg";
 import FeedbackIcon from "assets/svg-icon/feedback.svg";
-import { WANGA_EMAIL } from "src/constants/wangaEmail";
+import { WANGA_EMAIL } from "src/constants/socialNetworks";
 import { useNavigation } from "@react-navigation/native";
 import { Text } from "./Text";
 import ShareIcon from "assets/svg-icon/share.svg";
