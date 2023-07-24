@@ -17,7 +17,7 @@ import LoadingReader from "./components/LoadingReader";
 const MangaReader = ({ route }: RootStackScreenProps<"mangaReader">) => {
   const { id_release, manga } = route.params;
   const [chapter, setChapter] = useState(id_release);
-  const { state, close, open } = useDisclose(true);
+  const { state, close, open, toggle } = useDisclose(true);
 
   const { data, isLoading, error } = useQuery({
     queryKey: [queryKeys.pages, chapter],
@@ -93,8 +93,6 @@ const MangaReader = ({ route }: RootStackScreenProps<"mangaReader">) => {
     }
   };
 
-  // TODO: Criar o modal para falar ao usuario da um longPress para aparecer o header/footer;
-
   if (isLoading) return <LoadingReader />;
   return (
     <Layout>
@@ -110,6 +108,7 @@ const MangaReader = ({ route }: RootStackScreenProps<"mangaReader">) => {
         data={images}
         close={close}
         open={open}
+        toggle={toggle}
         state={state}
       />
       <FooterReader

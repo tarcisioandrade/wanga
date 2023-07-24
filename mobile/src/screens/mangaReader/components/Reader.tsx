@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useRef } from "react";
 import WebView from "react-native-webview";
 import { WebViewScrollEvent } from "react-native-webview/lib/WebViewTypes";
 import LoadingReader from "./LoadingReader";
-import { TouchableWithoutFeedback } from "react-native";
+import { PanResponder } from "react-native";
 import { setFavoriteChapter } from "src/utils/favoriteChapter";
 
 type Props = {
@@ -11,10 +11,19 @@ type Props = {
   mangaName: string;
   close: () => void;
   open: () => void;
+  toggle: () => void;
   state: boolean;
 };
 
-const Reader = ({ data, close, open, id_release, mangaName, state }: Props) => {
+const Reader = ({
+  data,
+  close,
+  open,
+  toggle,
+  id_release,
+  mangaName,
+  state,
+}: Props) => {
   let favorited = false;
 
   const renderImages = () => {
@@ -42,9 +51,28 @@ const Reader = ({ data, close, open, id_release, mangaName, state }: Props) => {
     }
   };
 
-  const handleTouch = () => {
-    open();
-  };
+  const isScrolling = useRef(false);
+  const isPressing = useRef(false);
+
+  const panResponder = PanResponder.create({
+    onStartShouldSetPanResponder: () => true,
+    onPanResponderGrant: () => {
+      isPressing.current = true;
+    },
+    onPanResponderMove: (evt, gestureState) => {
+      // Verifica se o movimento excede um limite, indicando que é um scroll.
+      if (Math.abs(gestureState.dx) > 5 || Math.abs(gestureState.dy) > 5) {
+        isScrolling.current = true;
+      }
+    },
+    onPanResponderRelease: () => {
+      if (!isScrolling.current && isPressing.current) {
+        toggle();
+      }
+      isScrolling.current = false; // Reinicializa o estado de scroll
+      isPressing.current = false; // Reinicializa o estado de pressionamento
+    },
+  });
 
   const htmlContent = `
     <html>
@@ -63,17 +91,16 @@ const Reader = ({ data, close, open, id_release, mangaName, state }: Props) => {
   `;
 
   return (
-    <TouchableWithoutFeedback onLongPress={handleTouch}>
-      <WebView
-        startInLoadingState
-        onLoadEnd={() => setTimeout(() => close(), 4000)}
-        onScroll={handleScroll}
-        renderLoading={() => <LoadingReader />}
-        showsVerticalScrollIndicator={false}
-        source={{ html: htmlContent }}
-        style={{ flex: 1 }}
-      />
-    </TouchableWithoutFeedback>
+    <WebView
+      startInLoadingState
+      onLoadEnd={() => setTimeout(() => close(), 4000)}
+      onScroll={handleScroll}
+      renderLoading={() => <LoadingReader />}
+      showsVerticalScrollIndicator={false}
+      source={{ html: htmlContent }}
+      style={{ flex: 1 }}
+      {...panResponder.panHandlers}
+    />
   );
 };
 
