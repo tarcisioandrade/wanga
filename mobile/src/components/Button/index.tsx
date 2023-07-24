@@ -1,16 +1,30 @@
-import { TouchableOpacityProps } from "react-native";
-import React from "react";
-import { ButtonText, PrimaryButton } from "./styles";
+import {
+  View,
+  Text,
+  ButtonProps as ButtonPropsRN,
+  ActivityIndicator,
+} from "react-native";
+import React, { ReactNode } from "react";
+import * as S from "./styled";
+import { useTheme } from "styled-components";
 
-type Props = TouchableOpacityProps & {
-  children: React.ReactNode;
+export type ButtonProps = ButtonPropsRN & {
+  type?: "fill" | "outline";
+  loading?: boolean;
 };
 
-const Button = ({ children, ...rest }: Props) => {
+const Button = ({ type = "fill", title, loading, ...props }: ButtonProps) => {
+  const theme = useTheme();
   return (
-    <PrimaryButton {...rest}>
-      <ButtonText>{children}</ButtonText>
-    </PrimaryButton>
+    <S.ButtonContainer type={type} {...props} disabled={loading}>
+      {loading ? (
+        <ActivityIndicator
+          color={type === "outline" ? theme.PRIMARY : theme.WHITE}
+        />
+      ) : (
+        <S.ButtonText type={type}>{title}</S.ButtonText>
+      )}
+    </S.ButtonContainer>
   );
 };
 
