@@ -1,9 +1,10 @@
-import { Pressable } from "react-native";
+import { Pressable, ToastAndroid } from "react-native";
 import React from "react";
 import HomeIcon from "assets/svg-icon/home.svg";
 import FavoritesIcon from "assets/svg-icon/favorites.svg";
 import HistoricIcon from "assets/svg-icon/historic.svg";
 import DownloadIcon from "assets/svg-icon/paper-download.svg";
+import LogoutIcon from "assets/svg-icon/logout.svg";
 import MoreIcon from "assets/svg-icon/more-icon.svg";
 import Logo from "assets/logo.svg";
 import { SvgProps } from "react-native-svg";
@@ -23,6 +24,7 @@ import {
   useDrawerProgress,
 } from "@react-navigation/drawer";
 import { useUser } from "src/contexts/UserContext";
+import Modal from "../Modal";
 
 type IconAndLabelMappings = {
   [key: string]: { icon: React.FC<SvgProps> };
@@ -48,7 +50,13 @@ const MenuDrawer = (props: DrawerContentComponentProps) => {
   const theme = useTheme();
   const progress = useDrawerProgress();
   const { state, open, close } = useDisclose(false);
-  const { user } = useUser();
+  const {
+    state: modalConfirmLogout,
+    open: openModalConfirmLogout,
+    close: closeModalConfirmLogout,
+  } = useDisclose(false);
+
+  const { user, removeUserFromLocalStorage } = useUser();
 
   // @ts-expect-error
   const translateX = Animated.interpolateNode(progress, {
@@ -58,6 +66,14 @@ const MenuDrawer = (props: DrawerContentComponentProps) => {
 
   const goToLoginScreen = () => {
     props.navigation.navigate("login");
+  };
+
+  const logout = () => {
+    removeUserFromLocalStorage().then(() => {
+      closeModalConfirmLogout();
+      props.navigation.navigate("home");
+      ToastAndroid.show("Desconectado.", ToastAndroid.TOP);
+    });
   };
 
   return (
@@ -127,10 +143,49 @@ const MenuDrawer = (props: DrawerContentComponentProps) => {
             );
           })}
         </S.DrawerItemContainer>
+        {user && (
+          <S.LogoutButton
+            style={({ pressed }) => ({
+              backgroundColor: pressed ? theme.SECONDARY : "transparent",
+            })}
+            onPress={openModalConfirmLogout}
+          >
+            <Icon
+              type="fill"
+              icon={LogoutIcon}
+              color={theme.MENU_ITEM_COLOR}
+              width={phs(24)}
+              height={pvs(24)}
+            />
+            <Text
+              color={themeMode.type === "dark" ? "GRAY_500" : "PRIMARY"}
+              size="FONT_XS"
+              weight="WEIGHT_MEDIUM"
+            >
+              Sair
+            </Text>
+          </S.LogoutButton>
+        )}
       </Container>
 
-      {/* Modal More  */}
+      {/* Modal More Options  */}
       <ModalOptions isOpen={state} onClose={close} />
+
+      {/* Modal Confirm Logout  */}
+      <Modal.Root isOpen={modalConfirmLogout} onClose={closeModalConfirmLogout}>
+        <Modal.Header>YAMEROO!</Modal.Header>
+        <Modal.Content>
+          <Text>Tem certeza que quer sair?</Text>
+        </Modal.Content>
+        <Modal.Footer>
+          <CustomPressable radius={4} onPress={closeModalConfirmLogout}>
+            <Text>NÃO</Text>
+          </CustomPressable>
+          <CustomPressable radius={4} onPress={logout}>
+            <Text>SIM</Text>
+          </CustomPressable>
+        </Modal.Footer>
+      </Modal.Root>
     </S.DrawerContainer>
   );
 };

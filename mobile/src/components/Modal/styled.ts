@@ -23,6 +23,7 @@ export const ModalCentered = styled.View`
 export const ModalContent = styled.View`
   width: 100%;
   padding: ${pvs(12)} ${phs(22)};
+  min-height: ${pvs(80)};
 `;
 
 export const ModalContainer = styled.View`
@@ -45,7 +46,7 @@ export const ModalFooter = styled.View`
   flex-direction: row;
   justify-content: flex-end;
   padding: ${pvs(12)} ${phs(22)};
-  gap: 16px;
+  gap: 36px;
   border-top-width: 1px;
   border-top-color: ${(props) => props.theme.CHAPTER_READ};
 `;

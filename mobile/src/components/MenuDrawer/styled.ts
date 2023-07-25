@@ -62,3 +62,12 @@ export const CustomDrawerItem = styled.Pressable<DrawerActive>`
   align-items: center;
   gap: 16px;
 `;
+
+export const LogoutButton = styled.Pressable`
+  padding: ${pvs(10)} ${phs(10)};
+  border-radius: 4px;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  margin-top: 10px;
+`;

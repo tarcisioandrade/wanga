@@ -4,7 +4,7 @@ import { User } from "src/@types/user";
 
 interface UserContextProps {
   user: User | null;
-  removeUserFromLocalStorage: () => void;
+  removeUserFromLocalStorage: () => Promise<void>;
   setUserInLocalStorage: (user: User) => Promise<void>;
   getUserInLocalStorage: () => Promise<void>;
 }
@@ -34,6 +34,7 @@ export const UserProvider = ({ children }: Props) => {
 
   const removeUserFromLocalStorage = async () => {
     await AsyncStorage.removeItem("@user");
+    setUser(null);
   };
 
   useEffect(() => {

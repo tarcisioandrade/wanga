@@ -2,12 +2,7 @@ import React, { useState } from "react";
 import { ReleaseElement } from "src/@types/release";
 import { truncateString } from "src/utils/truncateString";
 import { Text } from "src/components/Text";
-import {
-  CarouselMangaCardContainer,
-  CarouselMangaCardBadge,
-  CarouselMangaCardFooter,
-  CarouselMangaCardImage,
-} from "./styled";
+import * as S from "./styled";
 import { useNavigation } from "@react-navigation/native";
 
 type Props = {
@@ -19,7 +14,7 @@ const ReleaseMangaCard = ({ data, size }: Props) => {
   const [imageError, setImageError] = useState(false);
   const navigator = useNavigation();
 
-  const firstChapt = data.chapters.at(-1)!;
+  const firstChapt = data.chapters.at(-1);
 
   const chapterFormat =
     Number(firstChapt?.number) < 9
@@ -42,24 +37,26 @@ const ReleaseMangaCard = ({ data, size }: Props) => {
   const isFallbackImage = imageError || data.image.includes("no-cover");
 
   return (
-    <CarouselMangaCardContainer
+    <S.CarouselMangaCardContainer
       onPress={() => goToMangaScreen(data.id_serie)}
       size={size}
     >
-      <CarouselMangaCardBadge>
-        <Text color="WHITE" size="FONT_XS" weight="WEIGHT_MEDIUM">
-          {chapterLabel}
-        </Text>
-      </CarouselMangaCardBadge>
+      {chapterLabel && (
+        <S.CarouselMangaCardBadge>
+          <Text color="WHITE" size="FONT_XS" weight="WEIGHT_MEDIUM">
+            {chapterLabel}
+          </Text>
+        </S.CarouselMangaCardBadge>
+      )}
 
       {isFallbackImage ? (
-        <CarouselMangaCardImage
+        <S.CarouselMangaCardImage
           source={require("assets/images/no-asset.jpg")}
           resizeMode="cover"
           alt={data.name}
         />
       ) : (
-        <CarouselMangaCardImage
+        <S.CarouselMangaCardImage
           source={{
             uri: data.image,
           }}
@@ -69,12 +66,12 @@ const ReleaseMangaCard = ({ data, size }: Props) => {
         />
       )}
 
-      <CarouselMangaCardFooter>
+      <S.CarouselMangaCardFooter>
         <Text color="WHITE" size="FONT_4XS" weight="WEIGHT_SEMIBOLD">
           {truncateString(data.name, 16)}
         </Text>
-      </CarouselMangaCardFooter>
-    </CarouselMangaCardContainer>
+      </S.CarouselMangaCardFooter>
+    </S.CarouselMangaCardContainer>
   );
 };
 
