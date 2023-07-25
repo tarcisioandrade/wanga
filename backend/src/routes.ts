@@ -4,10 +4,13 @@ import { PagesController } from "./controllers/pages.controller";
 import { SearchController } from "./controllers/search.controller";
 import { ChaptersController } from "./controllers/chapters.controller";
 import got from "got";
+import { checkDuplicateEmail } from "./middlewares/verifySignUp";
+import { AuthController } from "./controllers/auth.controller";
 
 const pagesController = new PagesController();
 const searchController = new SearchController();
 const chaptersController = new ChaptersController();
+const authController = new AuthController();
 
 const router = Router();
 
@@ -69,5 +72,9 @@ router.get("/manga/:id", async (req, res) => {
     })
     .catch(() => res.sendStatus(404));
 });
+
+// AUTH
+router.post("/auth/signup", checkDuplicateEmail, authController.signup);
+router.post("/auth/signin", authController.signin);
 
 export default router;
