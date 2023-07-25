@@ -22,6 +22,7 @@ import {
   DrawerContentComponentProps,
   useDrawerProgress,
 } from "@react-navigation/drawer";
+import { useUser } from "src/contexts/UserContext";
 
 type IconAndLabelMappings = {
   [key: string]: { icon: React.FC<SvgProps> };
@@ -47,7 +48,7 @@ const MenuDrawer = (props: DrawerContentComponentProps) => {
   const theme = useTheme();
   const progress = useDrawerProgress();
   const { state, open, close } = useDisclose(false);
-  const user = false;
+  const { user } = useUser();
 
   // @ts-expect-error
   const translateX = Animated.interpolateNode(progress, {
@@ -67,7 +68,7 @@ const MenuDrawer = (props: DrawerContentComponentProps) => {
             {user ? (
               <S.DrawerAvatar>
                 <Text size="FONT_LG" color="WHITE" weight="WEIGHT_SEMIBOLD">
-                  W
+                  {user.name.charAt(0).toUpperCase()}
                 </Text>
               </S.DrawerAvatar>
             ) : (
@@ -86,7 +87,7 @@ const MenuDrawer = (props: DrawerContentComponentProps) => {
             </CustomPressable>
           </S.DrawerHeaderFlex>
           {user ? (
-            <S.UserLabel>Woltz-senpai</S.UserLabel>
+            <S.UserLabel>Olá, {user.name}</S.UserLabel>
           ) : (
             <S.NoAuthContainer>
               <Text color="GRAY_600" size="FONT_XS" weight="WEIGHT_MEDIUM">

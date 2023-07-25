@@ -7,6 +7,7 @@ import { toastConfig } from "src/components/CustomToast";
 import { useConfirmExit } from "src/hooks/useConfirmExit";
 import GlobalConfigs from "src/components/GlobalConfigs";
 import { ThemeProvider } from "src/contexts/ThemeContext";
+import { UserProvider } from "src/contexts/UserContext";
 
 export default function App() {
   const queryClient = new QueryClient();
@@ -17,10 +18,12 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
-        <GlobalConfigs>
-          <Routes />
-          <Toast config={toastConfig} />
-        </GlobalConfigs>
+        <UserProvider>
+          <GlobalConfigs>
+            <Routes />
+            <Toast config={toastConfig} />
+          </GlobalConfigs>
+        </UserProvider>
       </ThemeProvider>
     </QueryClientProvider>
   );

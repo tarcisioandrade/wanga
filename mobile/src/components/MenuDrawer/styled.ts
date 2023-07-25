@@ -2,6 +2,7 @@ import Animated from "react-native-reanimated";
 import styled from "styled-components/native";
 import Constants from "expo-constants";
 import { phs, pvs } from "src/utils/metrics";
+import { Text } from "../Text";
 
 type DrawerActive = {
   active: boolean;
@@ -39,11 +40,12 @@ export const NoAuthContainer = styled.View`
   margin-top: ${pvs(10)};
 `;
 
-export const UserLabel = styled.Text`
-  font-size: ${(props) => props.theme.FONT_BASE};
-  color: ${(props) => props.theme.GRAY_600};
-  font-weight: 600;
+export const UserLabel = styled(Text).attrs({
+  color: "GRAY_600",
+  weight: "WEIGHT_MEDIUM",
+})`
   margin-top: ${pvs(10)};
+  text-transform: capitalize;
 `;
 
 export const DrawerItemContainer = styled.View`

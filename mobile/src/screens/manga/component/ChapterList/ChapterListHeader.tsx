@@ -61,6 +61,9 @@ const ChapterListHeader = ({ manga, chapterError }: Props) => {
       getLastReadChapter();
     }, [])
   );
+  const imageUri = manga?.image.includes("no-cover")
+    ? require("assets/images/no-asset.jpg")
+    : { uri: manga?.image };
 
   return (
     <>
@@ -70,7 +73,7 @@ const ChapterListHeader = ({ manga, chapterError }: Props) => {
             width={120}
             height={168}
             resizeMode="cover"
-            source={{ uri: manga?.image }}
+            source={imageUri}
             radius={8}
           />
         </Stack>

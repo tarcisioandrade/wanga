@@ -16,7 +16,14 @@ export type ButtonProps = ButtonPropsRN & {
 const Button = ({ type = "fill", title, loading, ...props }: ButtonProps) => {
   const theme = useTheme();
   return (
-    <S.ButtonContainer type={type} {...props} disabled={loading}>
+    <S.ButtonContainer
+      type={type}
+      {...props}
+      disabled={loading}
+      style={({ pressed }) => ({
+        opacity: pressed ? 0.8 : 1,
+      })}
+    >
       {loading ? (
         <ActivityIndicator
           color={type === "outline" ? theme.PRIMARY : theme.WHITE}
