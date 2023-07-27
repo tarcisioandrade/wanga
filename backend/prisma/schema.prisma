@@ -22,11 +22,25 @@ model User {
   @@map("user")
 }
 
+model GoogleUser {
+  id         String     @id @default(uuid()) @map("_id")
+  id_google  String     @unique
+  name       String
+  email      String     @unique
+  plan       Plans      @default(free)
+  created_at DateTime   @default(now())
+  favorites  Favorite[]
+
+  @@map("google_user")
+}
+
 model Favorite {
-  id       String  @id @default(uuid()) @map("_id")
-  id_serie Int
-  User     User?   @relation(fields: [id_user], references: [id])
-  id_user  String?
+  id             String      @id @default(uuid()) @map("_id")
+  id_serie       Int
+  User           User?       @relation(fields: [id_user], references: [id])
+  id_user        String?
+  GoogleUser     GoogleUser? @relation(fields: [id_google_user], references: [id])
+  id_google_user String?
 
   @@map("favorite")
 }

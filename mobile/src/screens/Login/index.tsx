@@ -16,15 +16,9 @@ import { RootStackScreenProps } from "src/@types/navigation";
 import { useForm, Controller } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
-import { signinApi } from "src/api/wangaServices";
-import { useUser } from "src/contexts/UserContext";
-import {
-  KeyboardAvoidingView,
-  Pressable,
-  ToastAndroid,
-  View,
-} from "react-native";
+import { useAuth } from "./hooks/useAuth";
+import { ActivityIndicator } from "react-native";
+import { KeyboardAvoidingView, Pressable, View } from "react-native";
 
 const SigninSchema = z.object({
   email: z.string().email({ message: "E-mail inválido" }),
@@ -36,27 +30,15 @@ export type SigninUser = z.infer<typeof SigninSchema>;
 const Login = ({ navigation }: RootStackScreenProps<"login">) => {
   const [hidePassword, setHidePassword] = useState(true);
   const theme = useTheme();
-  const { setUserInLocalStorage } = useUser();
+  const { signin, signInWithGoogle, isGoogleSigninLoading, isLoading } =
+    useAuth();
+
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm<SigninUser>({
     resolver: zodResolver(SigninSchema),
-  });
-
-  const { isLoading, mutate } = useMutation({
-    mutationFn: (user: SigninUser) => signinApi(user),
-    onSuccess: (data) => {
-      setUserInLocalStorage(data).then(() => {
-        navigation.navigate("home");
-      });
-      ToastAndroid.show(`Bem Vindo, ${data.name}-senpai`, ToastAndroid.TOP)
-    },
-    onError(error) {
-      console.log(JSON.stringify(error, null, 2));
-      ToastAndroid.show("Email ou senha incorreto.", ToastAndroid.TOP);
-    },
   });
 
   const goToForgoutPasswordScreen = () => {
@@ -68,7 +50,7 @@ const Login = ({ navigation }: RootStackScreenProps<"login">) => {
   };
 
   const onSubmit = (data: SigninUser) => {
-    mutate(data);
+    signin(data);
   };
 
   return (
@@ -150,11 +132,20 @@ const Login = ({ navigation }: RootStackScreenProps<"login">) => {
                 />
               </S.ButtonsContainer>
               <S.Separate />
-              <S.GoogleButton>
-                <Icon icon={GoogleIcon} type="fill" />
-                <Text size="FONT_MD" weight="WEIGHT_SEMIBOLD">
-                  Entra com o Google
-                </Text>
+              <S.GoogleButton
+                onPress={signInWithGoogle}
+                disabled={isGoogleSigninLoading}
+              >
+                {isGoogleSigninLoading ? (
+                  <ActivityIndicator color={theme.PRIMARY} />
+                ) : (
+                  <>
+                    <Icon icon={GoogleIcon} type="fill" />
+                    <Text size="FONT_MD" weight="WEIGHT_SEMIBOLD">
+                      Entra com o Google
+                    </Text>
+                  </>
+                )}
               </S.GoogleButton>
             </View>
           </Container>

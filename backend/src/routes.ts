@@ -76,5 +76,6 @@ router.get("/manga/:id", async (req, res) => {
 // AUTH
 router.post("/auth/signup", checkDuplicateEmail, authController.signup);
 router.post("/auth/signin", authController.signin);
+router.post("/auth/google/signin", authController.signinWithGoogle);
 
 export default router;

@@ -27,5 +27,5 @@ export const ButtonText = styled(Text).attrs({
   weight: "WEIGHT_SEMIBOLD",
 })<Pick<ButtonProps, "type">>`
   color: ${({ theme, type = "fill" }) =>
-    type === "fill" ? theme.WHITE : theme.GRAY_600};
+    type === "fill" ? theme.WHITE : theme.TEXT_COLOR};
 `;

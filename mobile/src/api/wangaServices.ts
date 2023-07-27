@@ -5,6 +5,7 @@ import { Page } from "src/@types/page";
 import { SignupUser } from "src/screens/Register";
 import { User } from "src/@types/user";
 import { SigninUser } from "src/screens/Login";
+import { SigninGoogleInput } from "src/screens/Login/hooks/useAuth";
 
 interface MangaInfoResponse {
   manga: Manga;
@@ -46,6 +47,17 @@ export async function signinApi(user: SigninUser) {
   const res = await axios.post<User>("http://192.168.0.64:8080/auth/signin", {
     ...user,
   });
+
+  return res.data;
+}
+
+export async function signinGoogleApi(user: SigninGoogleInput) {
+  const res = await axios.post<User>(
+    "http://192.168.0.64:8080/auth/google/signin",
+    {
+      ...user,
+    }
+  );
 
   return res.data;
 }

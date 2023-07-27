@@ -25,6 +25,7 @@ import {
 } from "@react-navigation/drawer";
 import { useUser } from "src/contexts/UserContext";
 import Modal from "../Modal";
+import { GoogleSignin } from "@react-native-google-signin/google-signin";
 
 type IconAndLabelMappings = {
   [key: string]: { icon: React.FC<SvgProps> };
@@ -68,12 +69,14 @@ const MenuDrawer = (props: DrawerContentComponentProps) => {
     props.navigation.navigate("login");
   };
 
-  const logout = () => {
-    removeUserFromLocalStorage().then(() => {
-      closeModalConfirmLogout();
-      props.navigation.navigate("home");
-      ToastAndroid.show("Desconectado.", ToastAndroid.TOP);
-    });
+  const logout = async () => {
+    const isGoogleSignenIn = await GoogleSignin.isSignedIn();
+    if (isGoogleSignenIn) await GoogleSignin.signOut();
+    
+    removeUserFromLocalStorage();
+    closeModalConfirmLogout();
+    props.navigation.navigate("home");
+    ToastAndroid.show("Desconectado.", ToastAndroid.TOP);
   };
 
   return (
