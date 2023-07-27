@@ -10,9 +10,11 @@ import { useDisclose } from "src/hooks/useDisclose";
 import FooterReader from "./components/FooterReader";
 import HeaderReader from "./components/HeaderReader";
 import { useDownload } from "src/hooks/useDownload";
-import * as MediaLibrary from "expo-media-library";
 import Toast from "react-native-toast-message";
 import LoadingReader from "./components/LoadingReader";
+import * as FileSystem from "expo-file-system";
+
+const { StorageAccessFramework } = FileSystem;
 
 const MangaReader = ({ route }: RootStackScreenProps<"mangaReader">) => {
   const { id_release, manga } = route.params;
@@ -58,11 +60,23 @@ const MangaReader = ({ route }: RootStackScreenProps<"mangaReader">) => {
 
     if (!images || !manga) return;
 
-    const { status } = await MediaLibrary.requestPermissionsAsync();
-    if (status === "granted") {
+    const permission =
+      await StorageAccessFramework.requestDirectoryPermissionsAsync();
+
+    if (permission.granted) {
+      Toast.show({
+        type: "success",
+        text1: "Download Iniciado",
+        position: "bottom",
+        bottomOffset: 90,
+      });
       for (let i = 0; i < images.length; i++) {
         try {
-          const size = await handleDownload(images[i].url, i, albumName);
+          const size = await handleDownload(
+            images[i].url,
+            i,
+            permission.directoryUri
+          );
           if (size) fileSize += size;
         } catch (error) {
           return;
@@ -74,13 +88,7 @@ const MangaReader = ({ route }: RootStackScreenProps<"mangaReader">) => {
         Number(manga.id_serie),
         manga.image
       );
-      Toast.show({
-        type: "success",
-        text1: "Download Efetuado!",
-        position: "bottom",
-        bottomOffset: 90,
-      });
-    } else if (status === "denied") {
+    } else if (!permission.granted) {
       Alert.alert(
         "Permisão Negada",
         "Por favor, aceite a permissão para iniciar o download.",

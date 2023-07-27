@@ -1,5 +1,4 @@
 import * as FileSystem from "expo-file-system";
-import * as MediaLibrary from "expo-media-library";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { formatFileSizeInMB } from "src/utils/formatFileSizeInMB";
 import * as Crypto from "expo-crypto";
@@ -14,6 +13,7 @@ export type DownloadHistoric = {
 };
 
 const EXTENSION_IMAGE_REGEXP = /\.(gif|jpe?g|tiff?|png|webp|bmp)$/i;
+const { StorageAccessFramework } = FileSystem;
 
 export const useDownload = () => {
   const saveDownloadInHistoric = async (
@@ -54,59 +54,60 @@ export const useDownload = () => {
     await AsyncStorage.setItem("downloadHistoric", JSON.stringify(newValue));
   };
 
-  //TODO: Testar a criação de pasta no prebuild;
   const handleDownload = async (
     imageUrl: string,
     i: number,
-    albumName: string
+    dirGranted: string
   ) => {
     const extensionImage = imageUrl.match(EXTENSION_IMAGE_REGEXP)![1];
-
-    // let rootDirectory = FileSystem.documentDirectory + "Wanga/";
-    // let albumDirectory = rootDirectory + albumName + "/";
-    // let fileUri = albumDirectory + `${i}.jpg`;
-    let fileUri = FileSystem.documentDirectory + `${i}.${extensionImage}`;
+    const fileName = `${i}.${extensionImage}`;
+    let fileUri = FileSystem.documentDirectory + fileName;
 
     try {
-      // const rootFolderInfo = await FileSystem.getInfoAsync(rootDirectory);
-      // if (!rootFolderInfo.exists) {
-      //   await FileSystem.makeDirectoryAsync(rootDirectory, {
-      //     intermediates: true,
-      //   });
-      // }
-
-      // const albumFolderInfo = await FileSystem.getInfoAsync(albumDirectory);
-      // if (!albumFolderInfo.exists) {
-      //   await FileSystem.makeDirectoryAsync(albumDirectory, {
-      //     intermediates: true,
-      //   });
-      // }
-
       const res = await FileSystem.downloadAsync(imageUrl, fileUri);
       const fileSize = parseFloat(res.headers["content-length"]);
-
-      saveFile(res.uri, albumName);
+      saveAndroidFile(
+        fileUri,
+        fileName,
+        res.headers["content-type"],
+        dirGranted
+      );
 
       return fileSize;
-    } catch (err) {
-      console.log("FS Err: ", err);
+    } catch (e) {
+      console.error("download error:", e);
     }
   };
 
-  const saveFile = async (fileUri: string, albumName: string) => {
+  const saveAndroidFile = async (
+    fileUri: string,
+    fileName: string,
+    mimeType: string,
+    directoryUri: string
+  ) => {
     try {
-      const asset = await MediaLibrary.createAssetAsync(fileUri);
-      const album = await MediaLibrary.getAlbumAsync(albumName);
+      const fileString = await FileSystem.readAsStringAsync(fileUri, {
+        encoding: FileSystem.EncodingType.Base64,
+      });
 
-      if (album == null) {
-        await MediaLibrary.createAlbumAsync(albumName, asset, false);
-      } else {
-        await MediaLibrary.addAssetsToAlbumAsync([asset], album, false);
+      try {
+        await StorageAccessFramework.createFileAsync(
+          directoryUri,
+          fileName,
+          mimeType
+        )
+          .then(async (uri) => {
+            await FileSystem.writeAsStringAsync(uri, fileString, {
+              encoding: FileSystem.EncodingType.Base64,
+            });
+          })
+          .catch((e) => {
+            console.error(e);
+          });
+      } catch (e) {
+        throw e;
       }
-    } catch (err) {
-      console.error("Save err: ", err);
-      throw err;
-    }
+    } catch (err) {}
   };
 
   return {
