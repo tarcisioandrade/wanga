@@ -5,6 +5,7 @@ export type GoogleUserInput = Pick<GoogleUser, "email" | "name" | "id_google">;
 
 interface IGoogleUser {
   getUserWithEmail: (email: string) => Promise<GoogleUser | null>;
+  getUserById: (id: string) => Promise<GoogleUser | null>;
   createUser: (user: GoogleUserInput) => Promise<GoogleUser | null>;
 }
 
@@ -17,6 +18,16 @@ export class GoogleUserModel implements IGoogleUser {
     });
 
     return googleUser;
+  }
+
+  async getUserById(id: string) {
+    const user = await prisma.googleUser.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    return user;
   }
 
   async createUser(user: GoogleUserInput) {

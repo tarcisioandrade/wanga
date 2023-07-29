@@ -21,7 +21,7 @@ export const verifyToken = (
         message: "Unauthorized!",
       });
     }
-
+    
     next();
   });
 };

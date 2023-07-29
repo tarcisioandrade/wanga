@@ -6,11 +6,15 @@ import { ChaptersController } from "./controllers/chapters.controller";
 import got from "got";
 import { checkDuplicateEmail } from "./middlewares/verifySignUp";
 import { AuthController } from "./controllers/auth.controller";
+import { verifyToken } from "./middlewares/verifyToken";
+import { verifyUser } from "./middlewares/verifyUser";
+import { FavoriteController } from "./controllers/favorite.controler";
 
 const pagesController = new PagesController();
 const searchController = new SearchController();
 const chaptersController = new ChaptersController();
 const authController = new AuthController();
+const favoriteController = new FavoriteController();
 
 const router = Router();
 
@@ -77,5 +81,25 @@ router.get("/manga/:id", async (req, res) => {
 router.post("/auth/signup", checkDuplicateEmail, authController.signup);
 router.post("/auth/signin", authController.signin);
 router.post("/auth/google/signin", authController.signinWithGoogle);
+
+// FAVORITES
+router.get(
+  "/favorites",
+  verifyToken,
+  verifyUser,
+  favoriteController.getAllFavorites
+);
+router.post(
+  "/favorites/new",
+  verifyToken,
+  verifyUser,
+  favoriteController.createNewFavorite
+);
+router.post(
+  "/favorites/del",
+  verifyToken,
+  verifyUser,
+  favoriteController.deleteFavorite
+);
 
 export default router;
