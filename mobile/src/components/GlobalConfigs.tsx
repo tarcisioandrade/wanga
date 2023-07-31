@@ -14,6 +14,7 @@ import {
   HankenGrotesk_800ExtraBold,
 } from "@expo-google-fonts/dev";
 import LoadingScreen from "src/screens/LoadingScreen";
+import { GoogleSignin } from "@react-native-google-signin/google-signin";
 
 type Props = {
   children: ReactNode;
@@ -28,6 +29,13 @@ const GlobalConfigs = ({ children }: Props) => {
     HankenGrotesk_800ExtraBold,
     BungeeSpice_400Regular,
   });
+
+  GoogleSignin.configure({
+    scopes: ["email"],
+    webClientId: process.env.GOOGLE_WEB_CLIENT_ID,
+    offlineAccess: true,
+  });
+
   const { theme, themeLoaded } = useThemeMode();
 
   const statusStyle = theme.type === "dark" ? "light" : "dark";

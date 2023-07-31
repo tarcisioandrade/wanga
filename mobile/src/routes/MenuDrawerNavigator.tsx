@@ -1,10 +1,10 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { DrawerParamList } from "../@types/navigation";
-import Favorites from "../screens/Favorites";
 import MenuDrawer from "src/components/MenuDrawer";
 import HomeStackNavigator from "./HomeStackNavigator";
 import DownloadsStackNavigator from "./DownloadsStackNavigator";
 import HistoricStackNavigator from "./HistoricStackNavigator";
+import FavoritesStackNavigator from "./FavoritesStackNavigator";
 
 const { Screen, Navigator } = createDrawerNavigator<DrawerParamList>();
 
@@ -37,7 +37,7 @@ const MenuDrawerNavigator = () => {
         options={{
           title: "Favoritos",
         }}
-        component={Favorites}
+        component={FavoritesStackNavigator}
       />
       <Screen
         name="drawerHistoric"

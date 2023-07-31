@@ -42,7 +42,7 @@ const MangaScreen = ({ route }: RootStackScreenProps<"manga">) => {
 
   return (
     <Layout>
-      <MangaHeader score={data?.manga.score} />
+      <MangaHeader score={data?.manga.score} id_serie={data?.manga.id_serie} />
       <Container>
         {isLoading ? (
           <ChapterList.Skeleton />

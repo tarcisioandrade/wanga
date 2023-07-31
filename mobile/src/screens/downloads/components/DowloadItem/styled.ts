@@ -13,4 +13,5 @@ export const DownloadItemContainer = styled.Pressable`
 
 export const IconWrapper = styled.View`
   padding: 0 ${phs(6)};
+  width: ${phs(32)};
 `;

@@ -7,6 +7,7 @@ export type RootStackParamList = {
   search: undefined;
   downloads: undefined;
   historic: undefined;
+  favorites: undefined;
   about: undefined;
   settings: undefined;
   register: undefined;

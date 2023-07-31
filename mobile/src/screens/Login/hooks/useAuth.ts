@@ -1,8 +1,3 @@
-import {
-  GoogleSignin,
-  statusCodes,
-  NativeModuleError,
-} from "@react-native-google-signin/google-signin";
 import { useNavigation } from "@react-navigation/native";
 import { isAxiosError } from "axios";
 import { useState } from "react";
@@ -12,6 +7,12 @@ import { useUser } from "src/contexts/UserContext";
 import { ToastAndroid } from "react-native";
 import { useMutation } from "@tanstack/react-query";
 import { SigninUser } from "..";
+import Toast from "react-native-toast-message";
+import {
+  GoogleSignin,
+  statusCodes,
+  NativeModuleError,
+} from "@react-native-google-signin/google-signin";
 
 export type SigninGoogleInput = {
   id_google: string;
@@ -24,23 +25,26 @@ export const useAuth = () => {
   const navigation = useNavigation();
   const { setUserInLocalStorage } = useUser();
 
-  GoogleSignin.configure({
-    scopes: ["email"],
-    webClientId: process.env.GOOGLE_WEB_CLIENT_ID,
-    offlineAccess: true,
-  });
+  const welcomeUser = (userName: string) => {
+    Toast.show({
+      type: "info",
+      text1: `Bem Vindo, ${userName}-senpai`,
+      topOffset: 80,
+    });
+  };
 
   const { isLoading, mutate } = useMutation({
     mutationFn: (user: SigninUser) => signinApi(user),
     onSuccess: (data) => {
       setUserInLocalStorage(data).then(() => {
         navigation.navigate("home");
+        welcomeUser(data.name);
       });
-      ToastAndroid.show(`Bem Vindo, ${data.name}-senpai`, ToastAndroid.TOP);
     },
     onError(error) {
-      console.log(JSON.stringify(error, null, 2));
-      ToastAndroid.show("Email ou senha incorreto.", ToastAndroid.TOP);
+      if (isAxiosError(error) && error.response?.status === 401) {
+        ToastAndroid.show("Email ou senha incorreto.", ToastAndroid.BOTTOM);
+      }
     },
   });
 
@@ -58,10 +62,7 @@ export const useAuth = () => {
       });
       setUserInLocalStorage(wangaUser);
       navigation.navigate("home");
-      ToastAndroid.show(
-        `Bem Vindo, ${wangaUser.name}-senpai`,
-        ToastAndroid.TOP
-      );
+      welcomeUser(wangaUser.name);
     } catch (error) {
       if (isAxiosError(error)) {
         await GoogleSignin.revokeAccess();

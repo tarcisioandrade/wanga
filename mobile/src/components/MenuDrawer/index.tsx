@@ -72,7 +72,7 @@ const MenuDrawer = (props: DrawerContentComponentProps) => {
   const logout = async () => {
     const isGoogleSignenIn = await GoogleSignin.isSignedIn();
     if (isGoogleSignenIn) await GoogleSignin.signOut();
-    
+
     removeUserFromLocalStorage();
     closeModalConfirmLogout();
     props.navigation.navigate("home");
@@ -122,21 +122,34 @@ const MenuDrawer = (props: DrawerContentComponentProps) => {
             const { options } = props.descriptors[key];
             const isFocused = props.state.index === index;
             const IconDrawer = iconAndLabelMappings[name].icon;
+            const favoriteBlocked = !user && options.title === "Favoritos";
+
             return (
               <S.CustomDrawerItem
                 key={key}
                 active={isFocused}
                 onPress={() => props.navigation.navigate(name)}
+                disabled={favoriteBlocked}
               >
                 <Icon
                   type="fill"
                   icon={IconDrawer}
-                  color={theme.MENU_ITEM_COLOR}
+                  color={
+                    favoriteBlocked
+                      ? theme.SKELETON_COLOR
+                      : theme.MENU_ITEM_COLOR
+                  }
                   width={phs(24)}
                   height={pvs(24)}
                 />
                 <Text
-                  color={themeMode.type === "dark" ? "GRAY_500" : "PRIMARY"}
+                  color={
+                    favoriteBlocked
+                      ? "SKELETON_COLOR"
+                      : themeMode.type === "dark"
+                      ? "GRAY_500"
+                      : "PRIMARY"
+                  }
                   size="FONT_XS"
                   weight="WEIGHT_MEDIUM"
                 >

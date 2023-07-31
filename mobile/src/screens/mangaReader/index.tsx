@@ -24,6 +24,7 @@ const MangaReader = ({ route }: RootStackScreenProps<"mangaReader">) => {
   const { data, isLoading, error } = useQuery({
     queryKey: [queryKeys.pages, chapter],
     queryFn: () => getPages(chapter),
+    cacheTime: Infinity,
   });
 
   const { handleDownload, saveDownloadInHistoric } = useDownload();
@@ -67,8 +68,7 @@ const MangaReader = ({ route }: RootStackScreenProps<"mangaReader">) => {
       Toast.show({
         type: "success",
         text1: "Download Iniciado",
-        position: "bottom",
-        bottomOffset: 90,
+        topOffset: 50,
       });
       for (let i = 0; i < images.length; i++) {
         try {

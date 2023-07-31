@@ -6,6 +6,8 @@ import { SignupUser } from "src/screens/Register";
 import { User } from "src/@types/user";
 import { SigninUser } from "src/screens/Login";
 import { SigninGoogleInput } from "src/screens/Login/hooks/useAuth";
+import { FavoriteBody } from "src/@types/favorite";
+import { wangaDBApi } from "./instances";
 
 interface MangaInfoResponse {
   manga: Manga;
@@ -58,6 +60,28 @@ export async function signinGoogleApi(user: SigninGoogleInput) {
       ...user,
     }
   );
+
+  return res.data;
+}
+
+export async function newFavorite(id_serie: number) {
+  const res = await wangaDBApi.post("http://192.168.0.64:8080/favorites/new", {
+    id_serie,
+  });
+
+  return res.data;
+}
+
+export async function getFavorites() {
+  const res = await wangaDBApi.get<FavoriteBody>("/favorites");
+
+  return res.data;
+}
+
+export async function delFavorite(del_list: string[]) {
+  const res = await wangaDBApi.post("/favorites/del", {
+    del_list,
+  });
 
   return res.data;
 }

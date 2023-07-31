@@ -6,8 +6,12 @@ const lightTheme = {
 
   WARNING: "#FDBD31",
   RED_500: "#F24E1E",
+
   WHITE: "#FFFFFF",
+
   ORANGE_500: "#FFA500",
+
+  GREEN_500: "#22c55e",
 
   BLACK: "#000",
   BLACK_TRANSPARENT: "rgba(0, 0, 0, 0.5)",

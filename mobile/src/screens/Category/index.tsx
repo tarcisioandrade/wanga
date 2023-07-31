@@ -41,7 +41,7 @@ const Category = ({ route }: RootStackScreenProps<"category">) => {
     console.error(JSON.stringify(error, null, 2));
     return null;
   }
-  
+
   return (
     <Layout>
       <Header backShow title={name} />

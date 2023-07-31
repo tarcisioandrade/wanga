@@ -9,4 +9,5 @@ export const queryKeys = {
   pages: "pages-key",
   categories: "categories-key",
   categoriesSeries: "categories-series-key",
+  favorites: "favorites-key",
 };

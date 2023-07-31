@@ -10,18 +10,18 @@ import { useTheme } from "styled-components";
 import { Text } from "src/components/Text";
 import StarIcon from "assets/svg-icon/star.svg";
 import CustomPressable from "src/components/CustomPressable";
+import { useHandleFavorite } from "../hooks/useHandleFavorite";
 
 type Props = {
   score: string | undefined;
+  id_serie: string | undefined;
 };
 
-const MangaHeader = ({ score }: Props) => {
+const MangaHeader = ({ score, id_serie }: Props) => {
   const navigator = useNavigation();
   const theme = useTheme();
-
-  const hasFavorited = false;
-  const favoriteManga = () => {};
-  const unfavoriteManga = () => {};
+  const { isFavorited, favoriteManga, unfavoriteManga } =
+    useHandleFavorite(id_serie);
 
   return (
     <Container bg="BG_COLOR">
@@ -37,7 +37,7 @@ const MangaHeader = ({ score }: Props) => {
             </Stack>
           )}
         </Stack>
-        {hasFavorited ? (
+        {isFavorited ? (
           <CustomPressable onPress={unfavoriteManga}>
             <Icon type="fill" color={theme.RED_500} icon={FavoriteFill} />
           </CustomPressable>
