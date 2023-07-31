@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import { NextFunction, Request, Response } from "express";
-require("dotenv").config();
+import { SECRET_KEY } from "../constants/secret-key";
 
 export const verifyToken = (
   req: Request,
@@ -15,13 +15,13 @@ export const verifyToken = (
     });
   }
 
-  jwt.verify(token, process.env.SECRET as string, (err, decoded) => {
+  jwt.verify(token, SECRET_KEY, (err) => {
     if (err) {
       return res.status(401).send({
         message: "Unauthorized!",
       });
     }
-    
+
     next();
   });
 };

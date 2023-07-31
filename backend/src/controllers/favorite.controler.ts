@@ -51,12 +51,7 @@ export class FavoriteController {
     const del_list = req.body.del_list as string[];
 
     del_list.forEach(async (favorite) => {
-      await favoriteModel.deleteFavorite(favorite).catch(() => {
-        res.status(404).send({
-          message: "Favorite not Found!",
-        });
-        return;
-      });
+      await favoriteModel.deleteFavorite(favorite);
     });
 
     res.sendStatus(200);
