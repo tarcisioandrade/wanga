@@ -3,7 +3,11 @@ import { pvs } from "src/utils/metrics";
 import styled from "styled-components/native";
 import { InputProps } from ".";
 
-export const InputContainer = styled.View<Pick<InputProps, "isError">>`
+type Props = Pick<InputProps, "isError"> & {
+  focused: boolean;
+};
+
+export const InputContainer = styled.View<Props>`
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -12,8 +16,8 @@ export const InputContainer = styled.View<Pick<InputProps, "isError">>`
   height: ${pvs(49)};
   border-radius: 8px;
   border-width: 1px;
-  border-color: ${({ isError, theme }) =>
-    isError ? theme.RED_500 : theme.GRAY_600};
+  border-color: ${({ isError, theme, focused }) =>
+    isError ? theme.RED_500 : focused ? theme.PRIMARY : theme.GRAY_600};
 `;
 
 export const InputElement = styled(TextInput)`

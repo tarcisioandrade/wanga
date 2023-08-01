@@ -77,18 +77,19 @@ export const useAuth = () => {
 
       switch (typedError.code) {
         case statusCodes.SIGN_IN_CANCELLED:
-          Alert.alert("Processo Cancelado.");
+          ToastAndroid.show("Processo Cancelado.", ToastAndroid.BOTTOM);
           break;
         case statusCodes.IN_PROGRESS:
-          Alert.alert("Em progresso...");
+          Alert.alert("Status", "Em progresso...");
           break;
         case statusCodes.PLAY_SERVICES_NOT_AVAILABLE:
           Alert.alert(
+            "Error",
             "Google Play Services não está disponivel neste dispositivo."
           );
           break;
         case "7":
-          Alert.alert("Você está sem internet.");
+          Alert.alert("Falha na conexão", "Você está sem internet.");
           break;
         default:
           Alert.alert(

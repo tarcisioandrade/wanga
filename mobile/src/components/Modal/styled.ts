@@ -12,6 +12,7 @@ export const ModalWrapper = styled.View`
   align-items: center;
   background-color: rgba(0, 0, 0, 0.8);
   position: absolute;
+  z-index: 9999;
 `;
 
 export const ModalCentered = styled.View`

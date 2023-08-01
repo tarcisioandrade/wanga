@@ -17,8 +17,15 @@ import { useForm, Controller } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuth } from "./hooks/useAuth";
-import { ActivityIndicator } from "react-native";
-import { KeyboardAvoidingView, Pressable, View } from "react-native";
+import { ActivityIndicator, TouchableNativeFeedback } from "react-native";
+import { useThemeMode } from "src/contexts/ThemeContext";
+import Modal from "src/components/Modal";
+import { useFirstAccess } from "./hooks/useFirstAccess";
+import {
+  KeyboardAvoidingView,
+  Pressable,
+  View,
+} from "react-native";
 
 const SigninSchema = z.object({
   email: z.string().email({ message: "E-mail inválido" }),
@@ -30,6 +37,9 @@ export type SigninUser = z.infer<typeof SigninSchema>;
 const Login = ({ navigation }: RootStackScreenProps<"login">) => {
   const [hidePassword, setHidePassword] = useState(true);
   const theme = useTheme();
+  const { theme: themeMode } = useThemeMode();
+  const { close, dispatchModal, isFirstAccess, state } = useFirstAccess();
+
   const { signin, signInWithGoogle, isGoogleSigninLoading, isLoading } =
     useAuth();
 
@@ -42,7 +52,7 @@ const Login = ({ navigation }: RootStackScreenProps<"login">) => {
   });
 
   const goToForgoutPasswordScreen = () => {
-    console.log("Password");
+    navigation.navigate("forgotPassword");
   };
 
   const goToRegisterScreen = () => {
@@ -55,7 +65,11 @@ const Login = ({ navigation }: RootStackScreenProps<"login">) => {
 
   return (
     <>
-      <Header backShow title="Entre na sua conta" />
+      <Header
+        backShow
+        title="Entre na sua conta"
+        backArrowCallback={isFirstAccess ? dispatchModal : undefined}
+      />
       <Layout>
         <KeyboardAvoidingView>
           <Container>
@@ -114,7 +128,10 @@ const Login = ({ navigation }: RootStackScreenProps<"login">) => {
                   </Text>
                 )}
                 <S.ForgoutPassword onPress={goToForgoutPasswordScreen}>
-                  <Text size="FONT_3XS" color="PRIMARY">
+                  <Text
+                    size="FONT_3XS"
+                    color={themeMode.type === "dark" ? "WHITE" : "PRIMARY"}
+                  >
                     Esqueceu a senha?
                   </Text>
                 </S.ForgoutPassword>
@@ -132,25 +149,36 @@ const Login = ({ navigation }: RootStackScreenProps<"login">) => {
                 />
               </S.ButtonsContainer>
               <S.Separate />
-              <S.GoogleButton
+              <TouchableNativeFeedback
                 onPress={signInWithGoogle}
                 disabled={isGoogleSigninLoading}
               >
-                {isGoogleSigninLoading ? (
-                  <ActivityIndicator color={theme.PRIMARY} />
-                ) : (
-                  <>
-                    <Icon icon={GoogleIcon} type="fill" />
-                    <Text size="FONT_MD" weight="WEIGHT_SEMIBOLD">
-                      Entra com o Google
-                    </Text>
-                  </>
-                )}
-              </S.GoogleButton>
+                <S.GoogleButton>
+                  {isGoogleSigninLoading ? (
+                    <ActivityIndicator color={theme.PRIMARY} />
+                  ) : (
+                    <>
+                      <Icon icon={GoogleIcon} type="fill" />
+                      <Text size="FONT_MD" weight="WEIGHT_SEMIBOLD">
+                        Entra com o Google
+                      </Text>
+                    </>
+                  )}
+                </S.GoogleButton>
+              </TouchableNativeFeedback>
             </View>
           </Container>
         </KeyboardAvoidingView>
       </Layout>
+
+      <Modal.Root isOpen={state} onClose={close}>
+        <Modal.Header>Faz o L ogin</Modal.Header>
+        <Modal.Content>
+          <Text>
+            Faça login no app para ter acesso a todas as nossas funcionalidades!
+          </Text>
+        </Modal.Content>
+      </Modal.Root>
     </>
   );
 };

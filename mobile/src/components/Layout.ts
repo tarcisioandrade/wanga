@@ -18,6 +18,7 @@ type StackProps = {
   flex?: number;
   pb?: number;
   mt?: number;
+  mb?: number;
   my?: number;
   px?: number;
   py?: number;
@@ -88,6 +89,12 @@ export const Stack = styled.View<StackProps>`
     props.mt &&
     css`
       margin-top: ${pvs(props.mt)};
+    `}
+
+    ${(props) =>
+    props.mb &&
+    css`
+      margin-bottom: ${pvs(props.mb)};
     `}
 
     ${(props) =>

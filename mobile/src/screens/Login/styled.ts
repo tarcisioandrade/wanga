@@ -35,7 +35,7 @@ export const Separate = styled.View`
   margin: ${pvs(30)} 0;
 `;
 
-export const GoogleButton = styled.Pressable`
+export const GoogleButton = styled.View`
   height: ${pvs(49)};
   border-radius: 8px;
   border-width: 1px;

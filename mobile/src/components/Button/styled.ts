@@ -3,7 +3,7 @@ import { Text } from "../Text";
 import { pvs } from "src/utils/metrics";
 import { ButtonProps } from ".";
 
-export const ButtonContainer = styled.Pressable<
+export const ButtonContainer = styled.View<
   Pick<ButtonProps, "type" | "disabled">
 >`
   background-color: ${({ theme, type = "fill" }) =>

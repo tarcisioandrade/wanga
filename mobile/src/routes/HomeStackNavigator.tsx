@@ -12,6 +12,7 @@ import Settings from "src/screens/Settings";
 import Category from "src/screens/Category";
 import Login from "src/screens/Login";
 import Register from "src/screens/Register";
+import ForgotPassword from "src/screens/ForgotPassword";
 
 const { Navigator, Screen, Group } =
   createNativeStackNavigator<RootStackParamList>();
@@ -39,6 +40,7 @@ const HomeStackNavigator = () => {
       <Group screenOptions={{ animation: "none" }}>
         <Screen name="login" component={Login} />
         <Screen name="register" component={Register} />
+        <Screen name="forgotPassword" component={ForgotPassword} />
       </Group>
     </Navigator>
   );

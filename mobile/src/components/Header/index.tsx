@@ -22,6 +22,7 @@ type Props = {
   title?: string;
   value?: string;
   onChangeValue?: (value: string) => void;
+  backArrowCallback?: () => void;
 };
 const Header = ({
   inputShow,
@@ -32,16 +33,25 @@ const Header = ({
   categoryShow,
   title,
   onChangeValue,
+  backArrowCallback,
   value,
 }: Props) => {
   const navigator = useNavigation();
+
+  const onBackArrow = () => {
+    if (backArrowCallback) {
+      backArrowCallback();
+    } else {
+      navigator.goBack();
+    }
+  };
 
   return (
     <Container bg="BG_COLOR" style={{ zIndex: 9999 }}>
       <S.HeaderContainer>
         {backShow && (
           <Stack direction="row" gap={16} align_items="center">
-            <CustomPressable onPress={navigator.goBack}>
+            <CustomPressable onPress={onBackArrow}>
               <Icon type="fill" icon={ArrowLeft} />
             </CustomPressable>
 

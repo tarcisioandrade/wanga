@@ -12,6 +12,7 @@ export type RootStackParamList = {
   settings: undefined;
   register: undefined;
   login: undefined;
+  forgotPassword: undefined;
   category: {
     id_category: number;
     name: string;

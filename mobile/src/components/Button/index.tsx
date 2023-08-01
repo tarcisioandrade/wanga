@@ -1,14 +1,14 @@
-import {
-  View,
-  Text,
-  ButtonProps as ButtonPropsRN,
-  ActivityIndicator,
-} from "react-native";
 import React, { ReactNode } from "react";
 import * as S from "./styled";
 import { useTheme } from "styled-components";
+import {
+  ActivityIndicator,
+  TouchableNativeFeedbackProps,
+  TouchableNativeFeedback,
+} from "react-native";
 
-export type ButtonProps = ButtonPropsRN & {
+export type ButtonProps = TouchableNativeFeedbackProps & {
+  title: string;
   type?: "fill" | "outline";
   loading?: boolean;
 };
@@ -16,22 +16,17 @@ export type ButtonProps = ButtonPropsRN & {
 const Button = ({ type = "fill", title, loading, ...props }: ButtonProps) => {
   const theme = useTheme();
   return (
-    <S.ButtonContainer
-      type={type}
-      {...props}
-      disabled={loading}
-      style={({ pressed }) => ({
-        opacity: pressed ? 0.8 : 1,
-      })}
-    >
-      {loading ? (
-        <ActivityIndicator
-          color={type === "outline" ? theme.PRIMARY : theme.WHITE}
-        />
-      ) : (
-        <S.ButtonText type={type}>{title}</S.ButtonText>
-      )}
-    </S.ButtonContainer>
+    <TouchableNativeFeedback disabled={loading} {...props}>
+      <S.ButtonContainer type={type}>
+        {loading ? (
+          <ActivityIndicator
+            color={type === "outline" ? theme.PRIMARY : theme.WHITE}
+          />
+        ) : (
+          <S.ButtonText type={type}>{title}</S.ButtonText>
+        )}
+      </S.ButtonContainer>
+    </TouchableNativeFeedback>
   );
 };
 
