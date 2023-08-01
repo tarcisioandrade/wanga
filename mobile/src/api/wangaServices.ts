@@ -1,4 +1,3 @@
-import axios from "axios";
 import { Manga } from "src/@types/manga";
 import { ChapterBody } from "src/@types/chapters";
 import { Page } from "src/@types/page";
@@ -14,23 +13,19 @@ interface MangaInfoResponse {
 }
 
 export async function getMangaInfo(id: number) {
-  const res = await axios.get<MangaInfoResponse>(
-    `http://192.168.0.64:8080/manga/${id}`
-  );
+  const res = await wangaDBApi.get<MangaInfoResponse>(`/manga/${id}`);
 
   return res.data;
 }
 
 export async function getChapters(id: number, page: number = 1) {
-  const res = await axios.get<ChapterBody>(
-    `http://192.168.0.64:8080/chapters/${id}/${page}`
-  );
+  const res = await wangaDBApi.get<ChapterBody>(`/chapters/${id}/${page}`);
 
   return res.data;
 }
 
 export async function getPages(id: number) {
-  const res = await axios.get<Page>(`http://192.168.0.64:8080/pages/${id}`);
+  const res = await wangaDBApi.get<Page>(`/pages/${id}`);
 
   return res.data;
 }
@@ -38,7 +33,7 @@ export async function getPages(id: number) {
 export async function createUser(user: SignupUser) {
   const { confirmPassword, ...rest } = user;
 
-  const res = await axios.post<User>("http://192.168.0.64:8080/auth/signup", {
+  const res = await wangaDBApi.post<User>("/auth/signup", {
     ...rest,
   });
 
@@ -46,7 +41,7 @@ export async function createUser(user: SignupUser) {
 }
 
 export async function signinApi(user: SigninUser) {
-  const res = await axios.post<User>("http://192.168.0.64:8080/auth/signin", {
+  const res = await wangaDBApi.post<User>("/auth/signin", {
     ...user,
   });
 
@@ -54,18 +49,15 @@ export async function signinApi(user: SigninUser) {
 }
 
 export async function signinGoogleApi(user: SigninGoogleInput) {
-  const res = await axios.post<User>(
-    "http://192.168.0.64:8080/auth/google/signin",
-    {
-      ...user,
-    }
-  );
+  const res = await wangaDBApi.post<User>("/auth/google/signin", {
+    ...user,
+  });
 
   return res.data;
 }
 
 export async function newFavorite(id_serie: number) {
-  const res = await wangaDBApi.post("http://192.168.0.64:8080/favorites/new", {
+  const res = await wangaDBApi.post("/favorites/new", {
     id_serie,
   });
 
