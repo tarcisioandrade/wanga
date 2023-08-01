@@ -12,7 +12,7 @@ app.use(express.json());
 app.use("/", routes);
 
 app.use((_req, _res, next) => {
-  const err = new Error("Not Found");
+  const err = new Error("Not Found Route");
   next(err);
 });
 
@@ -24,5 +24,5 @@ app.use((error: any, _req: Request, res: Response, _next: NextFunction) => {
 });
 
 app.listen(port, () => {
-  console.log(`Running at http://localhost:${port}/`);
+  console.log(`Running at port ${port}`);
 });

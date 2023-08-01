@@ -3,7 +3,6 @@ import { getGenres, getTop, getMangaById, getPopular, getRecents } from "./api";
 import { PagesController } from "./controllers/pages.controller";
 import { SearchController } from "./controllers/search.controller";
 import { ChaptersController } from "./controllers/chapters.controller";
-import got from "got";
 import { checkDuplicateEmail } from "./middlewares/verifySignUp";
 import { AuthController } from "./controllers/auth.controller";
 import { verifyToken } from "./middlewares/verifyToken";
@@ -35,9 +34,6 @@ router.get("/genres/", (_req, res) => {
 });
 
 router.get("/recents", async (req, res) => {
-  const a = await got("https://mangalivre.net/home/getFeaturedSeries.json");
-
-  console.log("a", JSON.parse(a.body));
   res.redirect("/recents/1");
 });
 
@@ -72,6 +68,7 @@ router.get("/top/", async (_req, res) => {
 
 router.get("/manga/:id", async (req, res) => {
   const id = req.params.id;
+
   getMangaById(id)
     .then((response) => {
       res.send(response);

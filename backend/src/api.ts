@@ -53,7 +53,7 @@ export function search(name: string) {
     } catch (error) {
       if (error instanceof Error) {
         console.log(error.message);
-        return;
+        throw error;
       }
       console.log(error);
     }
@@ -98,7 +98,7 @@ export function getChapters(id: string, page: number | string) {
     } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);
-        return;
+        throw error;
       }
       console.error(error);
     }
@@ -147,7 +147,7 @@ export async function getPages(release_id: string) {
     } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);
-        return;
+        throw error;
       }
       console.error(error);
     }
@@ -162,7 +162,7 @@ export async function getPages(release_id: string) {
     } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);
-        return;
+        throw error;
       }
       console.error(error);
     }
@@ -191,7 +191,7 @@ export function getGenres() {
     } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);
-        return;
+        throw error;
       }
       console.error(error);
     }
@@ -212,7 +212,7 @@ export function getRecents(page: string) {
     } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);
-        return;
+        throw error;
       }
       console.error(error);
     }
@@ -233,7 +233,7 @@ export function getPopular(page: string) {
     } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);
-        return;
+        throw error;
       }
       console.error(error);
     }
@@ -253,7 +253,7 @@ export function getTop(page: string) {
     } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);
-        return;
+        throw error;
       }
       console.error(error);
     }
