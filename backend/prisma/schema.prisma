@@ -11,13 +11,14 @@ datasource db {
 }
 
 model User {
-  id         String     @id @default(uuid()) @map("_id")
-  name       String
-  email      String     @unique
-  password   String
-  plan       Plans      @default(free)
-  created_at DateTime   @default(now())
-  favorites  Favorite[]
+  id            String         @id @default(uuid()) @map("_id")
+  name          String
+  email         String         @unique
+  password      String
+  plan          Plans          @default(free)
+  created_at    DateTime       @default(now())
+  favorites     Favorite[]
+  RecoveryToken RecoveryToken?
 
   @@map("user")
 }
@@ -43,6 +44,15 @@ model Favorite {
   id_google_user String?
 
   @@map("favorite")
+}
+
+model RecoveryToken {
+  id      String @id @default(uuid()) @map("_id")
+  token   String
+  User    User   @relation(fields: [user_id], references: [id])
+  user_id String @unique
+
+  @@map("recovery_token")
 }
 
 enum Plans {

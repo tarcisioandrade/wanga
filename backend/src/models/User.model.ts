@@ -7,6 +7,7 @@ interface IUser {
   getUserWithEmail: (email: string) => Promise<User | null>;
   getUserById: (id: string) => Promise<User | null>;
   createUser: (user: UserInput) => Promise<User | null>;
+  updatePassword: (id_user: string, hash: string) => Promise<User | null>;
 }
 
 export class UserModel implements IUser {
@@ -38,5 +39,18 @@ export class UserModel implements IUser {
     });
 
     return newUser;
+  }
+
+  async updatePassword(id_user: string, hash: string) {
+    const user = await prisma.user.update({
+      where: {
+        id: id_user,
+      },
+      data: {
+        password: hash,
+      },
+    });
+
+    return user;
   }
 }

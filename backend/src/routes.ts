@@ -9,12 +9,14 @@ import { AuthController } from "./controllers/auth.controller";
 import { verifyToken } from "./middlewares/verifyToken";
 import { verifyUser } from "./middlewares/verifyUser";
 import { FavoriteController } from "./controllers/favorite.controler";
+import { ForgotPasswordController } from "./controllers/forgot-password.controller";
 
 const pagesController = new PagesController();
 const searchController = new SearchController();
 const chaptersController = new ChaptersController();
 const authController = new AuthController();
 const favoriteController = new FavoriteController();
+const forgotPassword = new ForgotPasswordController();
 
 const router = Router();
 
@@ -81,6 +83,8 @@ router.get("/manga/:id", async (req, res) => {
 router.post("/auth/signup", checkDuplicateEmail, authController.signup);
 router.post("/auth/signin", authController.signin);
 router.post("/auth/google/signin", authController.signinWithGoogle);
+router.post("/auth/forgotPassword", forgotPassword.createToken);
+router.post("/auth/resetPassword", forgotPassword.resetPassword);
 
 // FAVORITES
 router.get(
