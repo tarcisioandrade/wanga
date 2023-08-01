@@ -13,13 +13,15 @@ import { BackHandler, ToastAndroid, Alert } from "react-native";
 import DownloadHeader from "src/components/DeleteHeader";
 import Empty from "src/components/Empty";
 import { useUser } from "src/contexts/UserContext";
+import RefreshInError from "src/components/RefreshInError";
+import SearchSkeleton from "../search/components/SearchSkeleton";
 
 const Favorites = () => {
   const [favorites, setFavorites] = useState<Favorite[]>([]);
   const [deleteList, setDeleteList] = useState<string[]>([]);
   const { user } = useUser();
 
-  const { data, isError, refetch } = useQuery({
+  const { data, isError, error, refetch, isLoading } = useQuery({
     queryKey: [queryKeys.favorites],
     queryFn: getFavorites,
     enabled: !!user,
@@ -108,9 +110,9 @@ const Favorites = () => {
     }, [deleteMode])
   );
 
-  //TODO: Tratar error
-  if (isError) {
-    Alert.alert("Server Error", "Alguma coisa deu errada, tente novamente.");
+  //TODO: Colocar crashalytics
+  if (error) {
+    console.error(error);
   }
 
   //TODO: Passar essa logica do multiple delete para um hook.
@@ -126,7 +128,11 @@ const Favorites = () => {
         <Header menuShow logoShow searchShow categoryShow />
       )}
       <Container mt={10}>
-        {!favorites?.length ? (
+        {isLoading ? (
+          <SearchSkeleton />
+        ) : isError ? (
+          <RefreshInError refresh={refetch} />
+        ) : !favorites?.length ? (
           <Empty />
         ) : (
           <FlatList

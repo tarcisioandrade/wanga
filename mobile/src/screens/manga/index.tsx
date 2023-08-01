@@ -9,6 +9,7 @@ import { ChapterList } from "./component/ChapterList";
 import { useChapterRequest } from "./hooks/useChaptersRequest";
 import { FlatList, ActivityIndicator } from "react-native";
 import { vs } from "src/utils/metrics";
+import RefreshInError from "src/components/RefreshInError";
 
 const MangaScreen = ({ route }: RootStackScreenProps<"manga">) => {
   const { id } = route.params;
@@ -18,6 +19,7 @@ const MangaScreen = ({ route }: RootStackScreenProps<"manga">) => {
     error,
     isLoading: isMangaInfoLoading,
     refetch,
+    isError,
   } = useQuery({
     queryKey: [queryKeys.mangaInfo, id],
     queryFn: () => getMangaInfo(id),
@@ -31,20 +33,19 @@ const MangaScreen = ({ route }: RootStackScreenProps<"manga">) => {
     isErrorChapter,
   } = useChapterRequest(id);
 
-  const isLoading = isChapterLoading || isMangaInfoLoading;
-
-  // TODO: Tratar erro;
   if (error) {
     console.error(error);
-    refetch();
-    return null;
   }
+
+  const isLoading = isChapterLoading || isMangaInfoLoading;
 
   return (
     <Layout>
       <MangaHeader score={data?.manga.score} id_serie={data?.manga.id_serie} />
       <Container>
-        {isLoading ? (
+        {isError ? (
+          <RefreshInError refresh={refetch} />
+        ) : isLoading ? (
           <ChapterList.Skeleton />
         ) : (
           <FlatList

@@ -75,7 +75,11 @@ const Home = ({ navigation }: RootStackScreenProps<"home">) => {
         }
       >
         <GestureHandlerRootView>
-          <Parallax featured={featuredResult.data?.featured} />
+          <Parallax
+            featured={featuredResult.data?.featured}
+            error={featuredResult.isError}
+            refresh={featuredResult.refetch}
+          />
 
           <Container>
             <Tabs

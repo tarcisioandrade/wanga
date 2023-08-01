@@ -32,8 +32,6 @@ const MostReadCard = ({ data, position, size }: Props) => {
     });
   };
 
-  // TODO: TRANSFORMAR ESSES CARDS EM PATTERN COMPOSITION
-
   return (
     <CarouselMangaCardContainer
       onPress={() => goToMangaScreen(data.id_serie)}

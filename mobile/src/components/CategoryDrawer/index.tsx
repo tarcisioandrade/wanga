@@ -18,9 +18,10 @@ import {
   DrawerContentComponentProps,
   useDrawerProgress,
 } from "@react-navigation/drawer";
+import RefreshInError from "../RefreshInError";
 
 const CategoryDrawer = ({ navigation }: DrawerContentComponentProps) => {
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error, isError, refetch } = useQuery({
     queryKey: [queryKeys.categories],
     queryFn: getCategoriesList,
   });
@@ -40,34 +41,37 @@ const CategoryDrawer = ({ navigation }: DrawerContentComponentProps) => {
     });
   };
 
-  // TODO: Tratar Error
+  // TODO: Colocar crashalytics
   if (error) {
-    console.error(error, "category");
-    return null;
+    console.error(error);
   }
 
   if (isLoading) return null;
   return (
     <S.DrawerCategoryContainer style={{ transform: [{ translateX }] }}>
       <Container style={{ flex: 1 }}>
-        <FlashList
-          data={data?.categories_list}
-          keyExtractor={(item) => item.id_category.toString()}
-          estimatedItemSize={55}
-          showsVerticalScrollIndicator={false}
-          ItemSeparatorComponent={() => <View style={{ height: vs(15) }} />}
-          contentContainerStyle={{
-            paddingBottom: vs(70),
-          }}
-          ListHeaderComponent={() => (
-            <Text weight="WEIGHT_SEMIBOLD" style={{ marginBottom: vs(16) }}>
-              Categorias
-            </Text>
-          )}
-          renderItem={({ item }) => (
-            <CategoryItem category={item} handlePress={goToCategoryPage} />
-          )}
-        />
+        {isError ? (
+          <RefreshInError refresh={refetch} />
+        ) : (
+          <FlashList
+            data={data?.categories_list}
+            keyExtractor={(item) => item.id_category.toString()}
+            estimatedItemSize={55}
+            showsVerticalScrollIndicator={false}
+            ItemSeparatorComponent={() => <View style={{ height: vs(15) }} />}
+            contentContainerStyle={{
+              paddingBottom: vs(70),
+            }}
+            ListHeaderComponent={() => (
+              <Text weight="WEIGHT_SEMIBOLD" style={{ marginBottom: vs(16) }}>
+                Categorias
+              </Text>
+            )}
+            renderItem={({ item }) => (
+              <CategoryItem category={item} handlePress={goToCategoryPage} />
+            )}
+          />
+        )}
       </Container>
     </S.DrawerCategoryContainer>
   );

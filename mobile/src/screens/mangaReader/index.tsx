@@ -13,6 +13,7 @@ import { useDownload } from "src/hooks/useDownload";
 import Toast from "react-native-toast-message";
 import LoadingReader from "./components/LoadingReader";
 import * as FileSystem from "expo-file-system";
+import PageError from "./components/PageError";
 
 const { StorageAccessFramework } = FileSystem;
 
@@ -21,7 +22,7 @@ const MangaReader = ({ route }: RootStackScreenProps<"mangaReader">) => {
   const [chapter, setChapter] = useState(id_release);
   const { state, close, open, toggle } = useDisclose(true);
 
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error, isError, refetch } = useQuery({
     queryKey: [queryKeys.pages, chapter],
     queryFn: () => getPages(chapter),
     cacheTime: Infinity,
@@ -48,18 +49,16 @@ const MangaReader = ({ route }: RootStackScreenProps<"mangaReader">) => {
     }
   };
 
-  // TODO: Tratar error
+  // TODO: Colocar o chrashalytics
   if (error) {
-    if (error instanceof Error) {
-      Alert.alert("Server Error", error.message);
-    }
+    console.error(error);
   }
 
   const downloadInit = async () => {
+    if (!images || !manga) return;
+
     const albumName = `${data?.name}-${data?.chapter_number}`;
     let fileSize = 0;
-
-    if (!images || !manga) return;
 
     const permission =
       await StorageAccessFramework.requestDirectoryPermissionsAsync();
@@ -101,7 +100,6 @@ const MangaReader = ({ route }: RootStackScreenProps<"mangaReader">) => {
     }
   };
 
-  if (isLoading) return <LoadingReader />;
   return (
     <Layout>
       <StatusBar hidden />
@@ -110,15 +108,21 @@ const MangaReader = ({ route }: RootStackScreenProps<"mangaReader">) => {
         startDownload={downloadInit}
         currentChapter={data?.chapter_number}
       />
-      <Reader
-        mangaName={data?.name}
-        id_release={data?.release_id}
-        data={images}
-        close={close}
-        open={open}
-        toggle={toggle}
-        state={state}
-      />
+      {isLoading ? (
+        <LoadingReader />
+      ) : isError ? (
+        <PageError refresh={refetch} />
+      ) : (
+        <Reader
+          mangaName={data?.name}
+          id_release={data?.release_id}
+          data={images}
+          close={close}
+          open={open}
+          toggle={toggle}
+          state={state}
+        />
+      )}
       <FooterReader
         show={state}
         nextChapter={nextChapter}

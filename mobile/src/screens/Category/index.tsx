@@ -10,6 +10,7 @@ import CardSerie from "../../components/CardSerie";
 import { vs } from "src/utils/metrics";
 import { FlashList } from "@shopify/flash-list";
 import CategorySkeleton from "./components/CategorySkeleton";
+import RefreshInError from "src/components/RefreshInError";
 
 const Category = ({ route }: RootStackScreenProps<"category">) => {
   const { id_category, name } = route.params;
@@ -18,8 +19,10 @@ const Category = ({ route }: RootStackScreenProps<"category">) => {
     hasNextPage,
     isLoading,
     error,
+    isError,
     fetchNextPage,
     isFetchingNextPage,
+    refetch,
   } = useInfiniteQuery({
     queryKey: [queryKeys.categoriesSeries, id_category],
     queryFn: ({ pageParam = 1 }) => getCategoriesSeries(id_category, pageParam),
@@ -36,17 +39,18 @@ const Category = ({ route }: RootStackScreenProps<"category">) => {
     }
   };
 
-  // TODO: Tratar Erro
+  // TODO: Colocar crashlytics
   if (error) {
-    console.error(JSON.stringify(error, null, 2));
-    return null;
+    console.error(error);
   }
 
   return (
     <Layout>
       <Header backShow title={name} />
       <Container style={{ flex: 1 }}>
-        {isLoading ? (
+        {isError ? (
+          <RefreshInError refresh={refetch} />
+        ) : isLoading ? (
           <CategorySkeleton />
         ) : (
           <FlashList

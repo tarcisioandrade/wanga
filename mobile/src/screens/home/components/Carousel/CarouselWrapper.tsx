@@ -9,6 +9,7 @@ import RefreshIcon from "assets/svg-icon/refresh.svg";
 import Icon from "src/components/Icon";
 import { useTheme } from "styled-components";
 import CustomPressable from "src/components/CustomPressable";
+import RefreshInError from "src/components/RefreshInError";
 
 type CarouselWrapperProps = {
   data: any;
@@ -35,19 +36,7 @@ const CarouselWrapper = ({
   return (
     <S.CarouselWrapper bg="SECONDARY">
       {error ? (
-        <Stack
-          height={vs(166)}
-          justify_content="center"
-          align_items="center"
-          gap={10}
-        >
-          <Text size="FONT_SM" weight="WEIGHT_MEDIUM">
-            Falha no carregamento.
-          </Text>
-          <CustomPressable onPress={refresh}>
-            <Icon icon={RefreshIcon} type="fill" color={theme.GRAY_600} />
-          </CustomPressable>
-        </Stack>
+        <RefreshInError refresh={refresh} />
       ) : loading ? (
         <CarouselSkeleton />
       ) : (

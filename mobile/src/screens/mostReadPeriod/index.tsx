@@ -9,6 +9,7 @@ import { useMangaQueries } from "src/hooks/useMangaQueries";
 import { vs } from "src/utils/metrics";
 import CardsScreenSkeleton from "../../components/CardsScreenSkeleton";
 import { useTabs } from "src/hooks/useTabs";
+import RefreshInError from "src/components/RefreshInError";
 
 const MostReadPeriod = ({ route }: RootStackScreenProps<"mostReadPeriod">) => {
   const { type: typeDefault } = route.params;
@@ -22,7 +23,7 @@ const MostReadPeriod = ({ route }: RootStackScreenProps<"mostReadPeriod">) => {
   } = useTabs(typeDefault);
 
   const {
-    mostReadPeriodResult: { data, error, isLoading },
+    mostReadPeriodResult: { data, error, isLoading, isError, refetch },
   } = useMangaQueries(type, period);
 
   const dataFitred = data?.most_read.map(
@@ -34,10 +35,9 @@ const MostReadPeriod = ({ route }: RootStackScreenProps<"mostReadPeriod">) => {
     })
   );
 
-  // TODO: Tratar error
+  // TODO: Colocar crashalytics
   if (error) {
     console.error(error);
-    return null;
   }
 
   return (
@@ -60,6 +60,8 @@ const MostReadPeriod = ({ route }: RootStackScreenProps<"mostReadPeriod">) => {
 
         {isLoading ? (
           <CardsScreenSkeleton />
+        ) : isError ? (
+          <RefreshInError refresh={refetch} />
         ) : (
           <FlatList
             data={dataFitred}

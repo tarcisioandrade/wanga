@@ -9,19 +9,19 @@ import { FlatList } from "react-native";
 import ReleaseMangaCard from "src/components/ReleaseMangaCard";
 import { vs } from "src/utils/metrics";
 import { useTabs } from "src/hooks/useTabs";
+import RefreshInError from "src/components/RefreshInError";
 
 const Release = ({ route }: RootStackScreenProps<"release">) => {
   const { type: typeDefault } = route.params;
   const { typeMangaTabs, type, handleTypeTabChange } = useTabs(typeDefault);
 
   const {
-    releasesResult: { data, error, isLoading },
+    releasesResult: { data, error, isLoading, isError, refetch },
   } = useMangaQueries(type, type);
 
-  // TODO: Tratar error
+  // TODO: Colocar crashalytics
   if (error) {
     console.error(error);
-    return null;
   }
 
   return (
@@ -38,6 +38,8 @@ const Release = ({ route }: RootStackScreenProps<"release">) => {
 
         {isLoading ? (
           <CardsScreenSkeleton />
+        ) : isError ? (
+          <RefreshInError refresh={refetch} />
         ) : (
           <FlatList
             data={data?.releases}

@@ -45,7 +45,12 @@ const Reader = ({
     if (contentOffset.y === 0 && !state) open();
 
     // Chegou na metade do scroll
-    if (scrollPosition >= scrollEndOffset && !favorited && id_release && mangaName) {
+    if (
+      scrollPosition >= scrollEndOffset &&
+      !favorited &&
+      id_release &&
+      mangaName
+    ) {
       setReadChapter(mangaName, id_release);
       favorited = true;
     }
@@ -81,6 +86,7 @@ const Reader = ({
           body {
             margin: 0;
             padding: 0;
+            background-color: black;
           }
         </style>
       </head>

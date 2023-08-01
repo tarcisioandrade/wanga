@@ -23,6 +23,7 @@ const About = () => {
     setChecking(true);
 
     setTimeout(() => setChecking(false), 3000);
+    ToastAndroid.show("Seu app está atualizado", ToastAndroid.BOTTOM);
   };
 
   const goToEmail = async () => {
