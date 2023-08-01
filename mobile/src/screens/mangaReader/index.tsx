@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { RootStackScreenProps } from "src/@types/navigation";
 import { Layout } from "src/components/Layout";
 import { useQuery } from "@tanstack/react-query";
@@ -14,6 +14,7 @@ import Toast from "react-native-toast-message";
 import LoadingReader from "./components/LoadingReader";
 import * as FileSystem from "expo-file-system";
 import PageError from "./components/PageError";
+import { useReadHistoric } from "src/hooks/useReadHistoric";
 
 const { StorageAccessFramework } = FileSystem;
 
@@ -21,14 +22,14 @@ const MangaReader = ({ route }: RootStackScreenProps<"mangaReader">) => {
   const { id_release, manga } = route.params;
   const [chapter, setChapter] = useState(id_release);
   const { state, close, open, toggle } = useDisclose(true);
+  const { updateChapterHistoric } = useReadHistoric();
+  const { handleDownload, saveDownloadInHistoric } = useDownload();
 
   const { data, isLoading, error, isError, refetch } = useQuery({
     queryKey: [queryKeys.pages, chapter],
     queryFn: () => getPages(chapter),
     cacheTime: Infinity,
   });
-
-  const { handleDownload, saveDownloadInHistoric } = useDownload();
 
   const images = data?.images.map(({ legacy }) => ({
     url: legacy,
@@ -37,15 +38,23 @@ const MangaReader = ({ route }: RootStackScreenProps<"mangaReader">) => {
   const hasNextChapter = !!data?.next_chapter.release_id;
   const hasPrevChapter = !!data?.prev_chapter.release_id;
 
+  const updateChapter = (chapter: string) => {
+    if (manga) {
+      updateChapterHistoric(manga.name, chapter);
+    }
+  };
+
   const nextChapter = () => {
     if (data && hasNextChapter) {
       setChapter(Number(data.next_chapter.release_id));
+      updateChapter(data.next_chapter.number!);
     }
   };
 
   const prevChapter = () => {
     if (data && hasPrevChapter) {
       setChapter(Number(data.prev_chapter.release_id));
+      updateChapter(data.prev_chapter.number!);
     }
   };
 

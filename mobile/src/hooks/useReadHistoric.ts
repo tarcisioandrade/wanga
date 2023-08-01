@@ -35,7 +35,7 @@ export const useReadHistoric = () => {
           last_read_time: history.last_read_time,
         };
 
-        AsyncStorage.setItem("@read_history", JSON.stringify(historyRead));
+        updateReadHistoric(historyRead);
         return;
       }
 
@@ -44,7 +44,7 @@ export const useReadHistoric = () => {
       }
 
       historyRead.push(history);
-      AsyncStorage.setItem("@read_history", JSON.stringify(historyRead));
+      updateReadHistoric(historyRead);
     }
   };
 
@@ -52,5 +52,28 @@ export const useReadHistoric = () => {
     await AsyncStorage.setItem("@read_history", JSON.stringify(newValue));
   };
 
-  return { getReadHistoric, setReadHistoric, updateReadHistoric };
+  const updateChapterHistoric = async (name: string, chapter: string) => {
+    const currentHistoric = await getReadHistoric();
+    const historic = currentHistoric ? currentHistoric : ([] as ReadHistoric[]);
+
+    if (currentHistoric) {
+      const targetIndex = currentHistoric.findIndex((his) => his.name === name);
+
+      if (targetIndex !== -1) {
+        historic[targetIndex] = {
+          ...historic[targetIndex],
+          last_chapter_read: chapter,
+          last_read_time: new Date().toISOString(),
+        };
+        updateReadHistoric(historic);
+      }
+    }
+  };
+
+  return {
+    getReadHistoric,
+    setReadHistoric,
+    updateReadHistoric,
+    updateChapterHistoric,
+  };
 };
