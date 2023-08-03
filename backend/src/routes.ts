@@ -10,6 +10,7 @@ import { verifyUser } from "./middlewares/verifyUser";
 import { FavoriteController } from "./controllers/favorite.controler";
 import { ForgotPasswordController } from "./controllers/forgot-password.controller";
 import { NotificationController } from "./controllers/notification.controller";
+import { ApplicationController } from "./controllers/application.controller";
 
 const pagesController = new PagesController();
 const searchController = new SearchController();
@@ -18,6 +19,7 @@ const authController = new AuthController();
 const favoriteController = new FavoriteController();
 const forgotPassword = new ForgotPasswordController();
 const notificationController = new NotificationController();
+const applicationController = new ApplicationController();
 
 const router = Router();
 
@@ -115,5 +117,8 @@ router.post(
   "/notification/del",
   notificationController.deleteTokenNotification
 );
+
+// APPLICATION
+router.get("/application", applicationController.getApplication);
 
 export default router;
