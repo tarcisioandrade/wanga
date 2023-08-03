@@ -77,3 +77,19 @@ export async function delFavorite(del_list: string[]) {
 
   return res.data;
 }
+
+export async function addPushToken(token: string) {
+  const res = await wangaDBApi.post("/notification/add", {
+    token,
+  });
+
+  return res.data;
+}
+
+export async function delPushToken(token: string) {
+  const res = await wangaDBApi.post("/notification/del", {
+    token,
+  });
+
+  return res.data;
+}

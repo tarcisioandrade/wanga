@@ -8,9 +8,26 @@ import { useConfirmExit } from "src/hooks/useConfirmExit";
 import GlobalConfigs from "src/components/GlobalConfigs";
 import { ThemeProvider } from "src/contexts/ThemeContext";
 import { UserProvider } from "src/contexts/UserContext";
+import * as Notifications from "expo-notifications";
+import { useNotification } from "src/hooks/useNotification";
+import { useEffect } from "react";
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+    priority: Notifications.AndroidNotificationPriority.MAX,
+  }),
+});
 
 export default function App() {
   const queryClient = new QueryClient();
+  const { registerForPushNotificationsAsync } = useNotification();
+
+  useEffect(() => {
+    registerForPushNotificationsAsync();
+  }, []);
 
   useAppStateChange();
   useConfirmExit();
