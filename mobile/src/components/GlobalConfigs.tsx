@@ -8,16 +8,14 @@ import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { useUpdateAvaliable } from "src/hooks/useUpdateAvaliable";
 import { useDisclose } from "src/hooks/useDisclose";
 import ModalUpdateAvaliable from "./ModalUpdateAvaliable";
-//TODO: Trocar o expo google font dev para o do HankenGrotesk
 import {
   useFonts,
   HankenGrotesk_400Regular,
   HankenGrotesk_600SemiBold,
-  BungeeSpice_400Regular,
   HankenGrotesk_500Medium,
   HankenGrotesk_700Bold,
   HankenGrotesk_800ExtraBold,
-} from "@expo-google-fonts/dev";
+} from "@expo-google-fonts/hanken-grotesk";
 
 type Props = {
   children: ReactNode;
@@ -33,7 +31,7 @@ const GlobalConfigs = ({ children }: Props) => {
     HankenGrotesk_600SemiBold,
     HankenGrotesk_700Bold,
     HankenGrotesk_800ExtraBold,
-    BungeeSpice_400Regular,
+    BungeeSpice_400Regular: require("assets/font/BungeeSpice-Regular.ttf"),
   });
 
   GoogleSignin.configure({
