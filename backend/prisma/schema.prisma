@@ -55,6 +55,22 @@ model RecoveryToken {
   @@map("recovery_token")
 }
 
+model Application {
+  id         String   @id @default(uuid()) @map("_id")
+  name       String
+  version    String
+  updated_at DateTime @default(now())
+
+  @@map("application")
+}
+
+model PushToken {
+  id    String @id @default(uuid()) @map("_id")
+  token String @unique
+
+  @@map("push_token")
+}
+
 enum Plans {
   free
   vip
