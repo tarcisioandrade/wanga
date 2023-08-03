@@ -9,6 +9,7 @@ import { verifyToken } from "./middlewares/verifyToken";
 import { verifyUser } from "./middlewares/verifyUser";
 import { FavoriteController } from "./controllers/favorite.controler";
 import { ForgotPasswordController } from "./controllers/forgot-password.controller";
+import { NotificationController } from "./controllers/notification.controller";
 
 const pagesController = new PagesController();
 const searchController = new SearchController();
@@ -16,6 +17,7 @@ const chaptersController = new ChaptersController();
 const authController = new AuthController();
 const favoriteController = new FavoriteController();
 const forgotPassword = new ForgotPasswordController();
+const notificationController = new NotificationController();
 
 const router = Router();
 
@@ -101,6 +103,17 @@ router.post(
   verifyToken,
   verifyUser,
   favoriteController.deleteFavorite
+);
+
+// PUSH NOTIFICATION
+router.post("/notification/push", notificationController.pushNotification);
+router.post(
+  "/notification/add",
+  notificationController.addPushTokenNotification
+);
+router.post(
+  "/notification/del",
+  notificationController.deleteTokenNotification
 );
 
 export default router;
