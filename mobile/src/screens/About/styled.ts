@@ -20,7 +20,7 @@ export const AboutTextWithArrow = styled.View`
   align-items: center;
 `;
 
-export const AboutItem = styled.Pressable`
+export const AboutItem = styled.View`
   padding: ${pvs(18)} 0;
   border-bottom-width: 1px;
   border-bottom-color: ${(props) => props.theme.CHAPTER_READ};

@@ -7,6 +7,7 @@ import { SigninUser } from "src/screens/Login";
 import { SigninGoogleInput } from "src/screens/Login/hooks/useAuth";
 import { FavoriteBody } from "src/@types/favorite";
 import { wangaDBApi } from "./instances";
+import { ApplicationBody } from "src/@types/application";
 
 interface MangaInfoResponse {
   manga: Manga;
@@ -90,6 +91,12 @@ export async function delPushToken(token: string) {
   const res = await wangaDBApi.post("/notification/del", {
     token,
   });
+
+  return res.data;
+}
+
+export async function getApplication() {
+  const res = await wangaDBApi.get<ApplicationBody>("/application");
 
   return res.data;
 }

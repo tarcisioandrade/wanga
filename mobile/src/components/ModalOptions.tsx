@@ -7,7 +7,7 @@ import Modal from "./Modal";
 import SettingsIcon from "assets/svg-icon/settings.svg";
 import AboutIcon from "assets/svg-icon/about.svg";
 import FeedbackIcon from "assets/svg-icon/feedback.svg";
-import { WANGA_EMAIL } from "src/constants/socialNetworks";
+import { WANGA_EMAIL, WANGA_SITE } from "src/constants/socialNetworks";
 import { useNavigation } from "@react-navigation/native";
 import { Text } from "./Text";
 import ShareIcon from "assets/svg-icon/share.svg";
@@ -20,8 +20,7 @@ type Props = {
 const onShare = async () => {
   try {
     await Share.share({
-      message:
-        "Você gosta de ler mangás, novels ou manhuas? Confira o app Wanga https://www.google.com.br",
+      message: `Você gosta de ler mangás, novels ou manhuas? Confira o app Wanga: ${WANGA_SITE}`,
     });
   } catch (error) {
     throw error;
