@@ -30,6 +30,7 @@ export const useMangaQueries = (type: string, period: string = "week") => {
       ],
     });
 
+  // TODO: Paginação release e mostPeriod
   return {
     releasesResult,
     mostReadPeriodResult,

@@ -31,7 +31,7 @@ export function delay<T>(t: number, v: T): Promise<T> {
   });
 }
 
-const DEV_MODE = true;
+const DEV_MODE = false;
 
 export async function getReleases(page: number = 1, type?: string) {
   if (DEV_MODE) {
