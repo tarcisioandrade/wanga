@@ -1,13 +1,16 @@
-import React, { ReactNode, useEffect } from "react";
+import React, { ReactNode, useCallback, useEffect } from "react";
 import { ThemeProvider } from "styled-components/native";
 import { useThemeMode } from "src/contexts/ThemeContext";
 import { darkTheme, lightTheme } from "src/theme";
 import { StatusBar } from "expo-status-bar";
-import LoadingScreen from "src/screens/LoadingScreen";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { useUpdateAvaliable } from "src/hooks/useUpdateAvaliable";
 import { useDisclose } from "src/hooks/useDisclose";
 import ModalUpdateAvaliable from "./ModalUpdateAvaliable";
+import * as SplashScreen from "expo-splash-screen";
+import { useAdsConfig } from "src/hooks/useAdsConfig";
+import { Layout } from "./Layout";
+import { useInterstitialAds } from "src/contexts/AdsContext";
 import {
   useFonts,
   HankenGrotesk_400Regular,
@@ -21,10 +24,15 @@ type Props = {
   children: ReactNode;
 };
 
+SplashScreen.preventAutoHideAsync();
+
 const GlobalConfigs = ({ children }: Props) => {
   const { theme, themeLoaded } = useThemeMode();
   const { handleUpdate } = useUpdateAvaliable();
   const { state, close, open } = useDisclose(false);
+  const { initialize, adsLoading } = useAdsConfig();
+  const { loadInterstitial } = useInterstitialAds();
+
   let [fontsLoaded] = useFonts({
     HankenGrotesk_400Regular,
     HankenGrotesk_500Medium,
@@ -47,14 +55,26 @@ const GlobalConfigs = ({ children }: Props) => {
     handleUpdate().then((update) => {
       if (update) open();
     });
+    // Inicia o ADS
+    initialize();
+
+    // Carrega o Interstitial Ads
+    const unsubscribe = loadInterstitial();
+
+    return () => unsubscribe();
   }, []);
 
-  const clientLoading = !themeLoaded || !fontsLoaded;
+  const clientLoading = !themeLoaded || !fontsLoaded || adsLoading;
 
+  const onLayoutRootView = useCallback(async () => {
+    if (!clientLoading) await SplashScreen.hideAsync();
+  }, [clientLoading]);
+
+  if (clientLoading) return null;
   return (
     <ThemeProvider theme={themeStyle}>
       <StatusBar style={statusStyle} />
-      {clientLoading ? <LoadingScreen /> : children}
+      <Layout onLayout={onLayoutRootView}>{children}</Layout>
       <ModalUpdateAvaliable hasUpdate={state} close={close} />
     </ThemeProvider>
   );

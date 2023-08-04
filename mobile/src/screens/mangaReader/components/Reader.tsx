@@ -1,9 +1,10 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import WebView from "react-native-webview";
 import { WebViewScrollEvent } from "react-native-webview/lib/WebViewTypes";
 import LoadingReader from "./LoadingReader";
 import { PanResponder } from "react-native";
 import { setReadChapter } from "src/utils/readsChapters";
+import { useInterstitialAds } from "src/contexts/AdsContext";
 
 type Props = {
   data: { url: string }[] | undefined;
@@ -24,6 +25,8 @@ const Reader = ({
   mangaName,
   state,
 }: Props) => {
+  const { loadInterstitial, interstitialShow } = useInterstitialAds();
+
   let favorited = false;
 
   const renderImages = () => {
@@ -55,6 +58,13 @@ const Reader = ({
       favorited = true;
     }
   };
+
+  useEffect(() => {
+    interstitialShow();
+    const unsubscribe = loadInterstitial();
+
+    return () => unsubscribe();
+  }, []);
 
   const isScrolling = useRef(false);
   const isPressing = useRef(false);

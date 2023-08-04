@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { RootStackScreenProps } from "src/@types/navigation";
 import { Layout } from "src/components/Layout";
 import { useQuery } from "@tanstack/react-query";

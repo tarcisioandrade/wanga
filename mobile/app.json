@@ -13,6 +13,9 @@
       "backgroundColor": "#ffffff"
     },
     "assetBundlePatterns": ["**/*"],
+    "notification": {
+      "icon": "./assets/notification-icon.png"
+    },
     "ios": {
       "supportsTablet": false,
       "infoPlist": {
@@ -65,12 +68,23 @@
         }
       ],
       "@react-native-google-signin/google-signin",
-      ["expo-notifications"]
+      ["expo-notifications"],
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "useFrameworks": "static"
+          }
+        }
+      ]
     ],
     "extra": {
       "eas": {
         "projectId": "283fe420-2dd7-4bcb-ad58-1dedf166bd11"
       }
     }
+  },
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-3808386562611544~4811618872"
   }
 }

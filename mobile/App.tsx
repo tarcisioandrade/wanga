@@ -4,13 +4,13 @@ import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { useAppStateChange } from "./src/hooks/useAppStateChange";
 import Toast from "react-native-toast-message";
 import { toastConfig } from "src/components/CustomToast";
-import { useConfirmExit } from "src/hooks/useConfirmExit";
 import GlobalConfigs from "src/components/GlobalConfigs";
 import { ThemeProvider } from "src/contexts/ThemeContext";
 import { UserProvider } from "src/contexts/UserContext";
 import * as Notifications from "expo-notifications";
 import { useNotification } from "src/hooks/useNotification";
 import { useEffect } from "react";
+import { AdsProvider } from "src/contexts/AdsContext";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -30,16 +30,17 @@ export default function App() {
   }, []);
 
   useAppStateChange();
-  useConfirmExit();
 
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <UserProvider>
-          <GlobalConfigs>
-            <Routes />
-            <Toast config={toastConfig} />
-          </GlobalConfigs>
+          <AdsProvider>
+            <GlobalConfigs>
+              <Routes />
+              <Toast config={toastConfig} />
+            </GlobalConfigs>
+          </AdsProvider>
         </UserProvider>
       </ThemeProvider>
     </QueryClientProvider>

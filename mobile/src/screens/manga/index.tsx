@@ -13,7 +13,6 @@ import RefreshInError from "src/components/RefreshInError";
 
 const MangaScreen = ({ route }: RootStackScreenProps<"manga">) => {
   const { id } = route.params;
-
   const {
     data,
     error,

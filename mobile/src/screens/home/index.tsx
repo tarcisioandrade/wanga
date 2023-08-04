@@ -12,10 +12,13 @@ import { RootStackScreenProps } from "src/@types/navigation";
 import { useMangaQueries } from "src/hooks/useMangaQueries";
 import { useTabs } from "src/hooks/useTabs";
 import { RefreshControl } from "react-native";
+import { useConfirmExit } from "src/hooks/useConfirmExit";
 
 const Home = ({ navigation }: RootStackScreenProps<"home">) => {
   const [refreshing, setRefreshing] = useState(false);
   const { typeMangaTabs, type, handleTypeTabChange } = useTabs("");
+
+  useConfirmExit(true);
 
   const {
     releasesResult,

@@ -34,6 +34,7 @@
     "react-native": "0.71.8",
     "react-native-device-info": "^10.8.0",
     "react-native-gesture-handler": "~2.9.0",
+    "react-native-google-mobile-ads": "^11.6.4",
     "react-native-radio-buttons-group": "^3.0.2",
     "react-native-reanimated": "~2.14.4",
     "react-native-reanimated-carousel": "^3.4.0",
@@ -44,7 +45,8 @@
     "react-native-webview": "11.26.0",
     "recyclerlistview": "^4.2.0",
     "styled-components": "^5.3.5",
-    "zod": "^3.21.4"
+    "zod": "^3.21.4",
+    "expo-build-properties": "~0.6.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
