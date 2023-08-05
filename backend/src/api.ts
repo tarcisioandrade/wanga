@@ -247,15 +247,20 @@ export function getTop(page: string) {
   return (async () => {
     try {
       let response = await got(
-        "https://mangalivre.net/series/index/nota?page=" + page
+        "https://mangalivre.net/series/index/nota?page=" + page,
+        {
+          http2: true,
+        }
       );
+
+      console.log("response", response);
       return_data.data = parseResults(response.body);
     } catch (error) {
       if (error instanceof Error) {
-        console.error(error.message);
+        console.error("TOP ERROR", error.message);
         throw error;
       }
-      console.error(error);
+      console.error("TOP ERROR", error);
     }
     return return_data;
   })();
