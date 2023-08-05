@@ -2,7 +2,7 @@
   "name": "mobile",
   "version": "1.0.0",
   "engines": {
-    "node": "18"
+    "node": ">= 16.13"
   },
   "scripts": {
     "start": "expo start --dev-client",
