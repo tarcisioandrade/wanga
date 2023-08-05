@@ -4,10 +4,12 @@ import { User } from "src/@types/user";
 
 export const mangaDBApi = axios.create({
   baseURL: process.env.MANGA_DB_API,
+  timeout: 5000,
 });
 
 export const wangaDBApi = axios.create({
   baseURL: process.env.WANGA_API,
+  timeout: 5000,
 });
 
 wangaDBApi.interceptors.request.use(

@@ -15,6 +15,7 @@ import LoadingReader from "./components/LoadingReader";
 import * as FileSystem from "expo-file-system";
 import PageError from "./components/PageError";
 import { useReadHistoric } from "src/hooks/useReadHistoric";
+import { reportCrash } from "src/utils/crashReporting";
 
 const { StorageAccessFramework } = FileSystem;
 
@@ -58,9 +59,8 @@ const MangaReader = ({ route }: RootStackScreenProps<"mangaReader">) => {
     }
   };
 
-  // TODO: Colocar o chrashalytics
   if (error) {
-    console.error(error);
+    reportCrash(error, "Manga Reader");
   }
 
   const downloadInit = async () => {

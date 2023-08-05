@@ -10,6 +10,7 @@ import ReleaseMangaCard from "src/components/ReleaseMangaCard";
 import { vs } from "src/utils/metrics";
 import { useTabs } from "src/hooks/useTabs";
 import RefreshInError from "src/components/RefreshInError";
+import { reportCrash } from "src/utils/crashReporting";
 
 const Release = ({ route }: RootStackScreenProps<"release">) => {
   const { type: typeDefault } = route.params;
@@ -19,9 +20,8 @@ const Release = ({ route }: RootStackScreenProps<"release">) => {
     releasesResult: { data, error, isLoading, isError, refetch },
   } = useMangaQueries(type, type);
 
-  // TODO: Colocar crashalytics
   if (error) {
-    console.error(error);
+    reportCrash(error, "Release");
   }
 
   return (

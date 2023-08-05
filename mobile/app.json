@@ -33,14 +33,7 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      },
-      "permissions": [
-        "READ_EXTERNAL_STORAGE",
-        "WRITE_EXTERNAL_STORAGE",
-        "android.permission.READ_EXTERNAL_STORAGE",
-        "android.permission.WRITE_EXTERNAL_STORAGE",
-        "android.permission.ACCESS_MEDIA_LOCATION"
-      ]
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -63,23 +56,23 @@
     },
     "plugins": [
       [
-        "expo-media-library",
-        {
-          "photosPermission": "Allow Wanga to access your photos.",
-          "savePhotosPermission": "Allow Wanga to save photos.",
-          "isAccessMediaLocationEnabled": true
-        }
-      ],
-      "@react-native-google-signin/google-signin",
-      ["expo-notifications"],
-      [
         "expo-build-properties",
         {
           "ios": {
             "useFrameworks": "static"
           }
         }
-      ]
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/notification-icon.png",
+          "color": "#185DCF"
+        }
+      ],
+      "@react-native-firebase/app",
+      "@react-native-firebase/crashlytics",
+      "@react-native-google-signin/google-signin"
     ],
     "extra": {
       "eas": {

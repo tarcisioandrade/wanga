@@ -5,7 +5,7 @@ import {
   TestIds,
 } from "react-native-google-mobile-ads";
 
-const adUnitId = process.env.DEV_MODE
+const adUnitId = __DEV__
   ? TestIds.INTERSTITIAL
   : process.env.ADS_INTERSTITIAL_ID;
 

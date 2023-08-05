@@ -1,5 +1,6 @@
 import { useState } from "react";
 import mobileAds, { MaxAdContentRating } from "react-native-google-mobile-ads";
+import { reportCrash } from "src/utils/crashReporting";
 
 export const useAdsConfig = () => {
   const [adsLoading, setAdsLoading] = useState(false);
@@ -17,7 +18,7 @@ export const useAdsConfig = () => {
 
       mobileAds().initialize();
     } catch (error) {
-      console.error("ADS ERROR: ", error);
+      reportCrash(error, "Ads Initialize");
     } finally {
       setAdsLoading(false);
     }

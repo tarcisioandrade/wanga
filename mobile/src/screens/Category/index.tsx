@@ -11,6 +11,7 @@ import { vs } from "src/utils/metrics";
 import { FlashList } from "@shopify/flash-list";
 import CategorySkeleton from "./components/CategorySkeleton";
 import RefreshInError from "src/components/RefreshInError";
+import { reportCrash } from "src/utils/crashReporting";
 
 const Category = ({ route }: RootStackScreenProps<"category">) => {
   const { id_category, name } = route.params;
@@ -39,9 +40,8 @@ const Category = ({ route }: RootStackScreenProps<"category">) => {
     }
   };
 
-  // TODO: Colocar crashlytics
   if (error) {
-    console.error(error);
+    reportCrash(error, `Category ${name}`);
   }
 
   return (

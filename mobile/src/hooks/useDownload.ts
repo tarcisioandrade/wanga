@@ -2,6 +2,7 @@ import * as FileSystem from "expo-file-system";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { formatFileSizeInMB } from "src/utils/formatFileSizeInMB";
 import * as Crypto from "expo-crypto";
+import { reportCrash } from "src/utils/crashReporting";
 
 export type DownloadHistoric = {
   id: string;
@@ -74,8 +75,8 @@ export const useDownload = () => {
       );
 
       return fileSize;
-    } catch (e) {
-      console.error("download error:", e);
+    } catch (err) {
+      reportCrash(err, "Download Error");
     }
   };
 
@@ -107,7 +108,10 @@ export const useDownload = () => {
       } catch (e) {
         throw e;
       }
-    } catch (err) {}
+    } catch (err) {
+      reportCrash(err, "saveAndroidFile");
+      throw err;
+    }
   };
 
   return {

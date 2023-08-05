@@ -10,6 +10,7 @@ import { useChapterRequest } from "./hooks/useChaptersRequest";
 import { FlatList, ActivityIndicator } from "react-native";
 import { vs } from "src/utils/metrics";
 import RefreshInError from "src/components/RefreshInError";
+import { reportCrash } from "src/utils/crashReporting";
 
 const MangaScreen = ({ route }: RootStackScreenProps<"manga">) => {
   const { id } = route.params;
@@ -33,7 +34,7 @@ const MangaScreen = ({ route }: RootStackScreenProps<"manga">) => {
   } = useChapterRequest(id);
 
   if (error) {
-    console.error(error);
+    reportCrash(error, "Manga Info");
   }
 
   const isLoading = isChapterLoading || isMangaInfoLoading;

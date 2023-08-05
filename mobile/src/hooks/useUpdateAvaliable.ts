@@ -12,7 +12,7 @@ export const useUpdateAvaliable = () => {
   const currentClientVersion = DeviceInfo.getVersion();
 
   const handleUpdate = async () => {
-    if (process.env.DEV_MODE) return false;
+    if (__DEV__) return false;
     try {
       setLoading(true);
       const app = await getApplication();

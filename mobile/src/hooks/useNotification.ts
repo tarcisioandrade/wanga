@@ -3,6 +3,7 @@ import * as Notifications from "expo-notifications";
 import { Alert, Linking, Platform } from "react-native";
 import { addPushToken, delPushToken } from "src/api/wangaServices";
 import * as Device from "expo-device";
+import { reportCrash } from "src/utils/crashReporting";
 
 export const useNotification = () => {
   const alterNotification = async (status: boolean) => {
@@ -36,7 +37,7 @@ export const useNotification = () => {
       const token = await Notifications.getExpoPushTokenAsync();
       delPushToken(token.data);
     } catch (error) {
-      console.error(error);
+      reportCrash(error, "deleteTokenFromDB");
       throw error;
     }
   };
@@ -55,40 +56,44 @@ export const useNotification = () => {
       });
     }
 
-    if (Device.isDevice) {
-      const { status: existingStatus } =
-        await Notifications.getPermissionsAsync();
-      let finalStatus = existingStatus;
-      if (existingStatus !== "granted" && !notificationDisabled) {
-        const { status } = await Notifications.requestPermissionsAsync();
-        finalStatus = status;
-      }
-
-      if (finalStatus !== "granted" && !notificationDisabled) {
-        await alterNotification(true);
-
-        if (alertUser) {
-          Alert.alert(
-            "Notificações desabilitadas",
-            "Para receber notificações, habilite-as nas configurações do seu dispositivo.",
-            [
-              { text: "Cancelar", style: "cancel" },
-              {
-                text: "Abrir Configurações",
-                onPress: () => {
-                  Linking.openSettings();
-                },
-              },
-            ]
-          );
-          throw new Error("User doesn't allow for notification.");
+    try {
+      if (Device.isDevice) {
+        const { status: existingStatus } =
+          await Notifications.getPermissionsAsync();
+        let finalStatus = existingStatus;
+        if (existingStatus !== "granted" && !notificationDisabled) {
+          const { status } = await Notifications.requestPermissionsAsync();
+          finalStatus = status;
         }
 
-        return;
-      }
+        if (finalStatus !== "granted" && !notificationDisabled) {
+          await alterNotification(true);
 
-      const token = await Notifications.getExpoPushTokenAsync();
-      registerDevicePushTokenAsync(token);
+          if (alertUser) {
+            Alert.alert(
+              "Notificações desabilitadas",
+              "Para receber notificações, habilite-as nas configurações do seu dispositivo.",
+              [
+                { text: "Cancelar", style: "cancel" },
+                {
+                  text: "Abrir Configurações",
+                  onPress: () => {
+                    Linking.openSettings();
+                  },
+                },
+              ]
+            );
+            throw new Error("User doesn't allow for notification.");
+          }
+
+          return;
+        }
+
+        const token = await Notifications.getExpoPushTokenAsync();
+        registerDevicePushTokenAsync(token);
+      }
+    } catch (error) {
+      reportCrash(error, "registerForPushNotificationsAsync");
     }
   }
 

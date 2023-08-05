@@ -15,6 +15,7 @@ import Empty from "src/components/Empty";
 import { useUser } from "src/contexts/UserContext";
 import RefreshInError from "src/components/RefreshInError";
 import SearchSkeleton from "../search/components/SearchSkeleton";
+import { reportCrash } from "src/utils/crashReporting";
 
 const Favorites = () => {
   const [favorites, setFavorites] = useState<Favorite[]>([]);
@@ -110,9 +111,8 @@ const Favorites = () => {
     }, [deleteMode])
   );
 
-  //TODO: Colocar crashalytics
   if (error) {
-    console.error(error);
+    reportCrash(error, "Favorites");
   }
 
   //TODO: Passar essa logica do multiple delete para um hook.
