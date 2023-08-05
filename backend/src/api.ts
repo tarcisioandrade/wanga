@@ -6,6 +6,7 @@ import { Chapter, ChapterBody } from "./types/Chapter";
 import { Pages } from "./types/Pages";
 import { Genre } from "./types/Genres";
 import { ResultBody } from "./types/ResultBody";
+import axios from "axios";
 
 export function search(name: string) {
   let result: ResultBody<Manga> = { data: [] };
@@ -246,25 +247,18 @@ export function getTop(page: string) {
 
   return (async () => {
     try {
-      let response = await got(
-        "https://mangalivre.net/series/index/nota?page=" + page,
-        {
-          http2: true,
-          headers: {
-            "User-Agent":
-              "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
-          },
-        }
+      let response = await axios.get(
+        "https://mangalivre.net/series/index/nota?page=" + page
       );
 
-      console.log("response", response.request);
-      return_data.data = parseResults(response.body);
+      console.log("response", response);
+      return_data.data = parseResults(response.data);
     } catch (error) {
       if (error instanceof Error) {
-        console.error("TOP ERROR", error.message);
+        console.error(error.message);
         throw error;
       }
-      console.error("TOP ERROR", error);
+      console.error(error);
     }
     return return_data;
   })();
