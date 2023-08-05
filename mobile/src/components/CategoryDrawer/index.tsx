@@ -19,6 +19,7 @@ import {
   useDrawerProgress,
 } from "@react-navigation/drawer";
 import RefreshInError from "../RefreshInError";
+import { reportCrash } from "src/utils/crashReporting";
 
 const CategoryDrawer = ({ navigation }: DrawerContentComponentProps) => {
   const { data, isLoading, error, isError, refetch } = useQuery({
@@ -41,9 +42,8 @@ const CategoryDrawer = ({ navigation }: DrawerContentComponentProps) => {
     });
   };
 
-  // TODO: Colocar crashalytics
   if (error) {
-    console.error(error);
+    reportCrash(error, "Categories");
   }
 
   if (isLoading) return null;

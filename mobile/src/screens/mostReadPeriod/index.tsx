@@ -10,6 +10,7 @@ import { vs } from "src/utils/metrics";
 import CardsScreenSkeleton from "../../components/CardsScreenSkeleton";
 import { useTabs } from "src/hooks/useTabs";
 import RefreshInError from "src/components/RefreshInError";
+import { reportCrash } from "src/utils/crashReporting";
 
 const MostReadPeriod = ({ route }: RootStackScreenProps<"mostReadPeriod">) => {
   const { type: typeDefault } = route.params;
@@ -35,9 +36,8 @@ const MostReadPeriod = ({ route }: RootStackScreenProps<"mostReadPeriod">) => {
     })
   );
 
-  // TODO: Colocar crashalytics
   if (error) {
-    console.error(error);
+    reportCrash(error, "Most Read Period");
   }
 
   return (

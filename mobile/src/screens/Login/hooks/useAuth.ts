@@ -13,6 +13,7 @@ import {
   statusCodes,
   NativeModuleError,
 } from "@react-native-google-signin/google-signin";
+import { reportCrash } from "src/utils/crashReporting";
 
 export type SigninGoogleInput = {
   id_google: string;
@@ -44,6 +45,9 @@ export const useAuth = () => {
     onError(error) {
       if (isAxiosError(error) && error.response?.status === 401) {
         ToastAndroid.show("Email ou senha incorreto.", ToastAndroid.BOTTOM);
+        if (error.response?.status !== 401) {
+          reportCrash(error, "Wanga Auth");
+        }
       }
     },
   });
@@ -70,6 +74,7 @@ export const useAuth = () => {
           "Falha no Servidor",
           `Algo aconteceu, por favor, tente novamente mais tarde.`
         );
+        reportCrash(error, "signInWithGoogle");
         return;
       }
 
