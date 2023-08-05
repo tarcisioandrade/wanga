@@ -7,7 +7,7 @@
     "dev": "nodemon src/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node dist/server.js",
-    "postinstall": "tsup src --loader '.handlebars=file'"
+    "postinstall": "tsup src --loader .handlebars=file"
   },
   "keywords": [],
   "author": "",

@@ -5,3 +5,4 @@ npm-debug.log
 .DS_Store
 mangalivre.code-workspace
 backup
+dist
