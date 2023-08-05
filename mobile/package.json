@@ -1,6 +1,9 @@
 {
   "name": "mobile",
   "version": "1.0.0",
+  "engines": {
+    "node": "18"
+  },
   "scripts": {
     "start": "expo start --dev-client",
     "android": "expo run:android",
