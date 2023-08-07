@@ -257,6 +257,7 @@ export function getTop(page: string) {
         {
           agent: {
             http: agent,
+            https: agent,
           },
           https: {
             rejectUnauthorized: false,
