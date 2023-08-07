@@ -17,7 +17,7 @@ export class PagesModel implements IPages {
     };
 
     const response = await got(
-      `https://mangalivre.net/ler/null/online/${release_id}/capitulo-0/`
+      `https://api.scrape.do?token=4a9a40f7e68d45c28b012982fdea855f040aeef4ec4&url=https://mangalivre.net/ler/null/online/${release_id}/capitulo-0/`
     );
 
     // Capitulo Atual
@@ -60,7 +60,7 @@ export class PagesModel implements IPages {
   async getPagesImages(release_id: string) {
     let images: Image[] = [];
     const response = await got(
-      `https://mangalivre.net/leitor/pages/${release_id}.json`
+      `https://api.scrape.do?token=4a9a40f7e68d45c28b012982fdea855f040aeef4ec4&url=https://mangalivre.net/leitor/pages/${release_id}.json`
     );
     images = JSON.parse(response.body).images;
 

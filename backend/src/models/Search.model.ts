@@ -12,7 +12,7 @@ export class SearchModel implements ISearch {
     const form = "search=" + searchValue;
 
     const response = await got.post(
-      "https://mangalivre.net/lib/search/series.json",
+      "https://api.scrape.do?token=4a9a40f7e68d45c28b012982fdea855f040aeef4ec4&url=https://mangalivre.net/lib/search/series.json",
       {
         body: form,
         headers: {
