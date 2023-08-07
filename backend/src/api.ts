@@ -6,7 +6,6 @@ import { Chapter, ChapterBody } from "./types/Chapter";
 import { Pages } from "./types/Pages";
 import { Genre } from "./types/Genres";
 import { ResultBody } from "./types/ResultBody";
-import axios from "axios";
 
 export function search(name: string) {
   let result: ResultBody<Manga> = { data: [] };
@@ -247,12 +246,12 @@ export function getTop(page: string) {
 
   return (async () => {
     try {
-      let response = await axios.get(
+      let response = await got(
         "https://mangalivre.net/series/index/nota?page=" + page
       );
 
       console.log("response", response);
-      return_data.data = parseResults(response.data);
+      return_data.data = parseResults(response.body);
     } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);
@@ -269,7 +268,10 @@ export function getMangaById(id: string) {
 
   return (async () => {
     try {
-      let response = await got("https://mangalivre.net/manga/null/" + id);
+      let response = await got(
+        "http://api.scrape.do?token=4a9a40f7e68d45c28b012982fdea855f040aeef4ec4&url=https://mangalivre.net/manga/null/" +
+          id
+      );
       return_data.manga = parseManga(response.body, id);
     } catch (error) {
       console.error(error);
