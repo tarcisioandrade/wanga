@@ -11,6 +11,8 @@
     "web": "expo start --web",
     "apk": "eas build -p android --profile preview"
   },
+  "author": "Tarcisio Andrade",
+  "repository": "https://github.com/tarcisioandrade/wanga",
   "dependencies": {
     "@expo-google-fonts/hanken-grotesk": "^0.2.3",
     "@hookform/resolvers": "^3.1.1",

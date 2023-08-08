@@ -21,11 +21,7 @@ import { ActivityIndicator, TouchableNativeFeedback } from "react-native";
 import { useThemeMode } from "src/contexts/ThemeContext";
 import Modal from "src/components/Modal";
 import { useFirstAccess } from "./hooks/useFirstAccess";
-import {
-  KeyboardAvoidingView,
-  Pressable,
-  View,
-} from "react-native";
+import { KeyboardAvoidingView, Pressable, View } from "react-native";
 
 const SigninSchema = z.object({
   email: z.string().email({ message: "E-mail inválido" }),
@@ -172,7 +168,7 @@ const Login = ({ navigation }: RootStackScreenProps<"login">) => {
       </Layout>
 
       <Modal.Root isOpen={state} onClose={close}>
-        <Modal.Header>Faz o L ogin</Modal.Header>
+        <Modal.Header>Faça o Login</Modal.Header>
         <Modal.Content>
           <Text>
             Faça login no app para ter acesso a todas as nossas funcionalidades!

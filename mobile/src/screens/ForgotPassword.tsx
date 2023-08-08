@@ -47,17 +47,6 @@ const ForgotPassword = () => {
               <Stack mt={90} gap={48} mb={20}>
                 <S.Intro>
                   <Logo width={75} height={75} />
-                  <Stack mt={16}>
-                    <Text
-                      color="RED_500"
-                      size="FONT_4XS"
-                      style={{ textAlign: "center" }}
-                    >
-                      O adm não tem dinheiro para pagar os serviços necessários
-                      para recuperar sua senha, sinto muito. Tente não
-                      esquecê-la.
-                    </Text>
-                  </Stack>
                 </S.Intro>
                 <View>
                   <Controller

@@ -20,7 +20,7 @@ module.exports = function (api) {
         {
           alias: {
             src: "./src",
-            fakeData: "./fakeData",
+            mockData: "./mockData",
             assets: "./assets",
           },
         },
