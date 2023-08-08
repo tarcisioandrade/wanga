@@ -9,12 +9,9 @@ export class ChaptersModel implements IChapter {
   async getChapters(id: string, page: string | number) {
     let return_data = {} as Chapter;
     return_data.chapters = [];
-    const targer = encodeURIComponent(
-      `https://mangalivre.net/series/chapters_list.json?page=${page}&id_serie=${id}`
-    );
 
     let response = await got(
-      `https://api.scrape.do?token=4a9a40f7e68d45c28b012982fdea855f040aeef4ec4&url=${targer}&customHeaders=True`,
+      `https://mangalivre.net/series/chapters_list.json?page=${page}&id_serie=${id}`,
       {
         headers: {
           "x-requested-with": "XMLHttpRequest",

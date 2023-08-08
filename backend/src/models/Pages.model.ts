@@ -17,7 +17,7 @@ export class PagesModel implements IPages {
     };
 
     const response = await got(
-      `https://api.scrape.do?token=4a9a40f7e68d45c28b012982fdea855f040aeef4ec4&url=https://mangalivre.net/ler/null/online/${release_id}/capitulo-0/`
+      `https://mangalivre.net/ler/null/online/${release_id}/capitulo-0/`
     );
 
     // Capitulo Atual
