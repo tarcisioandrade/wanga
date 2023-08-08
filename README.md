@@ -83,5 +83,7 @@ Atualize o arquivo .env.example com suas informações.
  
     npm run dev
 
-### Extra
+### Licença
+
+Distribuído sob a Licença MIT. Consulte `LICENSE.txt` para obter mais informações.
 
