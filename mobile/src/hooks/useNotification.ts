@@ -61,14 +61,14 @@ export const useNotification = () => {
         const { status: existingStatus } =
           await Notifications.getPermissionsAsync();
         let finalStatus = existingStatus;
-        if (existingStatus !== "granted" && !notificationDisabled) {
+        if (existingStatus !== "granted") {
           const { status } = await Notifications.requestPermissionsAsync();
           finalStatus = status;
         }
 
-        if (finalStatus !== "granted" && !notificationDisabled) {
+        if (finalStatus !== "granted") {
           await alterNotification(true);
-
+          console.log("oi");
           if (alertUser) {
             Alert.alert(
               "Notificações desabilitadas",
@@ -94,6 +94,7 @@ export const useNotification = () => {
       }
     } catch (error) {
       reportCrash(error, "registerForPushNotificationsAsync");
+      throw error;
     }
   }
 

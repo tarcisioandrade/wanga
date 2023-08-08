@@ -80,7 +80,6 @@ const Settings = () => {
     ]).catch((err) => {
       setNotificationEnabled(false);
       alterNotification(false);
-      console.error(err);
     });
   };
 
