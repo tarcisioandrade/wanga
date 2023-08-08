@@ -22,7 +22,8 @@
 ## Sobre o Projeto
 </br>
 
-![Group 34](https://github.com/tarcisioandrade/wanga/assets/61153830/258696d2-5244-49ac-ba84-025e7c489b27)
+![Wanga Hero Image](https://github.com/tarcisioandrade/wanga/assets/61153830/f1755370-54e9-4e65-83d4-2dfc0a660342)
+
 
 O Wanga é um aplicativo de leitura de mangás, manhuas e novels que oferece uma experiência imersiva e envolvente para os amantes de histórias ilustradas. Com uma biblioteca em constante expansão e atualizações frequentes, o Wanga é o destino ideal para saciar sua sede por aventura e imaginação.
 
