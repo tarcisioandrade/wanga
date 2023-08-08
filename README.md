@@ -8,8 +8,9 @@
 
   <p align="center">
     Imagine mergulhar em histórias fascinantes, repletas de personagens cativantes e cenários deslumbrantes. Agora, essa experiência está ao alcance das suas mãos com o Wanga - o aplicativo definitivo de leitura de mangás, manhua e novels!
-    <br />
-    <br />
+    <p align="center">
+    <a href="https://www.figma.com/file/QqUAG40zgIwKnqiCt13rjy/Wanga?type=design&node-id=0%3A1&mode=design&t=CrU8kFfbTysKzyvc-1">Figma</a>
+  </p>
     <br />
     <br />
   </p>
@@ -81,3 +82,6 @@ Atualize o arquivo .env.example com suas informações.
 **Inicializando servidor**
  
     npm run dev
+
+### Extra
+
