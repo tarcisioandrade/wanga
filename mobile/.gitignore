@@ -18,4 +18,4 @@ web-build/
 
 mockData/
 android/
-.env.*
+.env.development
