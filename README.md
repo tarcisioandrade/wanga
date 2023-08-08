@@ -12,7 +12,6 @@
     <br />
     <br />
     <br />
-    <br />
   </p>
 </div>
 
@@ -35,7 +34,7 @@ Além de oferecer uma experiência de leitura visualmente estimulante, o Wanga t
 
 Clone o projeto `git clone https://github.com/tarcisioandrade/wanga.git`
 
-### Cliente
+### Mobile
 
 **Pré-requisitos**
 
