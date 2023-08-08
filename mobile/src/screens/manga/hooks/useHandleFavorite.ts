@@ -47,6 +47,7 @@ export const useHandleFavorite = (id_serie: string | undefined) => {
         text1: "Removido dos seus favoritos",
         topOffset: 80,
       });
+      refetch();
     },
     onError: (err) => {
       console.error(err);
