@@ -16,9 +16,9 @@ const FeaturedCard = ({ data }: Props) => {
   const theme = useTheme();
 
   const goToMangaScreen = (id: number) => {
-    navigator.navigate("manga", {
-      id,
-    });
+    // navigator.navigate("manga", {
+    //   id,
+    // });
   };
 
   return (

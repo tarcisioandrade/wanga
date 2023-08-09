@@ -5,7 +5,7 @@ import { Container, Layout, Stack } from "src/components/Layout";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
-import * as S from "./Login/styled";
+import * as S from "./login/styled";
 import Logo from "assets/logo.svg";
 import EmailIcon from "assets/svg-icon/email.svg";
 import { Text } from "src/components/Text";

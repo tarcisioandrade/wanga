@@ -25,9 +25,9 @@ const ReleaseMangaCard = ({ data, size }: Props) => {
     data.chapters.length > 1 ? `${chapterFormat}, ...` : chapterFormat;
 
   const goToMangaScreen = (id: number) => {
-    navigator.navigate("manga", {
-      id,
-    });
+    // navigator.navigate("manga", {
+    //   id,
+    // });
   };
 
   const handleImageError = () => {

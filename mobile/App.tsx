@@ -31,6 +31,8 @@ export default function App() {
 
   useAppStateChange();
 
+  // A navegação para a página no mangá (screen/manga) foram desabilitadas para compilação, pesquise por 'navigate("manga",' e habilite-as novamente.
+
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>

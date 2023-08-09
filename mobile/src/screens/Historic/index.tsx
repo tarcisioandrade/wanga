@@ -36,9 +36,9 @@ const Historic = () => {
   };
 
   const goToMangaPage = (id_manga: number) => {
-    navigator.navigate("manga", {
-      id: id_manga,
-    });
+    // navigator.navigate("manga", {
+    //   id: id_manga,
+    // });
   };
 
   const handleDeleteItems = (id: string) => {

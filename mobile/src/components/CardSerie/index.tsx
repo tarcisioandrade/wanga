@@ -17,9 +17,9 @@ const CardSerie = ({ serie }: Props) => {
   const navigator = useNavigation();
 
   const goToMangaScreen = (id: number) => {
-    navigator.navigate("manga", {
-      id,
-    });
+    // navigator.navigate("manga", {
+    //   id,
+    // });
   };
 
   const imageUri = serie.cover.includes("no-cover")

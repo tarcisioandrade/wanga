@@ -18,9 +18,9 @@ const MangaCard = ({ data, width, height }: Props) => {
   const navigator = useNavigation();
 
   const goToMangaScreen = (id: number) => {
-    navigator.navigate("manga", {
-      id,
-    });
+    // navigator.navigate("manga", {
+    //   id,
+    // });
   };
 
   return (
