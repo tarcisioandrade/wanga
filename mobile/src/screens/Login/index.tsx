@@ -20,8 +20,8 @@ import { useAuth } from "./hooks/useAuth";
 import { ActivityIndicator, TouchableNativeFeedback } from "react-native";
 import { useThemeMode } from "src/contexts/ThemeContext";
 import Modal from "src/components/Modal";
-import { useFirstAccess } from "./hooks/useFirstAccess";
 import { KeyboardAvoidingView, Pressable, View } from "react-native";
+import { useFirstAccess } from "./hooks/useFirstAccess";
 
 const SigninSchema = z.object({
   email: z.string().email({ message: "E-mail inválido" }),

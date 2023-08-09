@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../@types/navigation";
 import Search from "../screens/search";
 import MangaScreen from "src/screens/manga";
-import Historic from "src/screens/Historic";
+import Historic from "src/screens/historic";
 import MangaReader from "src/screens/mangaReader";
 
 const { Navigator, Screen } = createNativeStackNavigator<RootStackParamList>();

@@ -6,13 +6,13 @@ import Search from "../screens/search";
 import MangaScreen from "src/screens/manga";
 import MostReadPeriod from "src/screens/mostReadPeriod";
 import MangaReader from "src/screens/mangaReader";
-import Release from "src/screens/Release";
-import About from "src/screens/About";
-import Settings from "src/screens/Settings";
-import Category from "src/screens/Category";
-import Login from "src/screens/Login";
-import Register from "src/screens/Register";
-import ForgotPassword from "src/screens/ForgotPassword";
+import Release from "src/screens/release";
+import About from "src/screens/about";
+import Settings from "src/screens/settings";
+import Category from "src/screens/category";
+import Login from "src/screens/login";
+import Register from "src/screens/register";
+import ForgotPassword from "src/screens/forgotPassword";
 
 const { Navigator, Screen, Group } =
   createNativeStackNavigator<RootStackParamList>();

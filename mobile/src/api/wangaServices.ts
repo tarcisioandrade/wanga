@@ -1,10 +1,10 @@
 import { Manga } from "src/@types/manga";
 import { ChapterBody } from "src/@types/chapters";
 import { Page } from "src/@types/page";
-import { SignupUser } from "src/screens/Register";
+import { SignupUser } from "src/screens/register";
 import { User } from "src/@types/user";
-import { SigninUser } from "src/screens/Login";
-import { SigninGoogleInput } from "src/screens/Login/hooks/useAuth";
+import { SigninUser } from "src/screens/login";
+import { SigninGoogleInput } from "src/screens/login/hooks/useAuth";
 import { FavoriteBody } from "src/@types/favorite";
 import { wangaDBApi } from "./instances";
 import { ApplicationBody } from "src/@types/application";

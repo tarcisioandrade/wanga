@@ -4,7 +4,7 @@ import { RootStackParamList } from "../@types/navigation";
 import Search from "../screens/search";
 import MangaScreen from "src/screens/manga";
 import MangaReader from "src/screens/mangaReader";
-import Favorites from "src/screens/Favorites";
+import Favorites from "src/screens/favorites";
 
 const { Navigator, Screen } = createNativeStackNavigator<RootStackParamList>();
 
