@@ -87,3 +87,6 @@ Atualize o arquivo .env.example com suas informações.
 
 Distribuído sob a Licença MIT. Consulte `LICENSE.txt` para obter mais informações.
 
+### Créditos
+
+<a href="https://mangalivre.net/" >Mangalivre</a> - Banco de dados fonte dos mangas, manhuas e novels.
