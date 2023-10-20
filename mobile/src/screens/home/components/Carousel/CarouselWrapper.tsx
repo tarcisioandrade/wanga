@@ -3,12 +3,6 @@ import * as S from "./styled";
 import Carousel from "react-native-reanimated-carousel";
 import { hs, vs } from "src/utils/metrics";
 import CarouselSkeleton from "../CarouselSkeleton";
-import { Text } from "src/components/Text";
-import { Stack } from "src/components/Layout";
-import RefreshIcon from "assets/svg-icon/refresh.svg";
-import Icon from "src/components/Icon";
-import { useTheme } from "styled-components";
-import CustomPressable from "src/components/CustomPressable";
 import RefreshInError from "src/components/RefreshInError";
 
 type CarouselWrapperProps = {
@@ -31,8 +25,6 @@ const CarouselWrapper = ({
   error,
   refresh,
 }: CarouselWrapperProps) => {
-  const theme = useTheme();
-
   return (
     <S.CarouselWrapper bg="SECONDARY">
       {error ? (

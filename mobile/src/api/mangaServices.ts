@@ -14,13 +14,22 @@ export function delay<T>(t: number, v: T): Promise<T> {
   });
 }
 
+function dispatchError<T>(data: T, url: string | undefined) {
+  if (!Array.isArray(data))
+    throw new Error(
+      `The type of response is different from what you expect ${url}`
+    );
+}
+
 export async function getReleases(page: number = 1, type?: string) {
-  const { data } = await mangaDBApi.get<Release>("/home/releases", {
+  const { data, config } = await mangaDBApi.get<Release>("/home/releases", {
     params: {
       page,
       type,
     },
   });
+
+  dispatchError<Release>(data, config.url);
 
   return data;
 }
@@ -30,7 +39,7 @@ export async function getMostReadPeriod(
   period: string,
   type?: string
 ) {
-  const { data } = await mangaDBApi.get<MostReadPeriod>(
+  const { data, config } = await mangaDBApi.get<MostReadPeriod>(
     "/home/most_read_period",
     {
       params: {
@@ -41,16 +50,20 @@ export async function getMostReadPeriod(
     }
   );
 
+  dispatchError<MostReadPeriod>(data, config.url);
+
   return data;
 }
 
 export async function getMostRead(page: number = 1, type?: string) {
-  const { data } = await mangaDBApi.get<MostRead>("/home/most_read", {
+  const { data, config } = await mangaDBApi.get<MostRead>("/home/most_read", {
     params: {
       page,
       type,
     },
   });
+
+  dispatchError<MostRead>(data, config.url);
 
   return data;
 }
@@ -58,7 +71,7 @@ export async function getMostRead(page: number = 1, type?: string) {
 export async function getSearch(searchValue: string) {
   const search = searchValue;
 
-  const res = await mangaDBApi.post<Search>(
+  const { data, config } = await mangaDBApi.post<Search>(
     "/lib/search/series.json",
     {
       search,
@@ -71,25 +84,33 @@ export async function getSearch(searchValue: string) {
     }
   );
 
-  return res.data;
+  dispatchError<Search>(data, config.url);
+
+  return data;
 }
 
 export async function getFeatured() {
-  const res = await mangaDBApi.get<Featured>("/home/getFeaturedSeries.json");
+  const { data, config } = await mangaDBApi.get<Featured>(
+    "/home/getFeaturedSeries.json"
+  );
 
-  return res.data;
+  dispatchError<Featured>(data, config.url);
+
+  return data;
 }
 
 export async function getCategoriesList() {
-  const res = await mangaDBApi.get<CategoryBody>(
+  const { data, config } = await mangaDBApi.get<CategoryBody>(
     "/categories/categories_list.json"
   );
 
-  return res.data;
+  dispatchError<CategoryBody>(data, config.url);
+
+  return data;
 }
 
 export async function getCategoriesSeries(id_category: number, page: number) {
-  const res = await mangaDBApi.get<CategorySeriesBody>(
+  const { data, config } = await mangaDBApi.get<CategorySeriesBody>(
     `/categories/series_list.json?page=${page}`,
     {
       params: {
@@ -102,8 +123,10 @@ export async function getCategoriesSeries(id_category: number, page: number) {
     }
   );
 
+  dispatchError<CategorySeriesBody>(data, config.url);
+
   return {
-    series: res.data.series,
+    series: data.series,
     nextPage: page + 1,
   };
 }
