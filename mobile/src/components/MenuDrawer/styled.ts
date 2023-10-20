@@ -17,7 +17,7 @@ export const DrawerContainer = styled(Animated.View)`
 
 export const DrawerHeaderContainer = styled.View`
   padding-top: ${Constants.statusBarHeight + "px"};
-  height: ${pvs(114)};
+  padding-bottom: ${pvs(10)};
 `;
 
 export const DrawerHeaderFlex = styled.View`
