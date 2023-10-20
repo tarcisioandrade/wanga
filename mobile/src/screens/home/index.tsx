@@ -82,6 +82,7 @@ const Home = ({ navigation }: RootStackScreenProps<"home">) => {
             featured={featuredResult.data?.featured}
             error={featuredResult.isError}
             refresh={featuredResult.refetch}
+            loading={featuredResult.isLoading}
           />
 
           <Container>
