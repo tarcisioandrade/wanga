@@ -11,15 +11,16 @@ type Props = {
   featured: FeaturedElement[] | undefined;
   error: boolean;
   refresh: () => void;
+  loading: boolean;
 };
 
-const Parallax = ({ featured, error, refresh }: Props) => {
+const Parallax = ({ featured, error, refresh, loading }: Props) => {
   return (
     <Stack justify_content="center" align_items="center">
-      {!featured ? (
-        <Skeleton width={350} height={219} radius={8} />
+      {loading ? (
+        <Skeleton width={350} height={vs(219)} radius={8} />
       ) : error ? (
-        <RefreshInError height={219} refresh={refresh} />
+        <RefreshInError height={vs(219)} refresh={refresh} />
       ) : (
         <Carousel
           width={hs(350)}
@@ -28,7 +29,7 @@ const Parallax = ({ featured, error, refresh }: Props) => {
           loop
           height={vs(219)}
           style={{ width: "100%" }}
-          data={featured}
+          data={featured!}
           renderItem={({ item }) => <FeaturedCard data={item} />}
         />
       )}
