@@ -1,0 +1,359 @@
+{
+  "releases": [
+    {
+      "date": "hoje",
+      "dateString": "today",
+      "date_created": "2023-06-29T20:15:01-03:00",
+      "id_serie": 17871,
+      "name": "Wanna Do X With Me?",
+      "image": "https://static3.mangalivre.net/capas/Co_rPSazRNocAFhQ1Ay4rA/17871/649d871ae892f_external_cover.jpg",
+      "image_thumb": "https://static3.mangalivre.net/capas/nwfrYs261_VAgt_nZKfsmA/17871/thumb_649d871ae892f_external_cover.jpg",
+      "image_avif": "https://static3.mangalivre.net/capas/Gi6QqL4qT6ags8arkNVvww/17871/649d871ae892f_external_cover.jpg.avif",
+      "image_thumb_avif": "https://static3.mangalivre.net/capas/z5nHPu9bg_X-NPK3BrEKpw/17871/thumb_649d871ae892f_external_cover.jpg.avif",
+      "range": "4~10",
+      "chapters": [
+        {
+          "url": "/ler/wanna-do-x-with-me/online/474872/10",
+          "number": "10",
+          "date_created": "2023-06-29T20:15:01-03:00",
+          "scanlators": {
+            "scan-2300": {
+              "id_scanlator": 2300,
+              "name": "Scan Luna",
+              "link": "/scanlator/scan-luna/2300"
+            }
+          }
+        },
+        {
+          "url": "/ler/wanna-do-x-with-me/online/474871/9",
+          "number": "9",
+          "date_created": "2023-06-29T20:11:53-03:00",
+          "scanlators": {
+            "scan-2300": {
+              "id_scanlator": 2300,
+              "name": "Scan Luna",
+              "link": "/scanlator/scan-luna/2300"
+            }
+          }
+        },
+        {
+          "url": "/ler/wanna-do-x-with-me/online/474870/8",
+          "number": "8",
+          "date_created": "2023-06-29T20:09:41-03:00",
+          "scanlators": {
+            "scan-2300": {
+              "id_scanlator": 2300,
+              "name": "Scan Luna",
+              "link": "/scanlator/scan-luna/2300"
+            }
+          }
+        },
+        {
+          "url": "/ler/wanna-do-x-with-me/online/474869/7",
+          "number": "7",
+          "date_created": "2023-06-29T20:08:07-03:00",
+          "scanlators": {
+            "scan-2300": {
+              "id_scanlator": 2300,
+              "name": "Scan Luna",
+              "link": "/scanlator/scan-luna/2300"
+            }
+          }
+        },
+        {
+          "url": "/ler/wanna-do-x-with-me/online/474868/6",
+          "number": "6",
+          "date_created": "2023-06-29T20:06:32-03:00",
+          "scanlators": {
+            "scan-2300": {
+              "id_scanlator": 2300,
+              "name": "Scan Luna",
+              "link": "/scanlator/scan-luna/2300"
+            }
+          }
+        },
+        {
+          "url": "/ler/wanna-do-x-with-me/online/474867/5",
+          "number": "5",
+          "date_created": "2023-06-29T20:05:10-03:00",
+          "scanlators": {
+            "scan-2300": {
+              "id_scanlator": 2300,
+              "name": "Scan Luna",
+              "link": "/scanlator/scan-luna/2300"
+            }
+          }
+        },
+        {
+          "url": "/ler/wanna-do-x-with-me/online/474866/4",
+          "number": "4",
+          "date_created": "2023-06-29T20:02:44-03:00",
+          "scanlators": {
+            "scan-2300": {
+              "id_scanlator": 2300,
+              "name": "Scan Luna",
+              "link": "/scanlator/scan-luna/2300"
+            }
+          }
+        }
+      ],
+      "link": "/manga/wanna-do-x-with-me/17871"
+    },
+    {
+      "date": "hoje",
+      "dateString": "today",
+      "date_created": "2023-06-29T19:12:04-03:00",
+      "id_serie": 15848,
+      "name": "Project: X-45",
+      "image": "https://static3.mangalivre.net/capas/kV_CdfLtCY1RGddmYfCvyQ/15848/62fe585ecaa0d_capa.jpg",
+      "image_thumb": "https://static3.mangalivre.net/capas/jHYOmCZDU2Nx3ek8D-2_0g/15848/thumb_62fe585ecaa0d_capa.jpg",
+      "image_avif": "https://static3.mangalivre.net/capas/Ed_i70_gg1L4Q4a0tPGeyw/15848/62fe585ecaa0d_capa.jpg.avif",
+      "image_thumb_avif": "https://static3.mangalivre.net/capas/mzO5TJJG3M1mTr8ANiIhaw/15848/thumb_62fe585ecaa0d_capa.jpg.avif",
+      "range": "5",
+      "chapters": [
+        {
+          "url": "/ler/project-x-45/online/474862/5",
+          "number": "5",
+          "date_created": "2023-06-29T19:12:04-03:00",
+          "scanlators": {
+            "scan-2795": {
+              "id_scanlator": 2795,
+              "name": "Tra\u00e7o Nacional",
+              "link": "/scanlator/traco-nacional/2795"
+            }
+          }
+        }
+      ],
+      "link": "/manga/project-x-45/15848"
+    },
+    {
+      "date": "hoje",
+      "dateString": "today",
+      "date_created": "2023-06-29T17:56:22-03:00",
+      "id_serie": 17873,
+      "name": "Saihate ni Madou",
+      "image": "https://static3.mangalivre.net/capas/etZYBBvl4jywPYPESwKBIA/17873/649d88ad773bf_external_cover.jpg",
+      "image_thumb": "https://static3.mangalivre.net/capas/agu124b-dT7H6io9ytzfdg/17873/thumb_649d88ad773bf_external_cover.jpg",
+      "image_avif": "https://static3.mangalivre.net/capas/OsJow6mm8TFPxdHYPKH7ng/17873/649d88ad773bf_external_cover.jpg.avif",
+      "image_thumb_avif": "https://static3.mangalivre.net/capas/M2TCvB2nXouwDmFQcxZ4zw/17873/thumb_649d88ad773bf_external_cover.jpg.avif",
+      "range": "1",
+      "chapters": [
+        {
+          "url": "/ler/saihate-ni-madou/online/474861/1",
+          "number": "1",
+          "date_created": "2023-06-29T17:56:22-03:00",
+          "scanlators": {
+            "scan-2885": {
+              "id_scanlator": 2885,
+              "name": "Kasahaya",
+              "link": "/scanlator/kasahaya/2885"
+            }
+          }
+        }
+      ],
+      "link": "/manga/saihate-ni-madou/17873"
+    },
+    {
+      "date": "hoje",
+      "dateString": "today",
+      "date_created": "2023-06-29T17:47:01-03:00",
+      "id_serie": 17723,
+      "name": "Pink",
+      "image": "https://static3.mangalivre.net/capas/Y8CSt5U7tN-X_VWVVOl75w/17723/6480cf3adbfca_external_cover.jpg",
+      "image_thumb": "https://static3.mangalivre.net/capas/Lx6ibHrJG7OSV7moxTaObg/17723/thumb_6480cf3adbfca_external_cover.jpg",
+      "image_avif": "https://static3.mangalivre.net/capas/d_cWDuitYWb0Wefi8XwuPA/17723/6480cf3adbfca_external_cover.jpg.avif",
+      "image_thumb_avif": "https://static3.mangalivre.net/capas/1jqBgETfzjATm2gXVTQjyw/17723/thumb_6480cf3adbfca_external_cover.jpg.avif",
+      "range": "4",
+      "chapters": [
+        {
+          "url": "/ler/pink/online/474860/4",
+          "number": "4",
+          "date_created": "2023-06-29T17:47:01-03:00",
+          "scanlators": {
+            "scan-3067": {
+              "id_scanlator": 3067,
+              "name": "Sonny Boy Scans",
+              "link": "/scanlator/sonny-boy-scans/3067"
+            }
+          }
+        }
+      ],
+      "link": "/manga/pink/17723"
+    },
+    {
+      "date": "hoje",
+      "dateString": "today",
+      "date_created": "2023-06-29T17:43:10-03:00",
+      "id_serie": 7407,
+      "name": "Quanzhi Fashi",
+      "image": "https://static3.mangalivre.net/capas/_W4FCZW1VJW0rc8RZnJWqw/7407/external_cover.jpg",
+      "image_thumb": "https://static3.mangalivre.net/capas/lD0rYK5X2NmFR0m6jiYN5Q/7407/thumb_external_cover.jpg",
+      "image_avif": "https://static3.mangalivre.net/capas/ldPUwxba2zDM7CXQd8XcbA/7407/external_cover.jpg.avif",
+      "image_thumb_avif": "https://static3.mangalivre.net/capas/TtL5yt-PhQ14xEaIofLtdw/7407/thumb_external_cover.jpg.avif",
+      "range": "640~633",
+      "chapters": [
+        {
+          "url": "/ler/quanzhi-fashi/online/474859/633",
+          "number": "633",
+          "date_created": "2023-06-29T17:43:10-03:00",
+          "scanlators": {
+            "scan-2839": {
+              "id_scanlator": 2839,
+              "name": "Crystal Scan",
+              "link": "/scanlator/crystal-scan/2839"
+            }
+          }
+        },
+        {
+          "url": "/ler/quanzhi-fashi/online/474858/634",
+          "number": "634",
+          "date_created": "2023-06-29T17:41:48-03:00",
+          "scanlators": {
+            "scan-2839": {
+              "id_scanlator": 2839,
+              "name": "Crystal Scan",
+              "link": "/scanlator/crystal-scan/2839"
+            }
+          }
+        },
+        {
+          "url": "/ler/quanzhi-fashi/online/474857/635",
+          "number": "635",
+          "date_created": "2023-06-29T17:41:18-03:00",
+          "scanlators": {
+            "scan-2839": {
+              "id_scanlator": 2839,
+              "name": "Crystal Scan",
+              "link": "/scanlator/crystal-scan/2839"
+            }
+          }
+        },
+        {
+          "url": "/ler/quanzhi-fashi/online/474856/636",
+          "number": "636",
+          "date_created": "2023-06-29T17:39:06-03:00",
+          "scanlators": {
+            "scan-2839": {
+              "id_scanlator": 2839,
+              "name": "Crystal Scan",
+              "link": "/scanlator/crystal-scan/2839"
+            }
+          }
+        },
+        {
+          "url": "/ler/quanzhi-fashi/online/474855/637",
+          "number": "637",
+          "date_created": "2023-06-29T17:38:21-03:00",
+          "scanlators": {
+            "scan-2839": {
+              "id_scanlator": 2839,
+              "name": "Crystal Scan",
+              "link": "/scanlator/crystal-scan/2839"
+            }
+          }
+        },
+        {
+          "url": "/ler/quanzhi-fashi/online/474854/638",
+          "number": "638",
+          "date_created": "2023-06-29T17:36:35-03:00",
+          "scanlators": {
+            "scan-2839": {
+              "id_scanlator": 2839,
+              "name": "Crystal Scan",
+              "link": "/scanlator/crystal-scan/2839"
+            }
+          }
+        },
+        {
+          "url": "/ler/quanzhi-fashi/online/474853/640",
+          "number": "640",
+          "date_created": "2023-06-29T17:33:57-03:00",
+          "scanlators": {
+            "scan-2839": {
+              "id_scanlator": 2839,
+              "name": "Crystal Scan",
+              "link": "/scanlator/crystal-scan/2839"
+            }
+          }
+        }
+      ],
+      "link": "/manga/quanzhi-fashi/7407"
+    },
+    {
+      "date": "hoje",
+      "dateString": "today",
+      "date_created": "2023-06-29T17:33:11-03:00",
+      "id_serie": 17878,
+      "name": "The Baby Dragon Tames the Crazy People",
+      "image": "https://static3.mangalivre.net/capas/LUDJXHlpJP57Vi1uTapeug/17878/649d974ec05c6_capa.jpg",
+      "image_thumb": "https://static3.mangalivre.net/capas/ElOGmjGXgntIZVVpUwFF9g/17878/thumb_649d974ec05c6_capa.jpg",
+      "image_avif": "https://static3.mangalivre.net/capas/onjJ14qL3Up8uoWmejLHzA/17878/649d974ec05c6_capa.jpg.avif",
+      "image_thumb_avif": "https://static3.mangalivre.net/capas/Z6hOMHobAJXQoWacK7AKyg/17878/thumb_649d974ec05c6_capa.jpg.avif",
+      "range": "1~5",
+      "chapters": [
+        {
+          "url": "/ler/the-baby-dragon-tames-the-crazy-people/online/474852/5",
+          "number": "5",
+          "date_created": "2023-06-29T17:33:11-03:00",
+          "scanlators": {
+            "scan-2725": {
+              "id_scanlator": 2725,
+              "name": "Glass Sky",
+              "link": "/scanlator/glass-sky/2725"
+            }
+          }
+        },
+        {
+          "url": "/ler/the-baby-dragon-tames-the-crazy-people/online/474846/4",
+          "number": "4",
+          "date_created": "2023-06-29T11:55:28-03:00",
+          "scanlators": {
+            "scan-2725": {
+              "id_scanlator": 2725,
+              "name": "Glass Sky",
+              "link": "/scanlator/glass-sky/2725"
+            }
+          }
+        },
+        {
+          "url": "/ler/the-baby-dragon-tames-the-crazy-people/online/474845/3",
+          "number": "3",
+          "date_created": "2023-06-29T11:55:24-03:00",
+          "scanlators": {
+            "scan-2725": {
+              "id_scanlator": 2725,
+              "name": "Glass Sky",
+              "link": "/scanlator/glass-sky/2725"
+            }
+          }
+        },
+        {
+          "url": "/ler/the-baby-dragon-tames-the-crazy-people/online/474844/2",
+          "number": "2",
+          "date_created": "2023-06-29T11:55:19-03:00",
+          "scanlators": {
+            "scan-2725": {
+              "id_scanlator": 2725,
+              "name": "Glass Sky",
+              "link": "/scanlator/glass-sky/2725"
+            }
+          }
+        },
+        {
+          "url": "/ler/the-baby-dragon-tames-the-crazy-people/online/474843/1",
+          "number": "1",
+          "date_created": "2023-06-29T11:54:51-03:00",
+          "scanlators": {
+            "scan-2725": {
+              "id_scanlator": 2725,
+              "name": "Glass Sky",
+              "link": "/scanlator/glass-sky/2725"
+            }
+          }
+        }
+      ],
+      "link": "/manga/the-baby-dragon-tames-the-crazy-people/17878"
+    }
+  ],
+  "_isLoggedIn": false
+}

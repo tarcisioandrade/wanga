@@ -1,0 +1,50 @@
+{
+  "most_read": [
+    {
+      "id_serie": 7302,
+      "serie_name": "Martial Peak",
+      "cover": "https://static3.mangalivre.net/capas/oDR4VtFL_puGVJtRT4Eymg/7302/6022e659a8e56external_cover.jpg",
+      "cover_thumb": "https://static3.mangalivre.net/capas/nfwsZIwmMBIDkYbGdLZICQ/7302/thumb_6022e659a8e56external_cover.jpg",
+      "cover_avif": "https://static3.mangalivre.net/capas/46_7A4H7GaDA-pGIJT3IHw/7302/6022e659a8e56external_cover.jpg.avif",
+      "cover_thumb_avif": "https://static3.mangalivre.net/capas/EpZbTckaGAHxmSDJG_LSEg/7302/thumb_6022e659a8e56external_cover.jpg.avif",
+      "link": "/manga/martial-peak/7302"
+    },
+    {
+      "id_serie": 7702,
+      "serie_name": "Solo Leveling",
+      "cover": "https://static3.mangalivre.net/capas/IUQzYHNu_qeq5mosQv6wLw/7702/602ef3532b765external_cover.jpg",
+      "cover_thumb": "https://static3.mangalivre.net/capas/vD_Y_KEvhuRThhg00krrEg/7702/thumb_602ef3532b765external_cover.jpg",
+      "cover_avif": "https://static3.mangalivre.net/capas/0gpEVws0ikzlyP7mIaaffQ/7702/602ef3532b765external_cover.jpg.avif",
+      "cover_thumb_avif": "https://static3.mangalivre.net/capas/qCFADMTJk0EMOLBHMVtJww/7702/thumb_602ef3532b765external_cover.jpg.avif",
+      "link": "/manga/solo-leveling/7702"
+    },
+    {
+      "id_serie": 2412,
+      "serie_name": "Tales Of Demons And Gods",
+      "cover": "https://static3.mangalivre.net/capas/gD0Oa7y2CPW5rtPpe0HmRA/2412/external_cover.jpg",
+      "cover_thumb": "https://static3.mangalivre.net/capas/QMppHfs7kD7twAq97HRz3g/2412/thumb_external_cover.jpg",
+      "cover_avif": "https://static3.mangalivre.net/capas/DksudgML3o_7SL_eeaLnwA/2412/external_cover.jpg.avif",
+      "cover_thumb_avif": "https://static3.mangalivre.net/capas/fVZeoZzNn8P7x0dyj_QNjA/2412/thumb_external_cover.jpg.avif",
+      "link": "/manga/tales-of-demons-and-gods/2412"
+    },
+    {
+      "id_serie": 6950,
+      "serie_name": "Tokyo Revengers",
+      "cover": "https://static3.mangalivre.net/capas/c-aH6sSjILEMLNO--UVDMg/6950/613881e16f42fexternal_cover.jpg",
+      "cover_thumb": "https://static3.mangalivre.net/capas/poZuh-Yh0U6Yeemk0BTlEw/6950/thumb_613881e16f42fexternal_cover.jpg",
+      "cover_avif": "https://static3.mangalivre.net/capas/txL3e2Cxgf2a-ptcUCCJTA/6950/613881e16f42fexternal_cover.jpg.avif",
+      "cover_thumb_avif": "https://static3.mangalivre.net/capas/jBWnizT_1D-zcdeZTE1iSg/6950/thumb_613881e16f42fexternal_cover.jpg.avif",
+      "link": "/manga/tokyo-revengers/6950"
+    },
+    {
+      "id_serie": 13,
+      "serie_name": "One Piece",
+      "cover": "https://static3.mangalivre.net/capas/gCELLr4DNpa4XBAy0RjmtA/13/623e0f34a0ce7_external_cover.jpg",
+      "cover_thumb": "https://static3.mangalivre.net/capas/PfiDSuvKB00FNNx83oLbng/13/thumb_623e0f34a0ce7_external_cover.jpg",
+      "cover_avif": "https://static3.mangalivre.net/capas/Qn88fR_skikGik1oxfu_5A/13/623e0f34a0ce7_external_cover.jpg.avif",
+      "cover_thumb_avif": "https://static3.mangalivre.net/capas/4-j9F9n3bBJx1pudeTIwew/13/thumb_623e0f34a0ce7_external_cover.jpg.avif",
+      "link": "/manga/one-piece/13"
+    }
+  ],
+  "_isLoggedIn": false
+}
