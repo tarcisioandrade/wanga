@@ -8,12 +8,14 @@ import { getSearch } from "src/api/mangaServices";
 import CardSerie from "../../components/CardSerie";
 import SearchSkeleton from "./components/SearchSkeleton";
 import { Text } from "src/components/Text";
+import RefreshInError from "src/components/RefreshInError";
+import { vs } from "src/utils/metrics";
 
 const Search = () => {
   const [searchValue, setSearchValue] = useState("");
   const searchDebounced = useDebounce(searchValue, 500);
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching, isError, refetch } = useQuery({
     queryKey: [queryKeys.search, searchDebounced],
     queryFn: () => getSearch(searchDebounced),
     enabled: !!searchDebounced,
@@ -35,6 +37,7 @@ const Search = () => {
       <ScrollContainer>
         <Container>
           {loading ? <SearchSkeleton /> : null}
+          {isError && <RefreshInError refresh={refetch} height={vs(219)} />}
           {!loading && data?.series === false ? (
             <Text>Nenhum resultado encontrado.</Text>
           ) : null}
