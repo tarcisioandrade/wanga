@@ -16,8 +16,8 @@
   </p>
 </div>
 
-
-
+> [!NOTE]  
+> API INATIVA
 
 ## Sobre o Projeto
 </br>
